@@ -1,6 +1,5 @@
 package control;
 
-import pdx.edu.cs300_group9.Connection;
 
 
 /**
