@@ -20,10 +20,13 @@ public class Provider {
   private String provider_name;
   private String email;
   
+  
+  /// Prepared Statements
   private static PreparedStatement select_single_stmt = null;
   private static PreparedStatement insert_stmt = null;
   private static PreparedStatement update_stmt = null;
   private static PreparedStatement delete_stmt = null;
+  private static PreparedStatement search_stmt = null;
   
   //
   // Constructors
@@ -39,6 +42,12 @@ public class Provider {
   };
   
   public Provider (String provider_name, String email){
+	  this.provider_name = provider_name;
+	  this.email = email;
+  }
+  
+  private Provider (int provider_id, String provider_name, String email){
+	  this.provider_id = provider_id;
 	  this.provider_name = provider_name;
 	  this.email = email;
   }
@@ -63,6 +72,11 @@ public class Provider {
 	  if(delete_stmt == null){
 		  delete_stmt = conn.prepareStatement(
 			  "DELETE FROM providers WHERE provider_id = %"
+		  );
+	  }
+	  if(search_stmt == null){
+		  search_stmt = conn.prepareStatement(
+			  "SELECT provider_id, provider_name, email FROM providers WHERE provider_name LIKE ('%' || ? || '%')"
 		  );
 	  }
   }
@@ -149,7 +163,25 @@ public class Provider {
   /**
    * @param        partial_provider_name
    */
-  public void getProviders( String partial_provider_name )
+  public Iterable<Provider> getProviders( String partial_provider_name )
+  	throws Exception
   {
+	  if(partial_provider_name == null){
+		  partial_provider_name = "";
+	  }
+	  search_stmt.setString(1, partial_provider_name);
+	  ResultSet rs = search_stmt.executeQuery();
+	  LinkedList <Provider> list = new LinkedList<Provider>();
+	  
+	  while(rs.next()){
+		  Provider provider = new Provider(
+			  rs.getInt("provider_id"),
+			  rs.getString("provider_name"),
+			  rs.getString("email")
+		  );
+		  list.add(provider);
+	  }
+	  
+	  return list;
   }
 }
