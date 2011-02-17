@@ -3,6 +3,7 @@ package pdx.edu.cs300_group9;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -51,7 +52,7 @@ public class Provider {
 	  }
 	  if(insert_stmt == null){
 		  insert_stmt = conn.prepareStatement(
-			  "INSERT INTO providers (provider_name,email) VALUES (?,?)"
+			  "INSERT INTO providers (provider_name, email) VALUES (?,?)"
 		  );
 	  }
 	  if(update_stmt == null){
@@ -66,28 +67,46 @@ public class Provider {
 	  }
   }
   
+  
   //
   // Methods
   //
-
+  
+  public void save() throws SQLException{
+	  if (provider_id == -1){
+		  insert_stmt.setString(1, provider_name);
+		  insert_stmt.setString(2, email);
+		  insert_stmt.executeUpdate();
+		  //"get last insert id" as explained here:
+		  //http://www.freshblurbs.com/jdbc-get-last-inserts-id
+		  ResultSet rs = insert_stmt.getGeneratedKeys();
+		  rs.next();
+		  provider_id = rs.getInt(1);
+	  }else{
+		  update_stmt.setString(1, provider_name);
+		  update_stmt.setString(2, email);
+		  update_stmt.setInt(3, provider_id);
+		  update_stmt.executeUpdate();
+	  }
+  }
+  
+  public void delete() throws SQLException {
+	  if(provider_id != -1){
+		  delete_stmt.setInt(1, provider_id);
+		  delete_stmt.executeUpdate();
+		  provider_id = -1;
+	  }
+  }
 
   //
   // Accessor methods
   //
 
   /**
-   * Set the value of provider_id
-   * @param newVar the new value of provider_id
-   */
-  private void setProvider_id ( int newVar ) {
-    provider_id = newVar;
-  }
-
-  /**
    * Get the value of provider_id
    * @return the value of provider_id
    */
-  private int getProvider_id ( ) {
+  private int getProviderId ( ) {
     return provider_id;
   }
 
@@ -95,7 +114,7 @@ public class Provider {
    * Set the value of provider_name
    * @param newVar the new value of provider_name
    */
-  private void setProvider_name ( String newVar ) {
+  private void setProviderName ( String newVar ) {
     provider_name = newVar;
   }
 
@@ -103,7 +122,7 @@ public class Provider {
    * Get the value of provider_name
    * @return the value of provider_name
    */
-  private String getProvider_name ( ) {
+  private String getProviderName ( ) {
     return provider_name;
   }
 
@@ -133,6 +152,4 @@ public class Provider {
   public void getProviders( String partial_provider_name )
   {
   }
-
-
 }
