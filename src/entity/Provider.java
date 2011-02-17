@@ -1,10 +1,14 @@
-package pdx.edu.cs300_group9;
+
+package entity;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
+import control.ChocAnApp;
 
 
 /**

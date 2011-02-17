@@ -1,7 +1,8 @@
-package pdx.edu.cs300_group9;
+package control;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 
 
 /**
@@ -13,24 +14,22 @@ public class ChocAnApp {
   // Fields
   //
 
-  static private Connection db_connection = null;
+  static private Connection db_connection;
   
   //
   // Constructors
   //
-  public ChocAnApp () {
+  public ChocAnApp () { };
+  
+	  static public Connection getConnection()
+		throws Exception {
+		  if(db_connection == null){
+			  Class.forName("org.sqlite.JDBC");
+			  db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
+		  }
+		  return db_connection;
+	}
 	  
-  };
-  
-  static public Connection getConnection()
-  	throws Exception {
-	  if(db_connection == null){
-		  Class.forName("org.sqlite.JDBC");
-		  db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
-	  }
-	  return db_connection;
-  }
-  
   //
   // Methods
   //
@@ -62,8 +61,8 @@ public class ChocAnApp {
 
   /**
    */
-  public static void run(  )
-  {
+  public static void run(  ){
+	  
   }
 
 

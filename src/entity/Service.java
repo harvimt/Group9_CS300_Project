@@ -1,4 +1,4 @@
-package pdx.edu.cs300_group9;
+package entity;
 
 import java.math.BigDecimal;
 import java.util.*;
