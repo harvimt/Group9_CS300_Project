@@ -1,5 +1,8 @@
 package pdx.edu.cs300_group9;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 
 /**
  * Class ChocAnApp
@@ -10,12 +13,23 @@ public class ChocAnApp {
   // Fields
   //
 
-  private Connection db_connection;
+  static private Connection db_connection = null;
   
   //
   // Constructors
   //
-  public ChocAnApp () { };
+  public ChocAnApp () {
+	  
+  };
+  
+  static public Connection getConnection()
+  	throws Exception {
+	  if(db_connection == null){
+		  Class.forName("org.sqlite.JDBC");
+		  db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
+	  }
+	  return db_connection;
+  }
   
   //
   // Methods
