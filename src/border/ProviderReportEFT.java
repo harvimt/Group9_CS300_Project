@@ -1,10 +1,12 @@
-package pdx.edu.cs300_group9;
+package border;
+
+import control.ProviderReport;
 
 
 /**
- * Class ProviderReportEmail
+ * Class ProviderReportEFT
  */
-public class ProviderReportEmail {
+public class ProviderReportEFT {
 
   //
   // Fields
@@ -15,7 +17,7 @@ public class ProviderReportEmail {
   //
   // Constructors
   //
-  public ProviderReportEmail () { };
+  public ProviderReportEFT () { };
   
   //
   // Methods

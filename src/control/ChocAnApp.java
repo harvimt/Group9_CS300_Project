@@ -1,4 +1,6 @@
-package pdx.edu.cs300_group9;
+package control;
+
+import pdx.edu.cs300_group9.Connection;
 
 
 /**
@@ -48,8 +50,8 @@ public class ChocAnApp {
 
   /**
    */
-  public static void run(  )
-  {
+  public static void run(  ){
+	  
   }
 
 
