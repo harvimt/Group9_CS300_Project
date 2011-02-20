@@ -1,6 +1,11 @@
 package entity;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
+
+import control.ChocAnApp;
 
 
 
@@ -22,33 +27,73 @@ public class Member {
   private String zip_code;
   private String email;
   
+  /// Prepared Statements
+  private static PreparedStatement select_single_stmt = null;
+  private static PreparedStatement insert_stmt = null;
+  private static PreparedStatement update_stmt = null;
+  private static PreparedStatement delete_stmt = null;
+  private static PreparedStatement search_stmt = null;
+  
   //
   // Constructors
   //
-  public Member () { };
+  public Member (int member_id) throws Exception{
+	  initializeQueries();
+	  this.member_id = member_id;
+	  select_single_stmt.setInt(1, member_id);
+	  ResultSet rs = select_single_stmt.executeQuery();
+	  rs.next();
+
+	  this.full_name = rs.getString("full_name");
+	  this.member_status = MemberStatus.valueOf(rs.getString("member_status"));
+	  this.street_address = rs.getString("street_address");
+	  this.city = rs.getString("city");
+	  this.state = rs.getString("state");
+	  this.zip_code = rs.getString("zip_code");
+	  this.email = rs.getString("email");
+  }
   
   //
   // Methods
   //
-
+  private void initializeQueries() throws Exception{
+	   Connection conn = ChocAnApp.getConnection();
+	  if(select_single_stmt == null){
+		  select_single_stmt = conn.prepareStatement(
+			  "SELECT provider_name, email FROM providers WHERE provider_id = ?"
+		  );
+	  }
+	  if(insert_stmt == null){
+		  insert_stmt = conn.prepareStatement(
+			  "INSERT INTO providers (provider_name, email) VALUES (?,?)"
+		  );
+	  }
+	  if(update_stmt == null){
+		  update_stmt = conn.prepareStatement(
+			  "UPDATE providers SET provider_name = ?, email = ? WHERE provider_id = ?"
+		  );
+	  }
+	  if(delete_stmt == null){
+		  delete_stmt = conn.prepareStatement(
+			  "DELETE FROM providers WHERE provider_id = %"
+		  );
+	  }
+	  if(search_stmt == null){
+		  search_stmt = conn.prepareStatement(
+			  "SELECT provider_id, provider_name, email FROM providers WHERE provider_name LIKE ('%' || ? || '%')"
+		  );
+	  }
+ }
 
   //
   // Accessor methods
   //
 
   /**
-   * Set the value of member_id
-   * @param newVar the new value of member_id
-   */
-  private void setMember_id ( int newVar ) {
-    member_id = newVar;
-  }
-
-  /**
    * Get the value of member_id
    * @return the value of member_id
    */
-  private int getMember_id ( ) {
+  private int getMemberId ( ) {
     return member_id;
   }
 
