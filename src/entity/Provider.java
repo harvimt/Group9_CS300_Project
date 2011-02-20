@@ -47,12 +47,16 @@ public class Provider {
 	  this.email = rs.getString("email");
   };
   
-  public Provider (String provider_name, String email){
+  public Provider (String provider_name, String email)
+  	throws Exception{
+	  initializeQueries();
 	  this.provider_name = provider_name;
 	  this.email = email;
   }
   
-  private Provider (int provider_id, String provider_name, String email){
+  private Provider (int provider_id, String provider_name, String email)
+  	throws Exception{
+	  initializeQueries();
 	  this.provider_id = provider_id;
 	  this.provider_name = provider_name;
 	  this.email = email;
