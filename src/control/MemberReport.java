@@ -2,33 +2,31 @@ package control;
 
 import java.util.*;
 
-
 /**
  * Class MemberReport
  */
 public class MemberReport {
 
-  //
-  // Fields
-  //
+	//
+	// Fields
+	//
 
-  
-  //
-  // Constructors
-  //
-  public MemberReport () { };
-  
-  //
-  // Methods
-  //
+	//
+	// Constructors
+	//
+	public MemberReport() {
+	};
 
+	//
+	// Methods
+	//
 
-  //
-  // Accessor methods
-  //
+	//
+	// Accessor methods
+	//
 
-  //
-  // Other methods
-  //
+	//
+	// Other methods
+	//
 
 }

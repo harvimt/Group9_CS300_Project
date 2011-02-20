@@ -1,39 +1,35 @@
 package control;
 
-
 /**
  * Class Cron
  */
 public class Cron {
 
-  //
-  // Fields
-  //
+	//
+	// Fields
+	//
 
-  
-  //
-  // Constructors
-  //
-  public Cron () { };
-  
-  //
-  // Methods
-  //
+	//
+	// Constructors
+	//
+	public Cron() {
+	};
 
+	//
+	// Methods
+	//
 
-  //
-  // Accessor methods
-  //
+	//
+	// Accessor methods
+	//
 
-  //
-  // Other methods
-  //
+	//
+	// Other methods
+	//
 
-  /**
+	/**
    */
-  public void runCron(  )
-  {
-  }
-
+	public void runCron() {
+	}
 
 }

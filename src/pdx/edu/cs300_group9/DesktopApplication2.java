@@ -9,39 +9,41 @@ import org.jdesktop.application.SingleFrameApplication;
 
 import border.HomeScreen;
 
-
 /**
  * The main class of the application.
  */
 public class DesktopApplication2 extends SingleFrameApplication {
 
-    /**
-     * At startup create and show the main frame of the application.
-     */
-    @Override protected void startup() {
-        show(new HomeScreen(this));
-    }
+	/**
+	 * At startup create and show the main frame of the application.
+	 */
+	@Override
+	protected void startup() {
+		show(new HomeScreen(this));
+	}
 
-    /**
-     * This method is to initialize the specified window by injecting resources.
-     * Windows shown in our application come fully initialized from the GUI
-     * builder, so this additional configuration is not needed.
-     */
-    @Override protected void configureWindow(java.awt.Window root) {
-    }
+	/**
+	 * This method is to initialize the specified window by injecting resources.
+	 * Windows shown in our application come fully initialized from the GUI
+	 * builder, so this additional configuration is not needed.
+	 */
+	@Override
+	protected void configureWindow(java.awt.Window root) {
+	}
 
-    /**
-     * A convenient static getter for the application instance.
-     * @return the instance of DesktopApplication2
-     */
-    public static DesktopApplication2 getApplication() {
-        return Application.getInstance(DesktopApplication2.class);
-    }
+	/**
+	 * A convenient static getter for the application instance.
+	 * 
+	 * @return the instance of DesktopApplication2
+	 */
+	public static DesktopApplication2 getApplication() {
+		return Application.getInstance(DesktopApplication2.class);
+	}
 
-    /**
-     * Main method launching the application.
-     */
-    public static void main(String[] args) {
-        launch(DesktopApplication2.class, args);
-    }
+	/**
+	 * Main method launching the application.
+	 */
+	public static void main(String[] args) {
+		launch(DesktopApplication2.class, args);
+	}
 }

@@ -1,32 +1,30 @@
 package control;
 
-
 /**
  * Class ReportToAccountsPayable
  */
 public class ReportToAccountsPayable {
 
-  //
-  // Fields
-  //
+	//
+	// Fields
+	//
 
-  
-  //
-  // Constructors
-  //
-  public ReportToAccountsPayable () { };
-  
-  //
-  // Methods
-  //
+	//
+	// Constructors
+	//
+	public ReportToAccountsPayable() {
+	};
 
+	//
+	// Methods
+	//
 
-  //
-  // Accessor methods
-  //
+	//
+	// Accessor methods
+	//
 
-  //
-  // Other methods
-  //
+	//
+	// Other methods
+	//
 
 }

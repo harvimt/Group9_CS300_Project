@@ -2,33 +2,31 @@ package control;
 
 import java.util.*;
 
-
 /**
  * Class ProviderReport
  */
 public class ProviderReport {
 
-  //
-  // Fields
-  //
+	//
+	// Fields
+	//
 
-  
-  //
-  // Constructors
-  //
-  public ProviderReport () { };
-  
-  //
-  // Methods
-  //
+	//
+	// Constructors
+	//
+	public ProviderReport() {
+	};
 
+	//
+	// Methods
+	//
 
-  //
-  // Accessor methods
-  //
+	//
+	// Accessor methods
+	//
 
-  //
-  // Other methods
-  //
+	//
+	// Other methods
+	//
 
 }
