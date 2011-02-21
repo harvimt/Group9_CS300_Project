@@ -131,6 +131,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="memberMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="border.HomeScreen" id="openMemberList" methodName="openMemberList"/>
+                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="memberMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="memberMenuItem" noResource="true"/>
               </Properties>
@@ -158,16 +161,19 @@
         <Menu class="javax.swing.JMenu" name="reportMenu">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="border.HomeScreen" id="openServicesRenderedReport" methodName="openServicesRenderedReport"/>
+              <action class="border.HomeScreen" id="openProviderReport" methodName="openProviderReport"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="reportMenu.text"/>
             <Property name="name" type="java.lang.String" value="reportMenu" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="servicesRenderedMenuItem">
+            <MenuItem class="javax.swing.JMenuItem" name="providerReportMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="servicesRenderedMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="servicesRenderedMenuItem" noResource="true"/>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="border.HomeScreen" id="openProviderReport" methodName="openProviderReport"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="providerReportMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="providerReportMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="memberReportMenuItem">

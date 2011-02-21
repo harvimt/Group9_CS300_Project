@@ -85,7 +85,7 @@ public class HomeScreen extends FrameView {
         providerMenuItem = new javax.swing.JMenuItem();
         servicesMenuItem = new javax.swing.JMenuItem();
         reportMenu = new javax.swing.JMenu();
-        servicesRenderedMenuItem = new javax.swing.JMenuItem();
+        providerReportMenuItem = new javax.swing.JMenuItem();
         memberReportMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -162,6 +162,7 @@ public class HomeScreen extends FrameView {
         listMenu.setText(resourceMap.getString("listMenu.text")); // NOI18N
         listMenu.setName("listMenu"); // NOI18N
 
+        memberMenuItem.setAction(actionMap.get("openMemberList")); // NOI18N
         memberMenuItem.setText(resourceMap.getString("memberMenuItem.text")); // NOI18N
         memberMenuItem.setName("memberMenuItem"); // NOI18N
         listMenu.add(memberMenuItem);
@@ -178,13 +179,14 @@ public class HomeScreen extends FrameView {
 
         menuBar.add(listMenu);
 
-        reportMenu.setAction(actionMap.get("openServicesRenderedReport")); // NOI18N
+        reportMenu.setAction(actionMap.get("openProviderReport")); // NOI18N
         reportMenu.setText(resourceMap.getString("reportMenu.text")); // NOI18N
         reportMenu.setName("reportMenu"); // NOI18N
 
-        servicesRenderedMenuItem.setText(resourceMap.getString("servicesRenderedMenuItem.text")); // NOI18N
-        servicesRenderedMenuItem.setName("servicesRenderedMenuItem"); // NOI18N
-        reportMenu.add(servicesRenderedMenuItem);
+        providerReportMenuItem.setAction(actionMap.get("openProviderReport")); // NOI18N
+        providerReportMenuItem.setText(resourceMap.getString("providerReportMenuItem.text")); // NOI18N
+        providerReportMenuItem.setName("providerReportMenuItem"); // NOI18N
+        reportMenu.add(providerReportMenuItem);
 
         memberReportMenuItem.setAction(actionMap.get("openMemberReport")); // NOI18N
         memberReportMenuItem.setText(resourceMap.getString("memberReportMenuItem.text")); // NOI18N
@@ -239,22 +241,32 @@ public class HomeScreen extends FrameView {
 
     @Action
     public void openMemberList() {
+    	memberList = new MemberList();
+    	memberList.setVisible(true);
     }
 
     @Action
     public void openProviderList() {
+    	providerList = new ProviderList();
+    	providerList.setVisible(true);
     }
 
     @Action
     public void openServicesList() {
+    	servicesList = new ServiceList();
+    	servicesList.setVisible(true);
     }
 
     @Action
-    public void openServicesRenderedReport() {
+    public void openProviderReport() {
+    	providerReport = new ProviderReportUI();
+    	providerReport.setVisible(true);
     }
 
     @Action
     public void openMemberReport() {
+    	memberReport = new MemberReportUI();
+    	memberReport.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -269,9 +281,9 @@ public class HomeScreen extends FrameView {
     private javax.swing.JMenuItem memberReportMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem providerMenuItem;
+    private javax.swing.JMenuItem providerReportMenuItem;
     private javax.swing.JMenu reportMenu;
     private javax.swing.JMenuItem servicesMenuItem;
-    private javax.swing.JMenuItem servicesRenderedMenuItem;
     // End of variables declaration//GEN-END:variables
 
 	/*private final Timer messageTimer;
@@ -281,5 +293,10 @@ public class HomeScreen extends FrameView {
 	private int busyIconIndex = 0;
 */
 	private JDialog aboutBox;
-	private JFrame logServiceForm;
+	private javax.swing.JFrame logServiceForm;
+	private javax.swing.JFrame memberList;
+	private javax.swing.JFrame providerList;
+	private javax.swing.JFrame servicesList;
+	private javax.swing.JFrame providerReport;
+	private javax.swing.JFrame memberReport;
 }
