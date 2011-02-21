@@ -78,7 +78,7 @@ public class Provider {
 				"SELECT " +
 					"provider_id, provider_name, email " +
 				"FROM providers " +
-				"WHERE provider_name LIKE ('%' || ? || '%')");
+				"WHERE provider_name LIKE ('%' || ? || '%') ESCAPE '!'");
 		}
 	}
 
@@ -172,9 +172,14 @@ public class Provider {
 	 */
 	public Iterable<Provider> getProviders(String partial_provider_name)
 			throws Exception {
+		
 		if (partial_provider_name == null) {
 			partial_provider_name = "";
 		}
+		
+		//Escape with ! as escape character
+		partial_provider_name = partial_provider_name.replaceAll("[?_!]", "!$0");
+		
 		search_stmt.setString(1, partial_provider_name);
 		ResultSet rs = search_stmt.executeQuery();
 		LinkedList<Provider> list = new LinkedList<Provider>();
