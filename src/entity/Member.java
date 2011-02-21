@@ -97,17 +97,20 @@ public class Member {
 		}
 		if (update_stmt == null) {
 			update_stmt = conn.prepareStatement(
-				"UPDATE members SET provider_name = ?, email = ? WHERE provider_id = ?");
+				"UPDATE members SET " +
+					"full_name = ?, member_status = ?, street_address = ?, city = ?, " +
+					"state = ?, zip_code = ?, email = ?" +
+				"WHERE provider_id = ?");
 		}
 		if (delete_stmt == null) {
-			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE provider_id = %");
+			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE member_id = %");
 		}
 		if (search_stmt == null) {
 			search_stmt = conn.prepareStatement(
-				"SELECT" +
-					" member_id, full_name, member_status, street_address, city, state, zip_code, email " +
+				"SELECT " +
+					"member_id, full_name, member_status, street_address, city, state, zip_code, email " +
 				"FROM members " +
-				"WHERE full_name LIKE ('%' || ? || '%')");
+				"WHERE full_name LIKE ('%' || ? || '%') ESCAPE '!'");
 		}
 	}
 
