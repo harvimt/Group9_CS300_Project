@@ -7,7 +7,7 @@ package border;
 import org.jdesktop.application.Action;
 
 public class AboutBox extends javax.swing.JDialog {
-
+ 
     public AboutBox(java.awt.Frame parent) {
         super(parent);
         initComponents();
@@ -69,7 +69,7 @@ public class AboutBox extends javax.swing.JDialog {
         appDescLabel.setText(resourceMap.getString("appDescLabel.text")); // NOI18N
         appDescLabel.setName("appDescLabel"); // NOI18N
 
-        imageLabel.setIcon(resourceMap.getIcon("imageLabel.icon")); // NOI18N
+        //imageLabel.setIcon(resourceMap.getIcon("imageLabel.icon")); // NOI18N
         imageLabel.setName("imageLabel"); // NOI18N
 
         appDescLabel1.setText(resourceMap.getString("appDescLabel1.text")); // NOI18N
