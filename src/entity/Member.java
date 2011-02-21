@@ -43,13 +43,39 @@ public class Member {
 		rs.next();
 
 		this.full_name = rs.getString("full_name");
-		this.member_status = MemberStatus
-				.valueOf(rs.getString("member_status"));
+		this.member_status = MemberStatus.valueOf(rs.getString("member_status"));
 		this.street_address = rs.getString("street_address");
 		this.city = rs.getString("city");
 		this.state = rs.getString("state");
 		this.zip_code = rs.getString("zip_code");
 		this.email = rs.getString("email");
+	}
+
+	public Member(String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
+		throws Exception {
+		initializeQueries();
+
+		this.full_name = full_name;
+		this.member_status = member_status;
+		this.street_address = street_address;
+		this.city = city;
+		this.state = state;
+		this.zip_code = zip_code;
+		this.email = email;
+	}
+
+	private Member(int member_id, String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
+		throws Exception {
+		initializeQueries();
+
+		this.member_id = member_id;
+		this.full_name = full_name;
+		this.member_status = member_status;
+		this.street_address = street_address;
+		this.city = city;
+		this.state = state;
+		this.zip_code = zip_code;
+		this.email = email;
 	}
 
 	//
@@ -58,24 +84,30 @@ public class Member {
 	private void initializeQueries() throws Exception {
 		Connection conn = ChocAnApp.getConnection();
 		if (select_single_stmt == null) {
-			select_single_stmt = conn
-					.prepareStatement("SELECT provider_name, email FROM providers WHERE provider_id = ?");
+			select_single_stmt = conn.prepareStatement(
+				"SELECT " +
+					"full_name, member_status, street_address, city, state, zip_code, email " +
+				"FROM members WHERE member_id = ?");
 		}
 		if (insert_stmt == null) {
-			insert_stmt = conn
-					.prepareStatement("INSERT INTO providers (provider_name, email) VALUES (?,?)");
+			insert_stmt = conn.prepareStatement(
+				"INSERT INTO members " +
+					"(full_name, member_status, street_address, city, state, zip_code, email) " +
+				"VALUES (?,?,?,?,?,?,?)");
 		}
 		if (update_stmt == null) {
-			update_stmt = conn
-					.prepareStatement("UPDATE providers SET provider_name = ?, email = ? WHERE provider_id = ?");
+			update_stmt = conn.prepareStatement(
+				"UPDATE members SET provider_name = ?, email = ? WHERE provider_id = ?");
 		}
 		if (delete_stmt == null) {
-			delete_stmt = conn
-					.prepareStatement("DELETE FROM providers WHERE provider_id = %");
+			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE provider_id = %");
 		}
 		if (search_stmt == null) {
-			search_stmt = conn
-					.prepareStatement("SELECT provider_id, provider_name, email FROM providers WHERE provider_name LIKE ('%' || ? || '%')");
+			search_stmt = conn.prepareStatement(
+				"SELECT" +
+					" member_id, full_name, member_status, street_address, city, state, zip_code, email " +
+				"FROM members " +
+				"WHERE full_name LIKE ('%' || ? || '%')");
 		}
 	}
 
@@ -88,7 +120,7 @@ public class Member {
 	 * 
 	 * @return the value of member_id
 	 */
-	private int getMemberId() {
+	public int getMemberId() {
 		return member_id;
 	}
 
@@ -98,7 +130,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of full_name
 	 */
-	private void setFull_name(String newVar) {
+	public void setFullName(String newVar) {
 		full_name = newVar;
 	}
 
@@ -107,7 +139,7 @@ public class Member {
 	 * 
 	 * @return the value of full_name
 	 */
-	private String getFull_name() {
+	public String getFullName() {
 		return full_name;
 	}
 
@@ -117,7 +149,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of member_status
 	 */
-	private void setMember_status(MemberStatus newVar) {
+	public void setMemberStatus(MemberStatus newVar) {
 		member_status = newVar;
 	}
 
@@ -126,7 +158,7 @@ public class Member {
 	 * 
 	 * @return the value of member_status
 	 */
-	private MemberStatus getMember_status() {
+	public MemberStatus getMemberStatus() {
 		return member_status;
 	}
 
@@ -136,7 +168,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of street_address
 	 */
-	private void setStreet_address(String newVar) {
+	public void setStreetAddress(String newVar) {
 		street_address = newVar;
 	}
 
@@ -145,7 +177,7 @@ public class Member {
 	 * 
 	 * @return the value of street_address
 	 */
-	private String getStreet_address() {
+	public String getStreetAddress() {
 		return street_address;
 	}
 
@@ -155,7 +187,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of city
 	 */
-	private void setCity(String newVar) {
+	public void setCity(String newVar) {
 		city = newVar;
 	}
 
@@ -164,7 +196,7 @@ public class Member {
 	 * 
 	 * @return the value of city
 	 */
-	private String getCity() {
+	public String getCity() {
 		return city;
 	}
 
@@ -174,7 +206,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of state
 	 */
-	private void setState(String newVar) {
+	public void setState(String newVar) {
 		state = newVar;
 	}
 
@@ -183,7 +215,7 @@ public class Member {
 	 * 
 	 * @return the value of state
 	 */
-	private String getState() {
+	public String getState() {
 		return state;
 	}
 
@@ -193,7 +225,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of zip_code
 	 */
-	private void setZip_code(String newVar) {
+	public void setZipCode(String newVar) {
 		zip_code = newVar;
 	}
 
@@ -202,7 +234,7 @@ public class Member {
 	 * 
 	 * @return the value of zip_code
 	 */
-	private String getZip_code() {
+	public String getZipCode() {
 		return zip_code;
 	}
 
@@ -212,7 +244,7 @@ public class Member {
 	 * @param newVar
 	 *            the new value of email
 	 */
-	private void setEmail(String newVar) {
+	public void setEmail(String newVar) {
 		email = newVar;
 	}
 
@@ -221,7 +253,7 @@ public class Member {
 	 * 
 	 * @return the value of email
 	 */
-	private String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 

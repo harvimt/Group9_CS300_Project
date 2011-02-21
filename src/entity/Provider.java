@@ -58,24 +58,27 @@ public class Provider {
 	private void initializeQueries() throws Exception {
 		Connection conn = ChocAnApp.getConnection();
 		if (select_single_stmt == null) {
-			select_single_stmt = conn
-					.prepareStatement("SELECT provider_name, email FROM providers WHERE provider_id = ?");
+			select_single_stmt = conn.prepareStatement(
+				"SELECT provider_name, email FROM providers WHERE provider_id = ?");
 		}
 		if (insert_stmt == null) {
-			insert_stmt = conn
-					.prepareStatement("INSERT INTO providers (provider_name, email) VALUES (?,?)");
+			insert_stmt = conn.prepareStatement(
+				"INSERT INTO providers (provider_name, email) VALUES (?,?)");
 		}
 		if (update_stmt == null) {
-			update_stmt = conn
-					.prepareStatement("UPDATE providers SET provider_name = ?, email = ? WHERE provider_id = ?");
+			update_stmt = conn.prepareStatement(
+				"UPDATE providers SET provider_name = ?, email = ? WHERE provider_id = ?");
 		}
 		if (delete_stmt == null) {
-			delete_stmt = conn
-					.prepareStatement("DELETE FROM providers WHERE provider_id = %");
+			delete_stmt = conn.prepareStatement(
+				"DELETE FROM providers WHERE provider_id = %");
 		}
 		if (search_stmt == null) {
-			search_stmt = conn
-					.prepareStatement("SELECT provider_id, provider_name, email FROM providers WHERE provider_name LIKE ('%' || ? || '%')");
+			search_stmt = conn.prepareStatement(
+				"SELECT " +
+					"provider_id, provider_name, email " +
+				"FROM providers " +
+				"WHERE provider_name LIKE ('%' || ? || '%')");
 		}
 	}
 
