@@ -4,17 +4,10 @@
 -- 
 --  
 
-CREATE TABLE providers (
-  provider_id int(9) NOT NULL ,
+CREATE TABLE IF NOT EXISTS providers (
+  provider_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   provider_name varchar(32) NOT NULL ,
   email varchar(128) NOT NULL 
 );
 
-CREATE INDEX providers_provider_id_index  ON providers(provider_id);
-ALTER TABLE providers CHANGE provider_id provider_id int   NOT NULL AUTO_INCREMENT ;
-
--- CHECK Constraints are not supported in Mysql ( as of version 5.x )
--- But it'll parse the statements without error 
-CREATE INDEX providers_provider_id_index  ON providers(provider_id);
-
-CREATE INDEX providers_provider_name_index  ON providers(provider_name);
+CREATE INDEX IF NOT EXISTS providers_provider_name_index  ON providers(provider_name);
