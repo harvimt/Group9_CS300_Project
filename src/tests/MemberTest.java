@@ -56,7 +56,7 @@ public class MemberTest {
 			i_member.save();
 		}
 		Assert.assertTrue(Member.getMembers("John").get(0).getFullName().equals("John Doe"));
-		MemberStatus[] statuses = {MemberStatus.SUSPENDED};
+		MemberStatus[] statuses = {MemberStatus.SUSPENDED,MemberStatus.BANNED};
 		Assert.assertTrue(Member.getMembers(statuses).get(0).getFullName().equals("Jane Doe"));
 		assert(Member.getMembers("Jane",statuses).get(0).getFullName().equals("Jane Doe"));
 		
