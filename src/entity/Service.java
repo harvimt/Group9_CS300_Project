@@ -1,7 +1,6 @@
 package entity;
 
 import java.math.BigDecimal;
-import java.util.*;
 
 /**
  * Class Service
@@ -26,19 +25,19 @@ public class Service {
 	// Other methods
 	//
 
-	public int getService_id() {
+	public int getServiceId() {
 		return service_id;
 	}
 
-	public void setService_id(int service_id) {
+	public void setServiceId(int service_id) {
 		this.service_id = service_id;
 	}
 
-	public String getService_name() {
+	public String getServiceName() {
 		return service_name;
 	}
 
-	public void setService_name(String service_name) {
+	public void setServiceName(String service_name) {
 		this.service_name = service_name;
 	}
 
@@ -55,5 +54,4 @@ public class Service {
 	 */
 	public static void getServices(String partial_name) {
 	}
-
 }
