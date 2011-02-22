@@ -35,6 +35,9 @@ public class Member {
 	//
 	// Constructors
 	//
+	/**
+	 * "Create" a Member by fetching it from the database
+	 */
 	public Member(int member_id) throws Exception {
 		initializeQueries();
 		this.member_id = member_id;
@@ -51,6 +54,18 @@ public class Member {
 		this.email = rs.getString("email");
 	}
 
+	/**
+	 * Create a Member to save to the DB later.
+	 * 
+	 * @param full_name
+	 * @param member_status
+	 * @param street_address
+	 * @param city
+	 * @param state
+	 * @param zip_code
+	 * @param email
+	 * @throws Exception
+	 */
 	public Member(String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
 		throws Exception {
 		initializeQueries();
@@ -65,6 +80,19 @@ public class Member {
 		this.email = email;
 	}
 
+	/**
+	 * Create a Member that was fetched by a search method.
+	 * 
+	 * @param member_id
+	 * @param full_name
+	 * @param member_status
+	 * @param street_address
+	 * @param city
+	 * @param state
+	 * @param zip_code
+	 * @param email
+	 * @throws Exception
+	 */
 	private Member(int member_id, String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
 		throws Exception {
 		initializeQueries();
@@ -104,7 +132,7 @@ public class Member {
 				"WHERE member_id = ?");
 		}
 		if (delete_stmt == null) {
-			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE member_id = %");
+			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE member_id = ?");
 		}
 	}
 	
@@ -126,7 +154,7 @@ public class Member {
 			// http://www.freshblurbs.com/jdbc-get-last-inserts-id
 			ResultSet rs = insert_stmt.getGeneratedKeys();
 			rs.next();
-			member_id = rs.getInt("member_id");
+			member_id = rs.getInt(1);
 		} else {
 			update_stmt.setString(1, full_name);
 			update_stmt.setInt(2, member_status.getStatusId());
