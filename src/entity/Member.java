@@ -163,6 +163,7 @@ public class Member {
 			update_stmt.setString(5, state);
 			update_stmt.setString(6, zip_code);
 			update_stmt.setString(7, email);
+			update_stmt.setInt(8, member_id);
 			update_stmt.executeUpdate();
 		}
 	}
@@ -337,8 +338,6 @@ public class Member {
 		MemberStatus[] statuses_allowed)
 		throws Exception {
 		
-		
-		
 		StringBuilder builder = new StringBuilder(
 			"SELECT " +
 				"member_id, full_name, member_status, street_address, city, state, zip_code, email " +
@@ -348,6 +347,18 @@ public class Member {
 			builder.append(" WHERE ");
 			if(partial_name != null){
 				builder.append("full_name LIKE ('%' || ? || '%') ESCAPE '!' ");
+			}
+			if(statuses_allowed != null && statuses_allowed.length > 0){
+				builder.append("member_status IN (");
+				int i = 0;
+				for(MemberStatus status : statuses_allowed){
+					builder.append(status.getStatusId());
+					if(i < (statuses_allowed.length - 1)){
+						builder.append(",");
+					}
+					i+=1;
+				}
+				builder.append(")");
 			}
 		}
 		
@@ -370,8 +381,7 @@ public class Member {
 				rs.getString("zip_code"),
 				rs.getString("email")
 				);
-			list.add(member);
-			
+			list.add(member);			
 		}
 		return list;
 	}
