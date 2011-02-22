@@ -121,7 +121,7 @@ public class Provider {
 	 * 
 	 * @return the value of provider_id
 	 */
-	private int getProviderId() {
+	public int getProviderId() {
 		return provider_id;
 	}
 
@@ -131,7 +131,7 @@ public class Provider {
 	 * @param newVar
 	 *            the new value of provider_name
 	 */
-	private void setProviderName(String newVar) {
+	public void setProviderName(String newVar) {
 		provider_name = newVar;
 	}
 
@@ -140,7 +140,7 @@ public class Provider {
 	 * 
 	 * @return the value of provider_name
 	 */
-	private String getProviderName() {
+	public String getProviderName() {
 		return provider_name;
 	}
 
@@ -150,7 +150,7 @@ public class Provider {
 	 * @param newVar
 	 *            the new value of email
 	 */
-	private void setEmail(String newVar) {
+	public void setEmail(String newVar) {
 		email = newVar;
 	}
 
@@ -159,7 +159,7 @@ public class Provider {
 	 * 
 	 * @return the value of email
 	 */
-	private String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 

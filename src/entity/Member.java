@@ -3,7 +3,8 @@ package entity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 import control.ChocAnApp;
 
@@ -30,7 +31,6 @@ public class Member {
 	private static PreparedStatement insert_stmt = null;
 	private static PreparedStatement update_stmt = null;
 	private static PreparedStatement delete_stmt = null;
-	private static PreparedStatement search_stmt = null;
 
 	//
 	// Constructors
@@ -43,7 +43,7 @@ public class Member {
 		rs.next();
 
 		this.full_name = rs.getString("full_name");
-		this.member_status = MemberStatus.valueOf(rs.getString("member_status"));
+		this.member_status = MemberStatus.fromID(rs.getInt("member_status"));
 		this.street_address = rs.getString("street_address");
 		this.city = rs.getString("city");
 		this.state = rs.getString("state");
@@ -54,7 +54,8 @@ public class Member {
 	public Member(String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
 		throws Exception {
 		initializeQueries();
-
+		
+		this.member_id = -1;
 		this.full_name = full_name;
 		this.member_status = member_status;
 		this.street_address = street_address;
@@ -99,18 +100,53 @@ public class Member {
 			update_stmt = conn.prepareStatement(
 				"UPDATE members SET " +
 					"full_name = ?, member_status = ?, street_address = ?, city = ?, " +
-					"state = ?, zip_code = ?, email = ?" +
-				"WHERE provider_id = ?");
+					"state = ?, zip_code = ?, email = ? " +
+				"WHERE member_id = ?");
 		}
 		if (delete_stmt == null) {
 			delete_stmt = conn.prepareStatement("DELETE FROM members WHERE member_id = %");
 		}
-		if (search_stmt == null) {
-			search_stmt = conn.prepareStatement(
-				"SELECT " +
-					"member_id, full_name, member_status, street_address, city, state, zip_code, email " +
-				"FROM members " +
-				"WHERE full_name LIKE ('%' || ? || '%') ESCAPE '!'");
+	}
+	
+	/**
+	 * Save record to the Database
+	 * @throws Exception
+	 */
+	public void save() throws Exception{
+		if (member_id == -1) {
+			insert_stmt.setString(1, full_name);
+			insert_stmt.setInt(2, member_status.getStatusId());
+			insert_stmt.setString(3, street_address);
+			insert_stmt.setString(4, city);
+			insert_stmt.setString(5, state);
+			insert_stmt.setString(6, zip_code);
+			insert_stmt.setString(7, email);
+			insert_stmt.executeUpdate();
+			// "get last insert id" as explained here:
+			// http://www.freshblurbs.com/jdbc-get-last-inserts-id
+			ResultSet rs = insert_stmt.getGeneratedKeys();
+			rs.next();
+			member_id = rs.getInt("member_id");
+		} else {
+			update_stmt.setString(1, full_name);
+			update_stmt.setInt(2, member_status.getStatusId());
+			update_stmt.setString(3, street_address);
+			update_stmt.setString(4, city);
+			update_stmt.setString(5, state);
+			update_stmt.setString(6, zip_code);
+			update_stmt.setString(7, email);
+			update_stmt.executeUpdate();
+		}
+	}
+	/**
+	 * Delete member record from the database
+	 * @throws Exception
+	 */
+	public void delete() throws Exception{
+		if (member_id != -1) {
+			delete_stmt.setInt(1, member_id);
+			delete_stmt.executeUpdate();
+			member_id = -1;
 		}
 	}
 
@@ -268,16 +304,63 @@ public class Member {
 	 * @param partial_name
 	 * @param statuses_allowed
 	 */
-	public static void getMembers(String partial_name,
-			List<MemberStatus> statuses_allowed) {
+	public static List<Member> getMembers(
+		String partial_name,
+		MemberStatus[] statuses_allowed)
+		throws Exception {
+		
+		
+		
+		StringBuilder builder = new StringBuilder(
+			"SELECT " +
+				"member_id, full_name, member_status, street_address, city, state, zip_code, email " +
+			"FROM members");
+		
+		if(partial_name != null || statuses_allowed != null){
+			builder.append(" WHERE ");
+			if(partial_name != null){
+				builder.append("full_name LIKE ('%' || ? || '%') ESCAPE '!' ");
+			}
+		}
+		
+		Connection conn = ChocAnApp.getConnection();
+		PreparedStatement search_stmt = conn.prepareStatement(builder.toString());
+		if(partial_name != null){
+			partial_name = partial_name.replaceAll("[?_!]", "!$0");
+			search_stmt.setString(1, partial_name);
+		}
+		ResultSet rs = search_stmt.executeQuery();		
+		List <Member> list = new LinkedList<Member>();
+		while(rs.next()){
+			Member member = new Member(
+				rs.getInt("member_id"),
+				rs.getString("full_name"),
+				MemberStatus.fromID(rs.getInt("member_status")),
+				rs.getString("street_address"),
+				rs.getString("city"),
+				rs.getString("state"),
+				rs.getString("zip_code"),
+				rs.getString("email")
+				);
+			list.add(member);
+			
+		}
+		return list;
 	}
 
-	public static void getMembers(String partial_name) {
+	public static List<Member> getMembers(String partial_name)
+		throws Exception {
+		return getMembers(partial_name, null);
 	}
 
-	public static void getMembers(List<MemberStatus> statuses_allowed) {
+	public static List<Member> getMembers(MemberStatus[] statuses_allowed) 
+		throws Exception {
+		return getMembers(null,statuses_allowed);
 	}
 
-	public static void getMembers() {
+	public static List<Member> getMembers() 
+		throws Exception {
+		return getMembers(null,null);
+		
 	}
 }
