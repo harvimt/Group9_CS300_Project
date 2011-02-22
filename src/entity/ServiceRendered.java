@@ -1,10 +1,7 @@
-package control;
+package entity;
 
 import java.util.*;
 
-import entity.Member;
-import entity.Provider;
-import entity.Service;
 
 /**
  * Class ServiceRendered

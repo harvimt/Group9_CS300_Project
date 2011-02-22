@@ -2,6 +2,8 @@ package control;
 
 import java.util.*;
 
+import entity.ServiceRendered;
+
 /**
  * Class ServiceLogger
  */
