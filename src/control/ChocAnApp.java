@@ -37,6 +37,7 @@ public class ChocAnApp {
 		if (db_connection == null) {
 			Class.forName("org.sqlite.JDBC");
 			db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
+			initializeDB();
 		}
 		return db_connection;
 	}
