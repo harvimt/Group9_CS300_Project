@@ -1,7 +1,5 @@
 package control;
 
-import java.util.*;
-
 import entity.ServiceRendered;
 
 /**
@@ -35,7 +33,7 @@ public class ServiceLogger {
 	 * @param newVar
 	 *            the new value of service_rendered
 	 */
-	private void setService_rendered(ServiceRendered newVar) {
+	public void setServiceRendered(ServiceRendered newVar) {
 		service_rendered = newVar;
 	}
 
@@ -44,7 +42,7 @@ public class ServiceLogger {
 	 * 
 	 * @return the value of service_rendered
 	 */
-	private ServiceRendered getService_rendered() {
+	public ServiceRendered getServiceRendered() {
 		return service_rendered;
 	}
 

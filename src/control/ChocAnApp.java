@@ -1,17 +1,13 @@
 package control;
 
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.jdesktop.application.SingleFrameApplication;
 
 import entity.MemberStatus;
 

@@ -33,7 +33,7 @@ public class MemberReportEmail {
 	 * @param newVar
 	 *            the new value of report
 	 */
-	private void setReport(MemberReport newVar) {
+	public void setReport(MemberReport newVar) {
 		report = newVar;
 	}
 
@@ -42,7 +42,7 @@ public class MemberReportEmail {
 	 * 
 	 * @return the value of report
 	 */
-	private MemberReport getReport() {
+	public MemberReport getReport() {
 		return report;
 	}
 

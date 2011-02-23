@@ -1,6 +1,5 @@
 package control;
 
-import java.util.*;
 
 /**
  * Class MemberReport

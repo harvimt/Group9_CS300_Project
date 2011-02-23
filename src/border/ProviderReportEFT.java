@@ -33,7 +33,7 @@ public class ProviderReportEFT {
 	 * @param newVar
 	 *            the new value of report
 	 */
-	private void setReport(ProviderReport newVar) {
+	public void setReport(ProviderReport newVar) {
 		report = newVar;
 	}
 
@@ -42,7 +42,7 @@ public class ProviderReportEFT {
 	 * 
 	 * @return the value of report
 	 */
-	private ProviderReport getReport() {
+	public ProviderReport getReport() {
 		return report;
 	}
 

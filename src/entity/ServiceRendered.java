@@ -39,7 +39,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of service_logged
 	 */
-	private void setService_logged(Date newVar) {
+	public void setServiceLogged(Date newVar) {
 		service_logged = newVar;
 	}
 
@@ -48,7 +48,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of service_logged
 	 */
-	private Date getService_logged() {
+	public Date getServiceLogged() {
 		return service_logged;
 	}
 
@@ -58,7 +58,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of service_rendered
 	 */
-	private void setService_rendered(Date newVar) {
+	public void setServiceRendered(Date newVar) {
 		service_rendered = newVar;
 	}
 
@@ -67,7 +67,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of service_rendered
 	 */
-	private Date getService_rendered() {
+	public Date getServiceRendered() {
 		return service_rendered;
 	}
 
@@ -77,7 +77,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of provider
 	 */
-	private void setProvider(Provider newVar) {
+	public void setProvider(Provider newVar) {
 		provider = newVar;
 	}
 
@@ -86,7 +86,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of provider
 	 */
-	private Provider getProvider() {
+	public Provider getProvider() {
 		return provider;
 	}
 
@@ -96,7 +96,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of service
 	 */
-	private void setService(Service newVar) {
+	public void setService(Service newVar) {
 		service = newVar;
 	}
 
@@ -105,7 +105,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of service
 	 */
-	private Service getService() {
+	public Service getService() {
 		return service;
 	}
 
@@ -115,7 +115,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of member
 	 */
-	private void setMember(Member newVar) {
+	public void setMember(Member newVar) {
 		member = newVar;
 	}
 
@@ -124,7 +124,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of member
 	 */
-	private Member getMember() {
+	public Member getMember() {
 		return member;
 	}
 
@@ -134,7 +134,7 @@ public class ServiceRendered {
 	 * @param newVar
 	 *            the new value of comments
 	 */
-	private void setComments(String newVar) {
+	public void setComments(String newVar) {
 		comments = newVar;
 	}
 
@@ -143,7 +143,7 @@ public class ServiceRendered {
 	 * 
 	 * @return the value of comments
 	 */
-	private String getComments() {
+	public String getComments() {
 		return comments;
 	}
 
