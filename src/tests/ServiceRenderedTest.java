@@ -11,6 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import control.ChocAnApp;
+
 import entity.Member;
 import entity.MemberStatus;
 import entity.Provider;
@@ -79,6 +81,7 @@ public class ServiceRenderedTest {
 		for(Service i_service: services){
 			i_service.delete();
 		}
+		ChocAnApp.closeConnection();
 	}
 	
 	@Test

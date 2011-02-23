@@ -38,8 +38,13 @@ public class ChocAnApp {
 		return db_connection;
 	}
 	
+	static public void closeConnection() throws Exception {
+		db_connection.close();
+	}
+	
 	static protected void initializeDB() throws Exception{
 		Connection conn = ChocAnApp.getConnection();
+		conn.setAutoCommit(true);
 		java.sql.Statement stmt = conn.createStatement();
 		
 		//CREATE tables
@@ -52,6 +57,7 @@ public class ChocAnApp {
             	builder.append(line);
             	builder.append('\n');
             }
+            reader.close();
             stmt.executeUpdate(builder.toString());
 		}
 		
@@ -62,20 +68,18 @@ public class ChocAnApp {
 			pstmt.setString(1, status.name());
 			pstmt.addBatch();
 		}
-		
-		conn.setAutoCommit(false);
 		try {
 			pstmt.executeBatch(); //Execution will fail if they already exist, in which case carry on.
 		}catch (SQLException ex){}
-		conn.commit();
-		conn.setAutoCommit(true);
+		pstmt.close();
 		
 		ResultSet rs = stmt.executeQuery("SELECT status_id, status_name FROM member_statuses");
 		while(rs.next()){
 			MemberStatus status = MemberStatus.valueOf(rs.getString("status_name"));
 			status.setStatusId(rs.getInt("status_id"));
 		}
-		
+		rs.close();
+		stmt.close();
 	}
 
 	/**

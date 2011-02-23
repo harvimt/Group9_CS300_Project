@@ -385,6 +385,8 @@ public class Member {
 				);
 			list.add(member);			
 		}
+		rs.close();
+		search_stmt.close();
 		return list;
 	}
 

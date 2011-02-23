@@ -181,7 +181,9 @@ public class ServiceRendered {
 			insert_stmt.setInt(6, member.getMemberId());
 			insert_stmt.setString(7, comments);
 			
-			insert_stmt.executeUpdate();
+			if(insert_stmt.executeUpdate() != 1){
+				throw new Exception("INSERT failed");
+			}
 			ResultSet rs = insert_stmt.getGeneratedKeys();
 			rs.next();
 			this.transaction_id = rs.getInt(1);
@@ -194,8 +196,9 @@ public class ServiceRendered {
 			update_stmt.setInt(6, member.getMemberId());
 			update_stmt.setString(7, comments);
 			update_stmt.setInt(8, transaction_id);
-			update_stmt.execute();
-			
+			if(update_stmt.executeUpdate() != 1){
+				throw new Exception("UPDATE failed");
+			}
 		}
 	}
 	
