@@ -13,14 +13,16 @@ import entity.MemberStatus;
 public class MemberTest {
 
 	@Test public void testMember() throws Exception {
-		Member member = new Member("John Doe",MemberStatus.ACTIVE,
-			"123 foobar st.","Foobar City","OR","96502",
-			"foobar@example.com");
+		
 		
 		List<Member> members = Member.getMembers();
 		for(Member i_member : members){
 			i_member.delete();
 		}
+		
+		Member member = new Member("John Doe",MemberStatus.ACTIVE,
+			"123 foobar st.","Foobar City","OR","96502",
+			"foobar@example.com");
 		member.save();
 		
 		member.setFullName("Jane Doe");

@@ -110,7 +110,7 @@ public class Member {
 	//
 	// Methods
 	//
-	private void initializeQueries() throws Exception {
+	static private void initializeQueries() throws Exception {
 		Connection conn = ChocAnApp.getConnection();
 		if (select_single_stmt == null) {
 			select_single_stmt = conn.prepareStatement(
@@ -337,6 +337,8 @@ public class Member {
 		String partial_name,
 		MemberStatus[] statuses_allowed)
 		throws Exception {
+		
+		initializeQueries();
 		
 		StringBuilder builder = new StringBuilder(
 			"SELECT " +

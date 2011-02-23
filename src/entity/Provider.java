@@ -21,7 +21,7 @@ public class Provider {
 	private String provider_name;
 	private String email;
 
-	// / Prepared Statements
+	/// Prepared Statements
 	private static PreparedStatement select_single_stmt = null;
 	private static PreparedStatement insert_stmt = null;
 	private static PreparedStatement update_stmt = null;
@@ -55,7 +55,7 @@ public class Provider {
 		this.email = email;
 	}
 
-	private void initializeQueries() throws Exception {
+	static private void initializeQueries() throws Exception {
 		Connection conn = ChocAnApp.getConnection();
 		if (select_single_stmt == null) {
 			select_single_stmt = conn.prepareStatement(
@@ -71,7 +71,7 @@ public class Provider {
 		}
 		if (delete_stmt == null) {
 			delete_stmt = conn.prepareStatement(
-				"DELETE FROM providers WHERE provider_id = %");
+				"DELETE FROM providers WHERE provider_id = ?");
 		}
 		if (search_stmt == null) {
 			search_stmt = conn.prepareStatement(
@@ -170,8 +170,9 @@ public class Provider {
 	/**
 	 * @param partial_provider_name
 	 */
-	public Iterable<Provider> getProviders(String partial_provider_name)
+	static public List<Provider> getProviders(String partial_provider_name)
 			throws Exception {
+		initializeQueries();
 		
 		if (partial_provider_name == null) {
 			partial_provider_name = "";
@@ -182,7 +183,7 @@ public class Provider {
 		
 		search_stmt.setString(1, partial_provider_name);
 		ResultSet rs = search_stmt.executeQuery();
-		LinkedList<Provider> list = new LinkedList<Provider>();
+		List<Provider> list = new LinkedList<Provider>();
 
 		while (rs.next()) {
 			Provider provider = new Provider(rs.getInt("provider_id"),
@@ -191,5 +192,10 @@ public class Provider {
 		}
 
 		return list;
+	}
+	
+	static public List<Provider> getProviders()
+		throws Exception{
+		return getProviders(null);
 	}
 }
