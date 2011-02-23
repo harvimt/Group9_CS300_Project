@@ -25,14 +25,14 @@ public class ServiceTest {
 		service.save();
 		
 		service.setServiceName("Massage");
-		service.setFee(new BigDecimal(200));
+		service.setFee(new BigDecimal("200.20"));
 		service.save();
 		
 		int service_id = service.getServiceId();
 		service = new Service(service_id);
 		
-		Assert.assertTrue(service.getServiceName().equals("Massage"));
-		Assert.assertTrue(service.getFee().equals(new BigDecimal(200)));
+		Assert.assertEquals("Massage",service.getServiceName());
+		Assert.assertTrue(new BigDecimal("200.20").compareTo(service.getFee()) == 0);
 
 		service = new Service("Therapy", new BigDecimal(10));
 		service.save();
@@ -43,7 +43,7 @@ public class ServiceTest {
 			i_service.save();
 		}
 		
-		Assert.assertTrue(Service.getServices("rapy").get(0).getFee().equals(new BigDecimal(200)));
+		Assert.assertTrue( new BigDecimal(10).compareTo(Service.getServices("rapy").get(0).getFee()) == 0);
 		
 		services = Service.getServices();
 		for(Service i_service: services){

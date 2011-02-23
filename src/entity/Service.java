@@ -45,7 +45,9 @@ public class Service {
 	
 	public Service(
 		String service_name,
-		BigDecimal fee) {
+		BigDecimal fee) throws Exception {
+		
+		initializeQueries();
 		
 		this.service_id = -1;
 		this.service_name = service_name;
@@ -55,7 +57,9 @@ public class Service {
 	protected Service(
 		int service_id,
 		String service_name,
-		BigDecimal fee) {
+		BigDecimal fee) throws Exception {
+		
+		initializeQueries();
 		
 		this.service_id = service_id;
 		this.service_name = service_name;
@@ -107,7 +111,7 @@ public class Service {
 	}
 	
 	public void delete() throws Exception {
-		if(this.service_id == -1){
+		if(this.service_id != -1){
 			delete_stmt.setInt(1, service_id);
 			delete_stmt.executeUpdate();
 			service_id = -1;

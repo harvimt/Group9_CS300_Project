@@ -52,6 +52,7 @@ public class ServiceRendered {
 		this.transaction_id = -1;
 		this.service_logged = service_logged;
 		this.service_rendered = service_rendered;
+		this.fee = fee;
 		this.provider = provider;
 		this.service = service;
 		this.member = member;
@@ -73,6 +74,7 @@ public class ServiceRendered {
 		this.transaction_id = transaction_id;
 		this.service_logged = service_logged;
 		this.service_rendered = service_rendered;
+		this.fee = fee;
 		this.provider = provider;
 		this.service = service;
 		this.member = member;
@@ -87,7 +89,7 @@ public class ServiceRendered {
 			insert_stmt = conn.prepareStatement(
 				"INSERT INTO services_rendered ( " +
 					"service_logged, " +
-					"service_rendered, " +
+					"service_provided, " +
 					"fee, " +
 					"provider_id, " +
 					"service_id, " +
@@ -105,7 +107,7 @@ public class ServiceRendered {
 				"UPDATE services_rendered " +
 				"SET " +
 					"service_logged = datetime(? / 1000, 'unixepoch'), " +
-					"service_rendered = datetime(? / 1000, 'unixepoch'), " +
+					"service_provided = datetime(? / 1000, 'unixepoch'), " +
 					"fee = ?, " +
 					"provider_id = ?, " +
 					"service_id = ?, " +
@@ -124,7 +126,7 @@ public class ServiceRendered {
 				"SELECT " +
 					"SR.transaction_id, " +
 					"strftime('%s', SR.service_logged) * 1000 as service_logged, " +
-					"strftime('%s', SR.service_rendered) * 1000 as service_rendered, " +
+					"strftime('%s', SR.service_provided) * 1000 as service_provided, " +
 					"SR.fee, " +
 					"S.service_id, " +
 					"S.service_name, " +
@@ -132,14 +134,15 @@ public class ServiceRendered {
 					"M.member_id, " +
 					"M.full_name, " +
 					"M.member_status, " +
-					"M.stree_address, " +
+					"M.street_address, " +
 					"M.city, " +
 					"M.state, " +
 					"M.zip_code, " +
-					"M.email as member_email " +
+					"M.email as member_email, " +
+					"SR.comments " +
 				"FROM services_rendered SR " +
-				"LEFT JOIN services S ON S.serivice_id = SR.service_id " +
-				"LEFT JOIN members M ON M.service_id = SR.member_id " +
+				"LEFT JOIN services S ON S.service_id = SR.service_id " +
+				"LEFT JOIN members M ON M.member_id = SR.member_id " +
 				"WHERE SR.provider_id = ?");
 		}
 		
@@ -148,20 +151,17 @@ public class ServiceRendered {
 				"SELECT " +
 					"SR.transaction_id, " +
 					"strftime('%s', SR.service_logged) * 1000 as service_logged, " +
-					"strftime('%s', SR.service_rendered) * 1000 as service_rendered, " +
+					"strftime('%s', SR.service_provided) * 1000 as service_provided, " +
 					"SR.fee, " +
 					"S.service_id, " +
 					"S.service_name, " +
 					"S.fee as service_fee, " +
-					"M.city, " +
-					"M.state, " +
-					"M.zip_code, " +
-					"M.email as member_email, " +
 					"P.provider_id, " +
-					"P.service_name, " +
-					"P.email as provider_email " +
+					"P.provider_name, " +
+					"P.email as provider_email, " +
+					"SR.comments " +
 				"FROM services_rendered SR " +
-				"LEFT JOIN services S ON S.serivice_id = SR.service_id " +
+				"LEFT JOIN services S ON S.service_id = SR.service_id " +
 				"LEFT JOIN providers P ON P.provider_id = P.provider_id " +
 				"WHERE member_id = ?");
 		}
@@ -194,11 +194,13 @@ public class ServiceRendered {
 			update_stmt.setInt(6, member.getMemberId());
 			update_stmt.setString(7, comments);
 			update_stmt.setInt(8, transaction_id);
+			update_stmt.execute();
+			
 		}
 	}
 	
 	public void delete() throws Exception {
-		if(this.transaction_id == -1){
+		if(this.transaction_id != -1){
 			delete_stmt.setInt(1, transaction_id);
 			delete_stmt.executeUpdate();
 			transaction_id  = -1;
@@ -368,8 +370,8 @@ public class ServiceRendered {
 			
 			ServiceRendered sr = new ServiceRendered(
 				rs.getInt("transaction_id"),
-				rs.getDate("service_logged"),
-				rs.getDate("service_rendered"),
+				new Date(rs.getDate("service_logged").getTime()),
+				new Date(rs.getDate("service_provided").getTime()),
 				new BigDecimal(rs.getString("fee")),
 				provider,
 				service,
@@ -405,8 +407,8 @@ public class ServiceRendered {
 			
 			ServiceRendered sr = new ServiceRendered(
 				rs.getInt("transaction_id"),
-				rs.getDate("service_logged"),
-				rs.getDate("service_rendered"),
+				new Date(rs.getDate("service_logged").getTime()),
+				new Date(rs.getDate("service_provided").getTime()),
 				new BigDecimal(rs.getString("fee")),
 				provider,
 				service,
