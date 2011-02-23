@@ -5,6 +5,7 @@
 --  
 
 CREATE TABLE IF NOT EXISTS services_rendered (
+  transaction_id int NOT NULL PRIMARY KEY AUTOINCREMENT,
   service_logged int NOT NULL DEFAULT (date('now')),
   service_provided int NOT NULL ,
   provider_id int NOT NULL REFERENCES providers,

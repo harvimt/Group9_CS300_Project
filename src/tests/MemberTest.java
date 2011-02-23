@@ -69,6 +69,9 @@ public class MemberTest {
 		}
 		members = Member.getMembers();
 		Assert.assertTrue(members.isEmpty());
+		
+		//test the final line of MemberStatus
+		Assert.assertNull(MemberStatus.fromID(500));
 	}
 
 }

@@ -93,7 +93,7 @@ public class Member {
 	 * @param email
 	 * @throws Exception
 	 */
-	private Member(int member_id, String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
+	protected Member(int member_id, String full_name, MemberStatus member_status, String street_address, String city, String state, String zip_code, String email)
 		throws Exception {
 		initializeQueries();
 

@@ -47,7 +47,7 @@ public class Provider {
 		this.email = email;
 	}
 
-	private Provider(int provider_id, String provider_name, String email)
+	protected Provider(int provider_id, String provider_name, String email)
 			throws Exception {
 		initializeQueries();
 		this.provider_id = provider_id;
