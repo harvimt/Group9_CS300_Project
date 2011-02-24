@@ -34,59 +34,56 @@ public class LogServiceForm extends javax.swing.JFrame {
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		jTextField6 = new javax.swing.JTextField();
-		jTextField5 = new javax.swing.JTextField();
-		jTextField4 = new javax.swing.JTextField();
-		jTextField3 = new javax.swing.JTextField();
+
+		providerNumberField = new javax.swing.JTextField();
+		dateServiceRenderedField = new javax.swing.JFormattedTextField();
+		memberNumberField = new javax.swing.JTextField();
+		serviceCodeField = new javax.swing.JTextField();
 		jLabel7 = new javax.swing.JLabel();
 		jLabel1 = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
 		jLabel4 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
-		jFormattedTextField1 = new javax.swing.JFormattedTextField();
+		dateRecordEntered = new javax.swing.JFormattedTextField();
 		jButton3 = new javax.swing.JButton();
 		jButton1 = new javax.swing.JButton();
-		jScrollPane1 = new javax.swing.JScrollPane();
+		comments = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea();
 		jLabel6 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
-				.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
-				.getContext().getResourceMap(LogServiceForm.class);
+		.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
+		.getContext().getResourceMap(LogServiceForm.class);
 		setTitle(resourceMap.getString("Form.title")); // NOI18N
 		setName("Form"); // NOI18N
 
-		jTextField6.setText(resourceMap.getString("jTextField6.text")); // NOI18N
-		jTextField6.setName("jTextField6"); // NOI18N
-		jTextField6.addActionListener(new java.awt.event.ActionListener() {
+
+		providerNumberField.setText(resourceMap.getString("providerNumberField.text")); // NOI18N
+		providerNumberField.setName("providerNumberField"); // NOI18N
+		providerNumberField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField6ActionPerformed(evt);
+				providerNumberFieldActionPerformed(evt);
+			}
+		});
+		dateServiceRenderedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+		dateServiceRenderedField.setName("dateServiceRenderedField"); // NOI18N
+
+		memberNumberField.setText(resourceMap.getString("memberNumberField.text")); // NOI18N
+		memberNumberField.setName("memberNumberField"); // NOI18N
+		memberNumberField.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				memberNumberFieldActionPerformed(evt);
 			}
 		});
 
-		jTextField5.setText(resourceMap.getString("jTextField5.text")); // NOI18N
-		jTextField5.setName("jTextField5"); // NOI18N
-		jTextField5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField5ActionPerformed(evt);
-			}
-		});
 
-		jTextField4.setText(resourceMap.getString("jTextField4.text")); // NOI18N
-		jTextField4.setName("jTextField4"); // NOI18N
-		jTextField4.addActionListener(new java.awt.event.ActionListener() {
+		serviceCodeField.setText(resourceMap.getString("serviceCodeField.text")); // NOI18N
+		serviceCodeField.setName("serviceCodeField"); // NOI18N
+		serviceCodeField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField4ActionPerformed(evt);
-			}
-		});
-
-		jTextField3.setText(resourceMap.getString("jTextField3.text")); // NOI18N
-		jTextField3.setName("jTextField3"); // NOI18N
-		jTextField3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField3ActionPerformed(evt);
+				serviceCodeFieldActionPerformed(evt);
 			}
 		});
 
@@ -108,15 +105,13 @@ public class LogServiceForm extends javax.swing.JFrame {
 		jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
 		jLabel5.setName("jLabel5"); // NOI18N
 
-		jFormattedTextField1
-				.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-						new javax.swing.text.DateFormatter(java.text.DateFormat
-								.getDateInstance(java.text.DateFormat.SHORT))));
-		jFormattedTextField1.setName("jFormattedTextField1"); // NOI18N
+
+		dateRecordEntered.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+		dateRecordEntered.setName("dateRecordEntered"); // NOI18N
 
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application
-				.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
-				.getContext().getActionMap(LogServiceForm.class, this);
+		.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
+		.getContext().getActionMap(LogServiceForm.class, this);
 		jButton3.setAction(actionMap.get("openConfirmServiceLog")); // NOI18N
 		jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
 		jButton3.setName("jButton3"); // NOI18N
@@ -125,215 +120,115 @@ public class LogServiceForm extends javax.swing.JFrame {
 		jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
 		jButton1.setName("jButton1"); // NOI18N
 
-		jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+		comments.setName("comments"); // NOI18N
+
 
 		jTextArea1.setColumns(20);
 		jTextArea1.setRows(5);
 		jTextArea1.setName("jTextArea1"); // NOI18N
-		jScrollPane1.setViewportView(jTextArea1);
+		comments.setViewportView(jTextArea1);
 
 		jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
 		jLabel6.setName("jLabel6"); // NOI18N
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addContainerGap()
-																.addComponent(
-																		jLabel7)
-																.addGap(40, 40,
-																		40)
-																.addComponent(
-																		jFormattedTextField1,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		209,
-																		Short.MAX_VALUE))
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup()
-																.addGap(24, 24,
-																		24)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addGap(50,
-																										50,
-																										50)
-																								.addComponent(
-																										jButton1)
-																								.addGap(115,
-																										115,
-																										115)
-																								.addComponent(
-																										jButton3)
-																								.addGap(79,
-																										79,
-																										79))
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addGroup(
-																										layout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.TRAILING)
-																												.addComponent(
-																														jLabel2)
-																												.addComponent(
-																														jLabel1)
-																												.addComponent(
-																														jLabel3)
-																												.addComponent(
-																														jLabel4)
-																												.addComponent(
-																														jLabel5))
-																								.addGap(40,
-																										40,
-																										40)
-																								.addGroup(
-																										layout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.LEADING)
-																												.addComponent(
-																														jScrollPane1,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														209,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														jTextField4,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														209,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														jTextField6,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														209,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														jTextField3,
-																														javax.swing.GroupLayout.Alignment.TRAILING,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														209,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														jTextField5,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														209,
-																														Short.MAX_VALUE)))))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(155,
-																		155,
-																		155)
-																.addComponent(
-																		jLabel6)))
-								.addContainerGap()));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGap(16, 16, 16)
-								.addComponent(jLabel6,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										16,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jLabel7)
-												.addComponent(
-														jFormattedTextField1,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(jLabel7)
+										.addGap(40, 40, 40)
+										.addComponent(dateRecordEntered, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+										.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+												.addGap(24, 24, 24)
+												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(layout.createSequentialGroup()
+																.addGap(50, 50, 50)
+																.addComponent(jButton1)
+																.addGap(115, 115, 115)
+																.addComponent(jButton3)
+																.addGap(79, 79, 79))
+																.addGroup(layout.createSequentialGroup()
+																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+																				.addComponent(jLabel2)
+																				.addComponent(jLabel1)
+																				.addComponent(jLabel3)
+																				.addComponent(jLabel4)
+																				.addComponent(jLabel5))
+																				.addGap(40, 40, 40)
+																				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(comments, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+																						.addComponent(memberNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+																						.addComponent(providerNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+																						.addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+																						.addComponent(dateServiceRenderedField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))))
+																						.addGroup(layout.createSequentialGroup()
+																								.addGap(155, 155, 155)
+																								.addComponent(jLabel6)))
+																								.addContainerGap())
+		);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addGap(16, 16, 16)
+						.addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel7)
+								.addComponent(dateRecordEntered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField5,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel1))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField6,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(dateServiceRenderedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jLabel1))
+										.addGap(18, 18, 18)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(providerNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(jLabel2))
-								.addGap(22, 22, 22)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField4,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel3))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField3,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel4))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jLabel5)
-												.addComponent(
-														jScrollPane1,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jButton3)
-												.addComponent(jButton1))
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+												.addGap(22, 22, 22)
+												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(jLabel3))
+														.addGap(18, 18, 18)
+														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																.addComponent(serviceCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(jLabel4))
+																.addGap(18, 18, 18)
+																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																		.addComponent(jLabel5)
+																		.addComponent(comments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+																		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																				.addComponent(jButton3)
+																				.addComponent(jButton1))
+																				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField6ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField6ActionPerformed
 
-	private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField5ActionPerformed
+	private void providerNumberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_providerNumberFieldActionPerformed
 		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField5ActionPerformed
+	}//GEN-LAST:event_providerNumberFieldActionPerformed
 
-	private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField4ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField4ActionPerformed
 
-	private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField3ActionPerformed
+	private void dateServiceRenderedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateServiceRenderedFieldActionPerformed
 		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField3ActionPerformed
+	}//GEN-LAST:event_dateServiceRenderedFieldActionPerformed
+
+
+	private void memberNumberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberNumberFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_memberNumberFieldActionPerformed
+
+	private void serviceCodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceCodeFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_serviceCodeFieldActionPerformed
 
 	/**
 	 * @param args
@@ -347,18 +242,27 @@ public class LogServiceForm extends javax.swing.JFrame {
 		});
 	}
 
+
 	@Action
 	public void cancelServiceLog() {
+		dispose();
 	}
+
 
 	@Action
 	public void openConfirmServiceLog() {
+		logServiceConfirm = new LogServiceConfirm();
+		logServiceConfirm.setVisible(true);
+		logServiceConfirm.setFields(dateRecordEntered, dateServiceRenderedField, 
+				providerNumberField, memberNumberField, 
+				serviceCodeField, comments);
 	}
+
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton3;
-	private javax.swing.JFormattedTextField jFormattedTextField1;
+	private javax.swing.JFormattedTextField dateRecordEntered;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -366,12 +270,14 @@ public class LogServiceForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel5;
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
-	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JScrollPane comments;
 	private javax.swing.JTextArea jTextArea1;
-	private javax.swing.JTextField jTextField3;
-	private javax.swing.JTextField jTextField4;
-	private javax.swing.JTextField jTextField5;
-	private javax.swing.JTextField jTextField6;
-	// End of variables declaration//GEN-END:variables
+	private javax.swing.JTextField serviceCodeField;
+	private javax.swing.JTextField memberNumberField;
+	private javax.swing.JFormattedTextField dateServiceRenderedField;
+	private javax.swing.JTextField providerNumberField;
+
+	private LogServiceConfirm logServiceConfirm;
+	// End of variables declaration//GEN-END:variables`
 
 }
