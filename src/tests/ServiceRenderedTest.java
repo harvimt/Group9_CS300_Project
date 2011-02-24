@@ -115,8 +115,12 @@ public class ServiceRenderedTest {
 		
 		sr2.save();
 		
+		//java.lang.Thread.sleep(1000);
+		
 		sr1 = ServiceRendered.getServicesRenderedByProvider(provider1).get(0);
 		sr2 = ServiceRendered.getServicesRenderedMember(member2).get(0);
+		
+		//java.lang.Thread.sleep(1000);
 		
 		Assert.assertEquals(df.parse("Jan 16, 2011"),sr1.getServiceRendered());
 		Assert.assertEquals(dtf.parse("Jan 16, 2011 8:13:24 pm"), sr1.getServiceLogged());

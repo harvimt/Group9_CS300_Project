@@ -162,8 +162,8 @@ public class ServiceRendered {
 					"SR.comments " +
 				"FROM services_rendered SR " +
 				"LEFT JOIN services S ON S.service_id = SR.service_id " +
-				"LEFT JOIN providers P ON P.provider_id = P.provider_id " +
-				"WHERE member_id = ?");
+				"LEFT JOIN providers P ON P.provider_id = SR.provider_id " +
+				"WHERE SR.member_id = ?");
 		}
 	}
 	
@@ -181,12 +181,12 @@ public class ServiceRendered {
 			insert_stmt.setInt(6, member.getMemberId());
 			insert_stmt.setString(7, comments);
 			
-			if(insert_stmt.executeUpdate() != 1){
-				throw new Exception("INSERT failed");
-			}
+			insert_stmt.executeUpdate();
+			
 			ResultSet rs = insert_stmt.getGeneratedKeys();
 			rs.next();
 			this.transaction_id = rs.getInt(1);
+			rs.close();
 		}else{
 			update_stmt.setDate(1, new java.sql.Date(service_logged.getTime()));
 			update_stmt.setDate(2, new java.sql.Date(service_rendered.getTime()));
@@ -196,9 +196,7 @@ public class ServiceRendered {
 			update_stmt.setInt(6, member.getMemberId());
 			update_stmt.setString(7, comments);
 			update_stmt.setInt(8, transaction_id);
-			if(update_stmt.executeUpdate() != 1){
-				throw new Exception("UPDATE failed");
-			}
+			update_stmt.executeUpdate();
 		}
 	}
 	
