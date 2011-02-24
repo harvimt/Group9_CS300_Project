@@ -171,6 +171,128 @@ public class ServiceRendered {
 	// Methods
 	//
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+			* result
+			+ ((comments == null) ? 0
+				: comments
+					.hashCode());
+		result = prime
+			* result
+			+ ((fee == null) ? 0
+				: fee
+					.hashCode());
+		result = prime
+			* result
+			+ ((member == null) ? 0
+				: member
+					.hashCode());
+		result = prime
+			* result
+			+ ((provider == null) ? 0
+				: provider
+					.hashCode());
+		result = prime
+			* result
+			+ ((service == null) ? 0
+				: service
+					.hashCode());
+		result = prime
+			* result
+			+ ((service_logged == null) ? 0
+				: service_logged
+					.hashCode());
+		result = prime
+			* result
+			+ ((service_rendered == null) ? 0
+				: service_rendered
+					.hashCode());
+		result = prime
+			* result
+			+ transaction_id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(
+		Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj
+			.getClass())
+			return false;
+		ServiceRendered other = (ServiceRendered) obj;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments
+			.equals(other.comments))
+			return false;
+		if (fee == null) {
+			if (other.fee != null)
+				return false;
+		} else if (!fee
+			.equals(other.fee))
+			return false;
+		if (member == null) {
+			if (other.member != null)
+				return false;
+		} else if (!member
+			.equals(other.member))
+			return false;
+		if (provider == null) {
+			if (other.provider != null)
+				return false;
+		} else if (!provider
+			.equals(other.provider))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service
+			.equals(other.service))
+			return false;
+		if (service_logged == null) {
+			if (other.service_logged != null)
+				return false;
+		} else if (!service_logged
+			.equals(other.service_logged))
+			return false;
+		if (service_rendered == null) {
+			if (other.service_rendered != null)
+				return false;
+		} else if (!service_rendered
+			.equals(other.service_rendered))
+			return false;
+		if (transaction_id != other.transaction_id)
+			return false;
+		return true;
+	}
+
+	//
+	// Methods
+	//
+	
+	@Override
+	public String toString() {
+		return String
+			.format(
+				"ServiceRendered [transaction_id=%s, service_logged=%s, service_rendered=%s, fee=%s, provider=%s, service=%s, member=%s, comments=%s]",
+				transaction_id,
+				service_logged,
+				service_rendered,
+				fee,
+				provider,
+				service,
+				member,
+				comments);
+	}
+
 	public void save() throws Exception{
 		if(this.transaction_id == -1){
 			insert_stmt.setDate(1, new java.sql.Date(service_logged.getTime()));

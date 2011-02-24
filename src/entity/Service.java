@@ -94,6 +94,63 @@ public class Service {
 		}
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+			* result
+			+ ((fee == null) ? 0
+				: fee
+					.hashCode());
+		result = prime
+			* result
+			+ service_id;
+		result = prime
+			* result
+			+ ((service_name == null) ? 0
+				: service_name
+					.hashCode());
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return String
+			.format(
+				"Service [service_id=%s, service_name=%s, fee=%s]",
+				service_id,
+				service_name,
+				fee);
+	}
+
+	@Override
+	public boolean equals(
+		Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj
+			.getClass())
+			return false;
+		Service other = (Service) obj;
+		if (fee == null) {
+			if (other.fee != null)
+				return false;
+		} else if (fee.compareTo(other.fee) != 0)
+			return false;
+		if (service_id != other.service_id)
+			return false;
+		if (service_name == null) {
+			if (other.service_name != null)
+				return false;
+		} else if (!service_name
+			.equals(other.service_name))
+			return false;
+		return true;
+	}
+
 	public void save() throws Exception {
 		if(this.service_id == -1){
 			insert_stmt.setString(1, service_name);
