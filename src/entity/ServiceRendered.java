@@ -236,8 +236,8 @@ public class ServiceRendered {
 		if (fee == null) {
 			if (other.fee != null)
 				return false;
-		} else if (!fee
-			.equals(other.fee))
+		} else if (fee
+			.compareTo(other.fee) != 0)
 			return false;
 		if (member == null) {
 			if (other.member != null)
