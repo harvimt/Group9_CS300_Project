@@ -27,7 +27,7 @@ public class ServiceRendered {
 	private Member member;
 	private String comments;
 	
-	/// Prepared Statements
+	// Prepared Statements
 	private static PreparedStatement insert_stmt = null;
 	private static PreparedStatement update_stmt = null;
 	private static PreparedStatement delete_stmt = null;
