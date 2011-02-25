@@ -50,8 +50,8 @@ public class Service {
 		initializeQueries();
 		
 		this.service_id = -1;
-		this.service_name = service_name;
-		this.fee = fee;
+		setServiceName(service_name);
+		setFee(fee);
 	}
 
 	protected Service(
@@ -187,7 +187,11 @@ public class Service {
 		return service_name;
 	}
 
-	public void setServiceName(String service_name) {
+	public void setServiceName(String service_name) 
+		throws NullPointerException{
+		if(service_name == null){
+			throw new NullPointerException("service_name may not be null");
+		}
 		this.service_name = service_name;
 	}
 
@@ -195,7 +199,11 @@ public class Service {
 		return fee;
 	}
 
-	public void setFee(BigDecimal fee) {
+	public void setFee(BigDecimal fee) 
+		throws NullPointerException{
+		if(fee == null){
+			throw new NullPointerException("fee may not be null");
+		}
 		this.fee = fee;
 	}
 
