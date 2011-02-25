@@ -122,35 +122,34 @@ public class HomeScreen extends FrameView {
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(authenticateButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                .addComponent(logServiceButton)
-                .addGap(128, 128, 128))
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(invalidID)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(authenticateButton)
+                        .addGap(69, 69, 69)
+                        .addComponent(logServiceButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(invalidID))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(72, 72, 72)
                 .addComponent(invalidID)
                 .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(logServiceButton))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                        .addComponent(authenticateButton)))
-                .addGap(294, 294, 294))
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(authenticateButton)
+                    .addComponent(logServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -202,6 +201,7 @@ public class HomeScreen extends FrameView {
         addMenu.setText(resourceMap.getString("addMenu.text")); // NOI18N
         addMenu.setName("addMenu"); // NOI18N
 
+        addMemberMenuItem.setAction(actionMap.get("addNewMember")); // NOI18N
         addMemberMenuItem.setText(resourceMap.getString("addMemberMenuItem.text")); // NOI18N
         addMemberMenuItem.setName("addMemberMenuItem"); // NOI18N
         addMenu.add(addMemberMenuItem);
@@ -293,6 +293,12 @@ public class HomeScreen extends FrameView {
 		memberReport = new MemberReportUI();
 		memberReport.setVisible(true);
 	}
+
+    @Action
+    public void addNewMember() {
+        MemberForm memberForm = new MemberForm();
+        memberForm.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addMemberMenuItem;
