@@ -208,7 +208,8 @@ public class Service {
 	}
 
 	/**
-	 * @param partial_name
+	 * search for services by name
+	 * @param partial_name service name to search for
 	 */
 	public static List<Service> getServices(String partial_name)
 		throws Exception {
@@ -234,6 +235,11 @@ public class Service {
 		return list;
 	}
 	
+	/**
+	 * Get all services
+	 * @return
+	 * @throws Exception
+	 */
 	public static List<Service> getServices()
 		throws Exception{
 		return getServices(null);
