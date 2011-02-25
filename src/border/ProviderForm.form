@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
@@ -74,7 +74,6 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jTextField5">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jTextField5.text"/>
         <Property name="name" type="java.lang.String" value="jTextField5" noResource="true"/>
       </Properties>
       <Events>
@@ -83,7 +82,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jTextField1.text"/>
         <Property name="name" type="java.lang.String" value="jTextField1" noResource="true"/>
       </Properties>
       <Events>
@@ -92,19 +90,16 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
         <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
         <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
         <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
       </Properties>
     </Component>

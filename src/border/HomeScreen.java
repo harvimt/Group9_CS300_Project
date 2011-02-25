@@ -72,160 +72,173 @@ public class HomeScreen extends FrameView {
 	 */
 	@SuppressWarnings("unchecked")
 
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
+        mainPanel = new javax.swing.JPanel();
+        invalidID = new javax.swing.JLabel();
+        authenticateButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        logServiceButton = new javax.swing.JButton();
+        menuBar = new javax.swing.JMenuBar();
+        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
+        autenticateMenuItem = new javax.swing.JMenuItem();
+        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        listMenu = new javax.swing.JMenu();
+        memberMenuItem = new javax.swing.JMenuItem();
+        providerMenuItem = new javax.swing.JMenuItem();
+        servicesMenuItem = new javax.swing.JMenuItem();
+        reportMenu = new javax.swing.JMenu();
+        providerReportMenuItem = new javax.swing.JMenuItem();
+        memberReportMenuItem = new javax.swing.JMenuItem();
+        addMenu = new javax.swing.JMenu();
+        addMemberMenuItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
+        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
-		mainPanel = new javax.swing.JPanel();
-		invalidMemberFlag = new javax.swing.JLabel();
-		jButton1 = new javax.swing.JButton();
-		jTextField1 = new javax.swing.JTextField();
-		jButton2 = new javax.swing.JButton();
-		menuBar = new javax.swing.JMenuBar();
-		javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-		autenticateMenuItem = new javax.swing.JMenuItem();
-		javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
-		listMenu = new javax.swing.JMenu();
-		memberMenuItem = new javax.swing.JMenuItem();
-		providerMenuItem = new javax.swing.JMenuItem();
-		servicesMenuItem = new javax.swing.JMenuItem();
-		reportMenu = new javax.swing.JMenu();
-		providerReportMenuItem = new javax.swing.JMenuItem();
-		memberReportMenuItem = new javax.swing.JMenuItem();
-		javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-		javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        mainPanel.setName("mainPanel"); // NOI18N
 
-		mainPanel.setName("mainPanel"); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(HomeScreen.class);
+        invalidID.setFont(resourceMap.getFont("invalidID.font")); // NOI18N
+        invalidID.setForeground(resourceMap.getColor("invalidID.foreground")); // NOI18N
+        invalidID.setText(resourceMap.getString("invalidID.text")); // NOI18N
+        invalidID.setName("invalidID"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(HomeScreen.class, this);
+        authenticateButton.setAction(actionMap.get("authenticateMember")); // NOI18N
+        authenticateButton.setText(resourceMap.getString("authenticateButton.text")); // NOI18N
+        authenticateButton.setName("authenticateButton"); // NOI18N
 
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(HomeScreen.class);
-		invalidMemberFlag.setFont(resourceMap.getFont("invalidMemberFlag.font")); // NOI18N
-		invalidMemberFlag.setForeground(resourceMap.getColor("invalidMemberFlag.foreground")); // NOI18N
-		invalidMemberFlag.setText(resourceMap.getString("invalidMemberFlag.text")); // NOI18N
-		invalidMemberFlag.setName("invalidMemberFlag"); // NOI18N
+        jTextField1.setName("jTextField1"); // NOI18N
 
+        logServiceButton.setAction(actionMap.get("openLogServiceForm")); // NOI18N
+        logServiceButton.setText(resourceMap.getString("logServiceButton.text")); // NOI18N
+        logServiceButton.setName("logServiceButton"); // NOI18N
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(HomeScreen.class, this);
-		jButton1.setAction(actionMap.get("authenticateMember")); // NOI18N
-		jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-		jButton1.setName("jButton1"); // NOI18N
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(authenticateButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addComponent(logServiceButton)
+                .addGap(128, 128, 128))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addComponent(invalidID)
+                .addContainerGap(226, Short.MAX_VALUE))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(invalidID)
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(logServiceButton))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                        .addComponent(authenticateButton)))
+                .addGap(294, 294, 294))
+        );
 
-		jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-		jTextField1.setName("jTextField1"); // NOI18N
+        menuBar.setName("menuBar"); // NOI18N
 
-		jButton2.setAction(actionMap.get("openLogServiceForm")); // NOI18N
-		jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-		jButton2.setName("jButton2"); // NOI18N
+        fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
+        fileMenu.setName("fileMenu"); // NOI18N
 
-		javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-		mainPanel.setLayout(mainPanelLayout);
-		mainPanelLayout.setHorizontalGroup(
-				mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(mainPanelLayout.createSequentialGroup()
-						.addGap(41, 41, 41)
-						.addComponent(jButton1)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
-						.addComponent(jButton2)
-						.addGap(88, 88, 88))
-						.addGroup(mainPanelLayout.createSequentialGroup()
-								.addGap(166, 166, 166)
-								.addComponent(invalidMemberFlag)
-								.addContainerGap(173, Short.MAX_VALUE))
-								.addGroup(mainPanelLayout.createSequentialGroup()
-										.addGap(184, 184, 184)
-										.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(184, Short.MAX_VALUE))
-		);
-		mainPanelLayout.setVerticalGroup(
-				mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-						.addGap(77, 77, 77)
-						.addComponent(invalidMemberFlag)
-						.addGap(12, 12, 12)
-						.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-						.addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(jButton1)
-								.addComponent(jButton2))
-								.addGap(44, 44, 44))
-		);
+        autenticateMenuItem.setName("autenticateMenuItem"); // NOI18N
+        fileMenu.add(autenticateMenuItem);
 
-		menuBar.setName("menuBar"); // NOI18N
+        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setName("exitMenuItem"); // NOI18N
+        fileMenu.add(exitMenuItem);
 
-		fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
-		fileMenu.setName("fileMenu"); // NOI18N
+        menuBar.add(fileMenu);
 
+        listMenu.setAction(actionMap.get("openProviderList")); // NOI18N
+        listMenu.setText(resourceMap.getString("listMenu.text")); // NOI18N
+        listMenu.setName("listMenu"); // NOI18N
 
-		autenticateMenuItem.setText(resourceMap.getString("autenticateMenuItem.text")); // NOI18N
-		autenticateMenuItem.setName("autenticateMenuItem"); // NOI18N
-		fileMenu.add(autenticateMenuItem);
+        memberMenuItem.setAction(actionMap.get("openMemberList")); // NOI18N
+        memberMenuItem.setName("memberMenuItem"); // NOI18N
+        listMenu.add(memberMenuItem);
 
-		exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
-		exitMenuItem.setName("exitMenuItem"); // NOI18N
-		fileMenu.add(exitMenuItem);
+        providerMenuItem.setAction(actionMap.get("openProviderList")); // NOI18N
+        providerMenuItem.setName("providerMenuItem"); // NOI18N
+        listMenu.add(providerMenuItem);
 
-		menuBar.add(fileMenu);
+        servicesMenuItem.setAction(actionMap.get("openServicesList")); // NOI18N
+        servicesMenuItem.setName("servicesMenuItem"); // NOI18N
+        listMenu.add(servicesMenuItem);
 
-		listMenu.setAction(actionMap.get("openProviderList")); // NOI18N
-		listMenu.setText(resourceMap.getString("listMenu.text")); // NOI18N
-		listMenu.setName("listMenu"); // NOI18N
+        menuBar.add(listMenu);
 
-		memberMenuItem.setAction(actionMap.get("openMemberList")); // NOI18N
-		memberMenuItem.setText(resourceMap.getString("memberMenuItem.text")); // NOI18N
-		memberMenuItem.setName("memberMenuItem"); // NOI18N
-		listMenu.add(memberMenuItem);
+        reportMenu.setAction(actionMap.get("openProviderReport")); // NOI18N
+        reportMenu.setText(resourceMap.getString("reportMenu.text")); // NOI18N
+        reportMenu.setName("reportMenu"); // NOI18N
 
-		providerMenuItem.setAction(actionMap.get("openProviderList")); // NOI18N
-		providerMenuItem.setText(resourceMap.getString("providerMenuItem.text")); // NOI18N
-		providerMenuItem.setName("providerMenuItem"); // NOI18N
-		listMenu.add(providerMenuItem);
+        providerReportMenuItem.setAction(actionMap.get("openProviderReport")); // NOI18N
+        providerReportMenuItem.setName("providerReportMenuItem"); // NOI18N
+        reportMenu.add(providerReportMenuItem);
 
-		servicesMenuItem.setAction(actionMap.get("openServicesList")); // NOI18N
-		servicesMenuItem.setText(resourceMap.getString("servicesMenuItem.text")); // NOI18N
-		servicesMenuItem.setName("servicesMenuItem"); // NOI18N
-		listMenu.add(servicesMenuItem);
+        memberReportMenuItem.setAction(actionMap.get("openMemberReport")); // NOI18N
+        memberReportMenuItem.setName("memberReportMenuItem"); // NOI18N
+        reportMenu.add(memberReportMenuItem);
 
-		menuBar.add(listMenu);
+        menuBar.add(reportMenu);
 
-		reportMenu.setAction(actionMap.get("openProviderReport")); // NOI18N
-		reportMenu.setText(resourceMap.getString("reportMenu.text")); // NOI18N
-		reportMenu.setName("reportMenu"); // NOI18N
+        addMenu.setText(resourceMap.getString("addMenu.text")); // NOI18N
+        addMenu.setName("addMenu"); // NOI18N
 
-		providerReportMenuItem.setAction(actionMap.get("openProviderReport")); // NOI18N
-		providerReportMenuItem.setText(resourceMap.getString("providerReportMenuItem.text")); // NOI18N
-		providerReportMenuItem.setName("providerReportMenuItem"); // NOI18N
-		reportMenu.add(providerReportMenuItem);
+        addMemberMenuItem.setText(resourceMap.getString("addMemberMenuItem.text")); // NOI18N
+        addMemberMenuItem.setName("addMemberMenuItem"); // NOI18N
+        addMenu.add(addMemberMenuItem);
 
-		memberReportMenuItem.setAction(actionMap.get("openMemberReport")); // NOI18N
-		memberReportMenuItem.setText(resourceMap.getString("memberReportMenuItem.text")); // NOI18N
-		memberReportMenuItem.setName("memberReportMenuItem"); // NOI18N
-		reportMenu.add(memberReportMenuItem);
+        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        addMenu.add(jMenuItem2);
 
-		menuBar.add(reportMenu);
+        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        addMenu.add(jMenuItem3);
 
-		helpMenu.setAction(actionMap.get("showAboutBox")); // NOI18N
-		helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-		helpMenu.setName("helpMenu"); // NOI18N
-		helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				helpMenuMouseClicked(evt);
-			}
-		});
-		helpMenu.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				helpMenuActionPerformed(evt);
-			}
-		});
+        menuBar.add(addMenu);
 
-		aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-		aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-		helpMenu.add(aboutMenuItem);
+        helpMenu.setAction(actionMap.get("showAboutBox")); // NOI18N
+        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
+        helpMenu.setName("helpMenu"); // NOI18N
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
+            }
+        });
+        helpMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpMenuActionPerformed(evt);
+            }
+        });
 
-		menuBar.add(helpMenu);
+        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
+        helpMenu.add(aboutMenuItem);
 
-		setComponent(mainPanel);
-		setMenuBar(menuBar);
-	}// </editor-fold>//GEN-END:initComponents
+        menuBar.add(helpMenu);
+
+        setComponent(mainPanel);
+        setMenuBar(menuBar);
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_helpMenuActionPerformed
 		// TODO add your handling code here:
@@ -238,13 +251,17 @@ public class HomeScreen extends FrameView {
 	@Action
 	public void openLogServiceForm() {
 		logServiceForm = new LogServiceForm();
+		JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
+		logServiceForm.setLocale(mainFrame.getLocale());
 		logServiceForm.setVisible(true);
 	}
 
 	@Action
 	public void authenticateMember() {
-		if(jTextField1 == null);
-		invalidMemberFlag.setVisible(true);
+		if(jTextField1 == null)
+			invalidID.setVisible(false);
+		else
+			invalidID.setVisible(true);
 	}
 
 	@Action
@@ -277,22 +294,26 @@ public class HomeScreen extends FrameView {
 		memberReport.setVisible(true);
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JMenuItem autenticateMenuItem;
-	private javax.swing.JLabel invalidMemberFlag;
-	private javax.swing.JButton jButton1;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JMenu listMenu;
-	private javax.swing.JPanel mainPanel;
-	private javax.swing.JMenuItem memberMenuItem;
-	private javax.swing.JMenuItem memberReportMenuItem;
-	private javax.swing.JMenuBar menuBar;
-	private javax.swing.JMenuItem providerMenuItem;
-	private javax.swing.JMenuItem providerReportMenuItem;
-	private javax.swing.JMenu reportMenu;
-	private javax.swing.JMenuItem servicesMenuItem;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem addMemberMenuItem;
+    private javax.swing.JMenu addMenu;
+    private javax.swing.JMenuItem autenticateMenuItem;
+    private javax.swing.JButton authenticateButton;
+    private javax.swing.JLabel invalidID;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu listMenu;
+    private javax.swing.JButton logServiceButton;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JMenuItem memberMenuItem;
+    private javax.swing.JMenuItem memberReportMenuItem;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem providerMenuItem;
+    private javax.swing.JMenuItem providerReportMenuItem;
+    private javax.swing.JMenu reportMenu;
+    private javax.swing.JMenuItem servicesMenuItem;
+    // End of variables declaration//GEN-END:variables
 
 	/*private final Timer messageTimer;
 	private final Timer busyIconTimer;
