@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
@@ -73,7 +73,6 @@
   <SubComponents>
     <Component class="javax.swing.JToggleButton" name="jToggleButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jToggleButton2.text"/>
         <Property name="name" type="java.lang.String" value="jToggleButton2" noResource="true"/>
       </Properties>
       <Events>
@@ -82,14 +81,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
         <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButton3">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" resourceKey="jToggleButton3.text"/>
         <Property name="name" type="java.lang.String" value="jToggleButton3" noResource="true"/>
       </Properties>
       <Events>
@@ -98,7 +95,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
         <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
       </Properties>
     </Component>
@@ -226,17 +222,17 @@
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title resourceKey="jTable1.columnModel.title0"/>
+                  <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title resourceKey="jTable1.columnModel.title1"/>
+                  <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title resourceKey="jTable1.columnModel.title2"/>
+                  <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>

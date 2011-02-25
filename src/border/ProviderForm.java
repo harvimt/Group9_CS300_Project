@@ -11,6 +11,8 @@
 
 package border;
 
+import org.jdesktop.application.Action;
+
 /**
  * 
  * @author Brandon
@@ -29,128 +31,100 @@ public class ProviderForm extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTextField5 = new javax.swing.JTextField();
-		jTextField1 = new javax.swing.JTextField();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        providerNameField = new javax.swing.JFormattedTextField();
+        providerNumberField = new javax.swing.JFormattedTextField();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
-				.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
-				.getContext().getResourceMap(ProviderForm.class);
-		setTitle(resourceMap.getString("Form.title")); // NOI18N
-		setName("Form"); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
 
-		jTextField5.setText(resourceMap.getString("jTextField5.text")); // NOI18N
-		jTextField5.setName("jTextField5"); // NOI18N
-		jTextField5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField5ActionPerformed(evt);
-			}
-		});
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
 
-		jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-		jTextField1.setName("jTextField1"); // NOI18N
-		jTextField1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField1ActionPerformed(evt);
-			}
-		});
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
 
-		jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-		jLabel1.setName("jLabel1"); // NOI18N
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
 
-		jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-		jLabel2.setName("jLabel2"); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderForm.class, this);
+        jButton1.setAction(actionMap.get("cancelButtonClicked")); // NOI18N
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
 
-		jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-		jLabel3.setName("jLabel3"); // NOI18N
+        jButton2.setAction(actionMap.get("finishButtonClicked")); // NOI18N
+        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(117,
-																		117,
-																		117)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
-																				.addComponent(
-																						jLabel3)
-																				.addComponent(
-																						jLabel2))
-																.addGap(41, 41,
-																		41)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING,
-																				false)
-																				.addComponent(
-																						jTextField5)
-																				.addComponent(
-																						jTextField1,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						67,
-																						Short.MAX_VALUE)))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(102,
-																		102,
-																		102)
-																.addComponent(
-																		jLabel1)))
-								.addContainerGap(138, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGap(26, 26, 26)
-								.addComponent(jLabel1)
-								.addGap(43, 43, 43)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(
-																		jLabel2)
-																.addComponent(
-																		jTextField1,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(50, 50,
-																		50)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
-																				.addComponent(
-																						jLabel3)
-																				.addComponent(
-																						jTextField5,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))))
-								.addContainerGap(177, Short.MAX_VALUE)));
+        try {
+            providerNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("?????????????????????????")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        providerNameField.setName("providerNameField"); // NOI18N
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        try {
+            providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        providerNumberField.setName("providerNumberField"); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(providerNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2)
+                            .addComponent(providerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(providerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(providerNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(70, 70, 70))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField5ActionPerformed
 		// TODO add your handling code here:
@@ -172,12 +146,23 @@ public class ProviderForm extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JTextField jTextField5;
-	// End of variables declaration//GEN-END:variables
+    @Action
+    public void cancelButtonClicked() {
+        dispose();
+    }
+
+    @Action
+    public void finishButtonClicked() {
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JFormattedTextField providerNameField;
+    private javax.swing.JFormattedTextField providerNumberField;
+    // End of variables declaration//GEN-END:variables
 
 }

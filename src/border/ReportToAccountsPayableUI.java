@@ -29,69 +29,63 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
-				.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
-				.getContext().getResourceMap(ReportToAccountsPayableUI.class);
-		setTitle(resourceMap.getString("Form.title")); // NOI18N
-		setName("Form"); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ReportToAccountsPayableUI.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
 
-		jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { "Doctor", "1", "$1500", null },
-						{ "Therapist", "3", "$150", null },
-						{ null, null, null, "$1650" },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null } },
-				new String[] { "Provider", "# of Consultations", "Fee",
-						"Total Fee" }));
-		jTable1.setName("jTable1"); // NOI18N
-		jScrollPane1.setViewportView(jTable1);
-		jTable1.getColumnModel()
-				.getColumn(0)
-				.setHeaderValue(
-						resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
-		jTable1.getColumnModel()
-				.getColumn(1)
-				.setHeaderValue(
-						resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
-		jTable1.getColumnModel()
-				.getColumn(2)
-				.setHeaderValue(
-						resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
-		jTable1.getColumnModel()
-				.getColumn(3)
-				.setHeaderValue(
-						resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Doctor", "1", "$1500", null},
+                {"Therapist", "3", "$150", null},
+                {null, null, null, "$1650"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Provider", "# of Consultations", "Fee", "Total Fee"
+            }
+        ));
+        jTable1.setName("jTable1"); // NOI18N
+        jScrollPane1.setViewportView(jTable1);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	/**
 	 * @param args
@@ -105,9 +99,9 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
 
 }

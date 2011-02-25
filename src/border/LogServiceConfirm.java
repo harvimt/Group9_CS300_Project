@@ -11,15 +11,37 @@
 
 package border;
 
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.JTextArea;
+import org.jdesktop.application.Action;
+
+
 /**
  * 
  * @author Brandon
  */
 public class LogServiceConfirm extends javax.swing.JFrame {
 
+
 	/** Creates new form ConfirmLogService */
 	public LogServiceConfirm() {
 		initComponents();
+	}
+
+	public void setFields( javax.swing.JFormattedTextField dateEntered,
+			javax.swing.JTextField dateRendered,
+			javax.swing.JTextField providerNumber,
+			javax.swing.JTextField memberNumber,
+			javax.swing.JTextField serviceCode,
+			javax.swing.JTextArea comments){
+		dateTextField.setText( dateEntered.getText() );
+		dateServiceRendered.setText( dateRendered.getText() );
+		providerNumberField.setText( providerNumber.getText() );
+		memberNumberField.setText( memberNumber.getText() );
+		this.serviceCode.setText( serviceCode.getText() );
+		this.commentsTextArea.setText( comments.getText());
 	}
 
 	/**
@@ -29,285 +51,206 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jTextField1 = new javax.swing.JTextField();
-		jTextField7 = new javax.swing.JTextField();
-		jButton1 = new javax.swing.JButton();
-		jLabel1 = new javax.swing.JLabel();
-		jButton2 = new javax.swing.JButton();
-		jTextField2 = new javax.swing.JTextField();
-		jTextField3 = new javax.swing.JTextField();
-		jTextField4 = new javax.swing.JTextField();
-		jTextField5 = new javax.swing.JTextField();
-		jTextField6 = new javax.swing.JTextField();
-		jTextField8 = new javax.swing.JTextField();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel6 = new javax.swing.JLabel();
-		jLabel5 = new javax.swing.JLabel();
-		jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        titleLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        dateTextField = new javax.swing.JFormattedTextField();
+        dateServiceRendered = new javax.swing.JTextField();
+        providerNumberField = new javax.swing.JTextField();
+        memberNumberField = new javax.swing.JTextField();
+        serviceCode = new javax.swing.JTextField();
+        comments = new javax.swing.JScrollPane();
+        commentsTextArea = new javax.swing.JTextArea();
+        backButton = new javax.swing.JButton();
+        finishButton = new javax.swing.JButton();
 
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
-				.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class)
-				.getContext().getResourceMap(LogServiceConfirm.class);
-		jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-		jTextField1.setName("jTextField1"); // NOI18N
+        jTextField1.setName("jTextField1"); // NOI18N
 
-		jTextField7.setText(resourceMap.getString("jTextField7.text")); // NOI18N
-		jTextField7.setName("jTextField7"); // NOI18N
+        jTextField7.setName("jTextField7"); // NOI18N
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle(resourceMap.getString("Form.title")); // NOI18N
-		setName("Form"); // NOI18N
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(LogServiceConfirm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
 
-		jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-		jButton1.setName("jButton1"); // NOI18N
+        titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
+        titleLabel.setName("titleLabel"); // NOI18N
 
-		jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-		jLabel1.setName("jLabel1"); // NOI18N
+        jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
+        jLabel7.setName("jLabel7"); // NOI18N
 
-		jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-		jButton2.setName("jButton2"); // NOI18N
+        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
+        jLabel6.setName("jLabel6"); // NOI18N
 
-		jTextField2.setName("jTextField2"); // NOI18N
-		jTextField2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField2ActionPerformed(evt);
-			}
-		});
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
 
-		jTextField3.setName("jTextField3"); // NOI18N
-		jTextField3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField3ActionPerformed(evt);
-			}
-		});
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
 
-		jTextField4.setName("jTextField4"); // NOI18N
-		jTextField4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField4ActionPerformed(evt);
-			}
-		});
+        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+        jLabel4.setName("jLabel4"); // NOI18N
 
-		jTextField5.setName("jTextField5"); // NOI18N
-		jTextField5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField5ActionPerformed(evt);
-			}
-		});
+        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
+        jLabel5.setName("jLabel5"); // NOI18N
 
-		jTextField6.setName("jTextField6"); // NOI18N
-		jTextField6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField6ActionPerformed(evt);
-			}
-		});
+        dateTextField.setEditable(false);
+        dateTextField.setName("dateTextField"); // NOI18N
 
-		jTextField8.setName("jTextField8"); // NOI18N
-		jTextField8.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jTextField8ActionPerformed(evt);
-			}
-		});
+        dateServiceRendered.setEditable(false);
+        dateServiceRendered.setName("dateServiceRendered"); // NOI18N
+        dateServiceRendered.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateServiceRenderedActionPerformed(evt);
+            }
+        });
 
-		jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-		jLabel2.setName("jLabel2"); // NOI18N
+        providerNumberField.setEditable(false);
+        providerNumberField.setName("providerNumberField"); // NOI18N
+        providerNumberField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                providerNumberFieldActionPerformed(evt);
+            }
+        });
 
-		jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
-		jLabel4.setName("jLabel4"); // NOI18N
+        memberNumberField.setEditable(false);
+        memberNumberField.setName("memberNumberField"); // NOI18N
+        memberNumberField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                memberNumberFieldActionPerformed(evt);
+            }
+        });
 
-		jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-		jLabel3.setName("jLabel3"); // NOI18N
+        serviceCode.setEditable(false);
+        serviceCode.setAutoscrolls(false);
+        serviceCode.setName("serviceCode"); // NOI18N
+        serviceCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serviceCodeActionPerformed(evt);
+            }
+        });
 
-		jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
-		jLabel6.setName("jLabel6"); // NOI18N
+        comments.setName("comments"); // NOI18N
 
-		jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
-		jLabel5.setName("jLabel5"); // NOI18N
+        commentsTextArea.setColumns(20);
+        commentsTextArea.setEditable(false);
+        commentsTextArea.setRows(5);
+        commentsTextArea.setName("commentsTextArea"); // NOI18N
+        comments.setViewportView(commentsTextArea);
 
-		jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
-		jLabel8.setName("jLabel8"); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(LogServiceConfirm.class, this);
+        backButton.setAction(actionMap.get("closeLogServiceConfirm")); // NOI18N
+        backButton.setText(resourceMap.getString("backButton.text")); // NOI18N
+        backButton.setName("backButton"); // NOI18N
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(118,
-																		118,
-																		118)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addComponent(
-																										jButton2)
-																								.addGap(34,
-																										34,
-																										34)
-																								.addComponent(
-																										jButton1))
-																				.addComponent(
-																						jLabel1)))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(44, 44,
-																		44)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
-																				.addComponent(
-																						jLabel6)
-																				.addComponent(
-																						jLabel8)
-																				.addComponent(
-																						jLabel5)
-																				.addComponent(
-																						jLabel3)
-																				.addComponent(
-																						jLabel4)
-																				.addComponent(
-																						jLabel2))
-																.addGap(38, 38,
-																		38)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING,
-																				false)
-																				.addComponent(
-																						jTextField2)
-																				.addComponent(
-																						jTextField4)
-																				.addComponent(
-																						jTextField5)
-																				.addComponent(
-																						jTextField8)
-																				.addComponent(
-																						jTextField3,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						86,
-																						Short.MAX_VALUE)
-																				.addComponent(
-																						jTextField6))))
-								.addContainerGap(85, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGap(20, 20, 20)
-								.addComponent(jLabel1)
-								.addGap(15, 15, 15)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField2,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel2))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-										34, Short.MAX_VALUE)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jLabel5)
-												.addComponent(
-														jTextField6,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField8,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel6))
-								.addGap(20, 20, 20)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField5,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel3))
-								.addGap(20, 20, 20)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField4,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel4))
-								.addGap(20, 20, 20)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														jTextField3,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel8))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jButton1)
-												.addComponent(jButton2))
-								.addContainerGap()));
+        finishButton.setAction(actionMap.get("commitRecordToDatabase")); // NOI18N
+        finishButton.setText(resourceMap.getString("finishButton.text")); // NOI18N
+        finishButton.setName("finishButton"); // NOI18N
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(finishButton)
+                            .addComponent(dateServiceRendered)
+                            .addComponent(providerNumberField)
+                            .addComponent(memberNumberField)
+                            .addComponent(comments)
+                            .addComponent(serviceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(titleLabel)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleLabel)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateServiceRendered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(providerNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serviceCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(comments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backButton)
+                    .addComponent(finishButton))
+                .addGap(35, 35, 35))
+        );
 
-	private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField2ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField2ActionPerformed
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-	private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField3ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField3ActionPerformed
 
-	private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField4ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField4ActionPerformed
+	protected void serviceCodeActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
 
-	private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField5ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField5ActionPerformed
+	}
 
-	private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField6ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField6ActionPerformed
 
-	private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField8ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField8ActionPerformed
+	protected void memberNumberFieldActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	protected void providerNumberFieldActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	protected void dateServiceRenderedActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+
+	}
+
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -317,24 +260,36 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jButton1;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JTextField jTextField2;
-	private javax.swing.JTextField jTextField3;
-	private javax.swing.JTextField jTextField4;
-	private javax.swing.JTextField jTextField5;
-	private javax.swing.JTextField jTextField6;
-	private javax.swing.JTextField jTextField7;
-	private javax.swing.JTextField jTextField8;
-	// End of variables declaration//GEN-END:variables
+
+	@Action
+	public void closeLogServiceConfirm() {
+		dispose();
+	}
+
+	@Action
+	public void commitRecordToDatabase() {
+		// TODO finalizing code
+	}
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
+    private javax.swing.JScrollPane comments;
+    private javax.swing.JTextArea commentsTextArea;
+    private javax.swing.JTextField dateServiceRendered;
+    private javax.swing.JFormattedTextField dateTextField;
+    private javax.swing.JButton finishButton;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField memberNumberField;
+    private javax.swing.JTextField providerNumberField;
+    private javax.swing.JTextField serviceCode;
+    private javax.swing.JLabel titleLabel;
+    // End of variables declaration//GEN-END:variables
 
 }
