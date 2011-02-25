@@ -105,6 +105,8 @@ public class ServiceRenderedTest {
 		sr1.delete();
 		sr1.save();
 		
+		int trans_id = sr1.getTransactionID();
+		
 		sr2.setComments("Blogarsis");
 		sr2.setFee(new BigDecimal("430.50"));
 		sr2.setMember(member2);
@@ -118,6 +120,7 @@ public class ServiceRenderedTest {
 		sr1 = ServiceRendered.getServicesRenderedByProvider(provider1).get(0);
 		sr2 = ServiceRendered.getServicesRenderedMember(member2).get(0);
 		
+		Assert.assertEquals(trans_id, sr1.getTransactionID());
 		Assert.assertEquals(df.parse("Jan 16, 2011"),sr1.getServiceRendered());
 		Assert.assertEquals(dtf.parse("Jan 16, 2011 8:13:24 pm"), sr1.getServiceLogged());
 		Assert.assertTrue(new BigDecimal("200.03").compareTo(sr1.getFee()) == 0);

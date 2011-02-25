@@ -136,6 +136,120 @@ public class Member {
 		}
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+			* result
+			+ ((city == null) ? 0
+				: city
+					.hashCode());
+		result = prime
+			* result
+			+ ((email == null) ? 0
+				: email
+					.hashCode());
+		result = prime
+			* result
+			+ ((full_name == null) ? 0
+				: full_name
+					.hashCode());
+		result = prime
+			* result
+			+ member_id;
+		result = prime
+			* result
+			+ ((member_status == null) ? 0
+				: member_status
+					.hashCode());
+		result = prime
+			* result
+			+ ((state == null) ? 0
+				: state
+					.hashCode());
+		result = prime
+			* result
+			+ ((street_address == null) ? 0
+				: street_address
+					.hashCode());
+		result = prime
+			* result
+			+ ((zip_code == null) ? 0
+				: zip_code
+					.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(
+		Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj
+			.getClass())
+			return false;
+		Member other = (Member) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city
+			.equals(other.city))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email
+			.equals(other.email))
+			return false;
+		if (full_name == null) {
+			if (other.full_name != null)
+				return false;
+		} else if (!full_name
+			.equals(other.full_name))
+			return false;
+		if (member_id != other.member_id)
+			return false;
+		if (member_status != other.member_status)
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state
+			.equals(other.state))
+			return false;
+		if (street_address == null) {
+			if (other.street_address != null)
+				return false;
+		} else if (!street_address
+			.equals(other.street_address))
+			return false;
+		if (zip_code == null) {
+			if (other.zip_code != null)
+				return false;
+		} else if (!zip_code
+			.equals(other.zip_code))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return String
+			.format(
+				"Member [member_id=%s, full_name=%s, member_status=%s, street_address=%s, city=%s, state=%s, zip_code=%s, email=%s]",
+				member_id,
+				full_name,
+				member_status,
+				street_address,
+				city,
+				state,
+				zip_code,
+				email);
+	}
+
 	/**
 	 * Save record to the Database
 	 * @throws Exception

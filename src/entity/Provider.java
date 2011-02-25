@@ -86,6 +86,64 @@ public class Provider {
 	// Methods
 	//
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+			* result
+			+ ((email == null) ? 0
+				: email
+					.hashCode());
+		result = prime
+			* result
+			+ provider_id;
+		result = prime
+			* result
+			+ ((provider_name == null) ? 0
+				: provider_name
+					.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(
+		Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj
+			.getClass())
+			return false;
+		Provider other = (Provider) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email
+			.equals(other.email))
+			return false;
+		if (provider_id != other.provider_id)
+			return false;
+		if (provider_name == null) {
+			if (other.provider_name != null)
+				return false;
+		} else if (!provider_name
+			.equals(other.provider_name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return String
+			.format(
+				"Provider [provider_id=%s, provider_name=%s, email=%s]",
+				provider_id,
+				provider_name,
+				email);
+	}
+
 	public void save() throws SQLException {
 		if (provider_id == -1) {
 			insert_stmt.setString(1, provider_name);
