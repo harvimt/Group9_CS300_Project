@@ -1,5 +1,7 @@
 package border;
 
+import org.jdesktop.application.Action;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -35,12 +37,14 @@ public class MemberList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        activeCheckBox = new javax.swing.JCheckBox();
+        cancelledCheckBox = new javax.swing.JCheckBox();
+        bannedCheckBox = new javax.swing.JCheckBox();
+        suspendedCheckBox = new javax.swing.JCheckBox();
+        allCheckBox = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(MemberList.class);
@@ -84,18 +88,31 @@ public class MemberList extends javax.swing.JFrame {
 
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jTextField1.setName("jTextField1"); // NOI18N
+        searchField.setName("searchField"); // NOI18N
 
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
+        activeCheckBox.setSelected(true);
+        activeCheckBox.setText(resourceMap.getString("activeCheckBox.text")); // NOI18N
+        activeCheckBox.setName("activeCheckBox"); // NOI18N
 
-        jCheckBox2.setName("jCheckBox2"); // NOI18N
+        cancelledCheckBox.setText(resourceMap.getString("cancelledCheckBox.text")); // NOI18N
+        cancelledCheckBox.setName("cancelledCheckBox"); // NOI18N
 
-        jCheckBox3.setName("jCheckBox3"); // NOI18N
+        bannedCheckBox.setText(resourceMap.getString("bannedCheckBox.text")); // NOI18N
+        bannedCheckBox.setName("bannedCheckBox"); // NOI18N
 
-        jCheckBox4.setName("jCheckBox4"); // NOI18N
+        suspendedCheckBox.setText(resourceMap.getString("suspendedCheckBox.text")); // NOI18N
+        suspendedCheckBox.setName("suspendedCheckBox"); // NOI18N
+
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(MemberList.class, this);
+        allCheckBox.setAction(actionMap.get("allCheckBoxChecked")); // NOI18N
+        allCheckBox.setText(resourceMap.getString("allCheckBox.text")); // NOI18N
+        allCheckBox.setName("allCheckBox"); // NOI18N
+
+        jButton1.setAction(actionMap.get("addButtonClicked")); // NOI18N
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,18 +123,25 @@ public class MemberList extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(525, 525, 525))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(221, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
-                .addGap(126, 126, 126)
-                .addComponent(jLabel2)
-                .addGap(27, 27, 27)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(311, 311, 311))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(activeCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(suspendedCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelledCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bannedCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(allCheckBox)
+                        .addGap(18, 18, 18)))
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
         );
@@ -126,12 +150,14 @@ public class MemberList extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(activeCheckBox)
+                    .addComponent(suspendedCheckBox)
+                    .addComponent(cancelledCheckBox)
+                    .addComponent(bannedCheckBox)
+                    .addComponent(allCheckBox)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -153,16 +179,40 @@ public class MemberList extends javax.swing.JFrame {
 		});
 	}
 
+    @Action
+    public void allCheckBoxChecked() {
+        if( allCheckBox.isSelected() == true ){
+            activeCheckBox.setSelected(true);
+            suspendedCheckBox.setSelected(true);
+            cancelledCheckBox.setSelected(true);
+            bannedCheckBox.setSelected(true);
+        }
+        else{
+            activeCheckBox.setSelected(false);
+            suspendedCheckBox.setSelected(false);
+            cancelledCheckBox.setSelected(false);
+            bannedCheckBox.setSelected(false);
+        }
+    }
+
+    @Action
+    public void addButtonClicked() {
+        MemberForm memberForm = new MemberForm();
+        memberForm.setVisible(true);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox activeCheckBox;
+    private javax.swing.JCheckBox allCheckBox;
+    private javax.swing.JCheckBox bannedCheckBox;
+    private javax.swing.JCheckBox cancelledCheckBox;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JCheckBox suspendedCheckBox;
     // End of variables declaration//GEN-END:variables
 
 }
