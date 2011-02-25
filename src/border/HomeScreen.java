@@ -157,6 +157,7 @@ public class HomeScreen extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
+        autenticateMenuItem.setText(resourceMap.getString("autenticateMenuItem.text")); // NOI18N
         autenticateMenuItem.setName("autenticateMenuItem"); // NOI18N
         fileMenu.add(autenticateMenuItem);
 
@@ -171,14 +172,17 @@ public class HomeScreen extends FrameView {
         listMenu.setName("listMenu"); // NOI18N
 
         memberMenuItem.setAction(actionMap.get("openMemberList")); // NOI18N
+        memberMenuItem.setText(resourceMap.getString("memberMenuItem.text")); // NOI18N
         memberMenuItem.setName("memberMenuItem"); // NOI18N
         listMenu.add(memberMenuItem);
 
         providerMenuItem.setAction(actionMap.get("openProviderList")); // NOI18N
+        providerMenuItem.setText(resourceMap.getString("providerMenuItem.text")); // NOI18N
         providerMenuItem.setName("providerMenuItem"); // NOI18N
         listMenu.add(providerMenuItem);
 
         servicesMenuItem.setAction(actionMap.get("openServicesList")); // NOI18N
+        servicesMenuItem.setText(resourceMap.getString("servicesMenuItem.text")); // NOI18N
         servicesMenuItem.setName("servicesMenuItem"); // NOI18N
         listMenu.add(servicesMenuItem);
 
@@ -188,11 +192,13 @@ public class HomeScreen extends FrameView {
         reportMenu.setText(resourceMap.getString("reportMenu.text")); // NOI18N
         reportMenu.setName("reportMenu"); // NOI18N
 
-        providerReportMenuItem.setAction(actionMap.get("openProviderReport")); // NOI18N
+        providerReportMenuItem.setAction(actionMap.get("openMemberReport")); // NOI18N
+        providerReportMenuItem.setText(resourceMap.getString("providerReportMenuItem.text")); // NOI18N
         providerReportMenuItem.setName("providerReportMenuItem"); // NOI18N
         reportMenu.add(providerReportMenuItem);
 
-        memberReportMenuItem.setAction(actionMap.get("openMemberReport")); // NOI18N
+        memberReportMenuItem.setAction(actionMap.get("openProviderReport")); // NOI18N
+        memberReportMenuItem.setText(resourceMap.getString("memberReportMenuItem.text")); // NOI18N
         memberReportMenuItem.setName("memberReportMenuItem"); // NOI18N
         reportMenu.add(memberReportMenuItem);
 
@@ -206,10 +212,12 @@ public class HomeScreen extends FrameView {
         addMemberMenuItem.setName("addMemberMenuItem"); // NOI18N
         addMenu.add(addMemberMenuItem);
 
+        jMenuItem2.setAction(actionMap.get("addNewProvider")); // NOI18N
         jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
         jMenuItem2.setName("jMenuItem2"); // NOI18N
         addMenu.add(jMenuItem2);
 
+        jMenuItem3.setAction(actionMap.get("addNewService")); // NOI18N
         jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
         jMenuItem3.setName("jMenuItem3"); // NOI18N
         addMenu.add(jMenuItem3);
@@ -298,6 +306,18 @@ public class HomeScreen extends FrameView {
     public void addNewMember() {
         MemberForm memberForm = new MemberForm();
         memberForm.setVisible(true);
+    }
+
+    @Action
+    public void addNewProvider() {
+        ProviderForm providerForm = new ProviderForm();
+        providerForm.setVisible(true);
+    }
+
+    @Action
+    public void addNewService() {
+        ServiceForm serviceForm = new ServiceForm();
+        serviceForm.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

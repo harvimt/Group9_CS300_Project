@@ -106,6 +106,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="autenticateMenuItem">
               <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="autenticateMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="autenticateMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -137,6 +138,7 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="border.HomeScreen" id="openMemberList" methodName="openMemberList"/>
                 </Property>
+                <Property name="text" type="java.lang.String" resourceKey="memberMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="memberMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -145,6 +147,7 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="border.HomeScreen" id="openProviderList" methodName="openProviderList"/>
                 </Property>
+                <Property name="text" type="java.lang.String" resourceKey="providerMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="providerMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -153,6 +156,7 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="border.HomeScreen" id="openServicesList" methodName="openServicesList"/>
                 </Property>
+                <Property name="text" type="java.lang.String" resourceKey="servicesMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="servicesMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -170,16 +174,18 @@
             <MenuItem class="javax.swing.JMenuItem" name="providerReportMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="border.HomeScreen" id="openProviderReport" methodName="openProviderReport"/>
+                  <action class="border.HomeScreen" id="openMemberReport" methodName="openMemberReport"/>
                 </Property>
+                <Property name="text" type="java.lang.String" resourceKey="providerReportMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="providerReportMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="memberReportMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="border.HomeScreen" id="openMemberReport" methodName="openMemberReport"/>
+                  <action class="border.HomeScreen" id="openProviderReport" methodName="openProviderReport"/>
                 </Property>
+                <Property name="text" type="java.lang.String" resourceKey="memberReportMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="memberReportMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -202,12 +208,18 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="border.HomeScreen" id="addNewProvider" methodName="addNewProvider"/>
+                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jMenuItem2.text"/>
                 <Property name="name" type="java.lang.String" value="jMenuItem2" noResource="true"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="border.HomeScreen" id="addNewService" methodName="addNewService"/>
+                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jMenuItem3.text"/>
                 <Property name="name" type="java.lang.String" value="jMenuItem3" noResource="true"/>
               </Properties>
