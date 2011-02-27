@@ -189,6 +189,15 @@
                 <Property name="name" type="java.lang.String" value="memberReportMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="accountsPayabelMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="border.HomeScreen" id="openAccountsPayableReport" methodName="openAccountsPayableReport"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="accountsPayabelMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="accountsPayabelMenuItem" noResource="true"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="addMenu">

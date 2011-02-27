@@ -91,6 +91,7 @@ public class HomeScreen extends FrameView {
         reportMenu = new javax.swing.JMenu();
         providerReportMenuItem = new javax.swing.JMenuItem();
         memberReportMenuItem = new javax.swing.JMenuItem();
+        accountsPayabelMenuItem = new javax.swing.JMenuItem();
         addMenu = new javax.swing.JMenu();
         addMemberMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -201,6 +202,11 @@ public class HomeScreen extends FrameView {
         memberReportMenuItem.setText(resourceMap.getString("memberReportMenuItem.text")); // NOI18N
         memberReportMenuItem.setName("memberReportMenuItem"); // NOI18N
         reportMenu.add(memberReportMenuItem);
+
+        accountsPayabelMenuItem.setAction(actionMap.get("openAccountsPayableReport")); // NOI18N
+        accountsPayabelMenuItem.setText(resourceMap.getString("accountsPayabelMenuItem.text")); // NOI18N
+        accountsPayabelMenuItem.setName("accountsPayabelMenuItem"); // NOI18N
+        reportMenu.add(accountsPayabelMenuItem);
 
         menuBar.add(reportMenu);
 
@@ -320,7 +326,14 @@ public class HomeScreen extends FrameView {
         serviceForm.setVisible(true);
     }
 
+    @Action
+    public void openAccountsPayableReport() {
+        ReportToAccountsPayableUI accountsPayableUI = new ReportToAccountsPayableUI();
+        accountsPayableUI.setVisible(true);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem accountsPayabelMenuItem;
     private javax.swing.JMenuItem addMemberMenuItem;
     private javax.swing.JMenu addMenu;
     private javax.swing.JMenuItem autenticateMenuItem;
