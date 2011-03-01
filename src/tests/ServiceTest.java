@@ -73,6 +73,7 @@ public class ServiceTest {
 		Service service1 = new Service("Super Special Therapy", new BigDecimal(500));
 		Service service2 = new Service("Super Special Massage", new BigDecimal(600));
 		Service service3 = new Service("Less Special Massage", new BigDecimal(520));
+		Object empty = new Object();
 		
 		service1.save();
 		service2.save();
@@ -81,6 +82,9 @@ public class ServiceTest {
 		Service service3_dup = Service.getServices("Less").get(0);
 		Assert.assertNotSame(service3, service3_dup);
 		Assert.assertEquals(service3, service3_dup);
+		
+		Assert.assertTrue(!service3.equals(empty));
+		Assert.assertTrue(!service3.equals(null));
 		
 		Assert.assertEquals(service1, service1);
 		Assert.assertTrue(!service3.equals(service1));
