@@ -94,8 +94,16 @@ public class HomeScreen extends FrameView {
         accountsPayabelMenuItem = new javax.swing.JMenuItem();
         addMenu = new javax.swing.JMenu();
         addMemberMenuItem = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        providerAddMenuItem = new javax.swing.JMenuItem();
+        serviceAddMenuItem = new javax.swing.JMenuItem();
+        editMenu = new javax.swing.JMenu();
+        memberEditMenuItem = new javax.swing.JMenuItem();
+        providerEditMenuItem = new javax.swing.JMenuItem();
+        serviceEditMenuItem = new javax.swing.JMenuItem();
+        deleteMenu = new javax.swing.JMenu();
+        memberDeleteMenuItem = new javax.swing.JMenuItem();
+        providerDeleteMenuItem = new javax.swing.JMenuItem();
+        serviceDeleteMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -218,17 +226,51 @@ public class HomeScreen extends FrameView {
         addMemberMenuItem.setName("addMemberMenuItem"); // NOI18N
         addMenu.add(addMemberMenuItem);
 
-        jMenuItem2.setAction(actionMap.get("addNewProvider")); // NOI18N
-        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        addMenu.add(jMenuItem2);
+        providerAddMenuItem.setAction(actionMap.get("addNewProvider")); // NOI18N
+        providerAddMenuItem.setText(resourceMap.getString("providerAddMenuItem.text")); // NOI18N
+        providerAddMenuItem.setName("providerAddMenuItem"); // NOI18N
+        addMenu.add(providerAddMenuItem);
 
-        jMenuItem3.setAction(actionMap.get("addNewService")); // NOI18N
-        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
-        jMenuItem3.setName("jMenuItem3"); // NOI18N
-        addMenu.add(jMenuItem3);
+        serviceAddMenuItem.setAction(actionMap.get("addNewService")); // NOI18N
+        serviceAddMenuItem.setText(resourceMap.getString("serviceAddMenuItem.text")); // NOI18N
+        serviceAddMenuItem.setName("serviceAddMenuItem"); // NOI18N
+        addMenu.add(serviceAddMenuItem);
 
         menuBar.add(addMenu);
+
+        editMenu.setText(resourceMap.getString("editMenu.text")); // NOI18N
+        editMenu.setName("editMenu"); // NOI18N
+
+        memberEditMenuItem.setText(resourceMap.getString("memberEditMenuItem.text")); // NOI18N
+        memberEditMenuItem.setName("memberEditMenuItem"); // NOI18N
+        editMenu.add(memberEditMenuItem);
+
+        providerEditMenuItem.setText(resourceMap.getString("providerEditMenuItem.text")); // NOI18N
+        providerEditMenuItem.setName("providerEditMenuItem"); // NOI18N
+        editMenu.add(providerEditMenuItem);
+
+        serviceEditMenuItem.setText(resourceMap.getString("serviceEditMenuItem.text")); // NOI18N
+        serviceEditMenuItem.setName("serviceEditMenuItem"); // NOI18N
+        editMenu.add(serviceEditMenuItem);
+
+        menuBar.add(editMenu);
+
+        deleteMenu.setText(resourceMap.getString("deleteMenu.text")); // NOI18N
+        deleteMenu.setName("deleteMenu"); // NOI18N
+
+        memberDeleteMenuItem.setText(resourceMap.getString("memberDeleteMenuItem.text")); // NOI18N
+        memberDeleteMenuItem.setName("memberDeleteMenuItem"); // NOI18N
+        deleteMenu.add(memberDeleteMenuItem);
+
+        providerDeleteMenuItem.setText(resourceMap.getString("providerDeleteMenuItem.text")); // NOI18N
+        providerDeleteMenuItem.setName("providerDeleteMenuItem"); // NOI18N
+        deleteMenu.add(providerDeleteMenuItem);
+
+        serviceDeleteMenuItem.setText(resourceMap.getString("serviceDeleteMenuItem.text")); // NOI18N
+        serviceDeleteMenuItem.setName("serviceDeleteMenuItem"); // NOI18N
+        deleteMenu.add(serviceDeleteMenuItem);
+
+        menuBar.add(deleteMenu);
 
         helpMenu.setAction(actionMap.get("showAboutBox")); // NOI18N
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
@@ -338,19 +380,27 @@ public class HomeScreen extends FrameView {
     private javax.swing.JMenu addMenu;
     private javax.swing.JMenuItem autenticateMenuItem;
     private javax.swing.JButton authenticateButton;
+    private javax.swing.JMenu deleteMenu;
+    private javax.swing.JMenu editMenu;
     private javax.swing.JLabel invalidID;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu listMenu;
     private javax.swing.JButton logServiceButton;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JMenuItem memberDeleteMenuItem;
+    private javax.swing.JMenuItem memberEditMenuItem;
     private javax.swing.JMenuItem memberMenuItem;
     private javax.swing.JMenuItem memberReportMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem providerAddMenuItem;
+    private javax.swing.JMenuItem providerDeleteMenuItem;
+    private javax.swing.JMenuItem providerEditMenuItem;
     private javax.swing.JMenuItem providerMenuItem;
     private javax.swing.JMenuItem providerReportMenuItem;
     private javax.swing.JMenu reportMenu;
+    private javax.swing.JMenuItem serviceAddMenuItem;
+    private javax.swing.JMenuItem serviceDeleteMenuItem;
+    private javax.swing.JMenuItem serviceEditMenuItem;
     private javax.swing.JMenuItem servicesMenuItem;
     // End of variables declaration//GEN-END:variables
 
