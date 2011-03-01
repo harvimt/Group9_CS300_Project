@@ -20,7 +20,7 @@ public class ServiceRendered {
 	
 	private int transaction_id;
 	private Date service_logged;
-	private Date service_rendered;
+	private Date service_provided;
 	private BigDecimal fee;
 	private Provider provider;
 	private Service service;
@@ -40,7 +40,7 @@ public class ServiceRendered {
 	
 	public ServiceRendered(
 		Date service_logged,
-		Date service_rendered,
+		Date service_provided,
 		BigDecimal fee,
 		Provider provider,
 		Service service,
@@ -51,7 +51,7 @@ public class ServiceRendered {
 		
 		this.transaction_id = -1;
 		this.service_logged = service_logged;
-		this.service_rendered = service_rendered;
+		this.service_provided = service_provided;
 		this.fee = fee;
 		this.provider = provider;
 		this.service = service;
@@ -62,7 +62,7 @@ public class ServiceRendered {
 	protected ServiceRendered(
 		int transaction_id,
 		Date service_logged,
-		Date service_rendered,
+		Date service_provided,
 		BigDecimal fee,
 		Provider provider,
 		Service service,
@@ -73,7 +73,7 @@ public class ServiceRendered {
 		
 		this.transaction_id = transaction_id;
 		this.service_logged = service_logged;
-		this.service_rendered = service_rendered;
+		this.service_provided = service_provided;
 		this.fee = fee;
 		this.provider = provider;
 		this.service = service;
@@ -207,8 +207,8 @@ public class ServiceRendered {
 					.hashCode());
 		result = prime
 			* result
-			+ ((service_rendered == null) ? 0
-				: service_rendered
+			+ ((service_provided == null) ? 0
+				: service_provided
 					.hashCode());
 		result = prime
 			* result
@@ -263,11 +263,11 @@ public class ServiceRendered {
 		} else if (!service_logged
 			.equals(other.service_logged))
 			return false;
-		if (service_rendered == null) {
-			if (other.service_rendered != null)
+		if (service_provided == null) {
+			if (other.service_provided != null)
 				return false;
-		} else if (!service_rendered
-			.equals(other.service_rendered))
+		} else if (!service_provided
+			.equals(other.service_provided))
 			return false;
 		if (transaction_id != other.transaction_id)
 			return false;
@@ -285,7 +285,7 @@ public class ServiceRendered {
 				"ServiceRendered [transaction_id=%s, service_logged=%s, service_rendered=%s, fee=%s, provider=%s, service=%s, member=%s, comments=%s]",
 				transaction_id,
 				service_logged,
-				service_rendered,
+				service_provided,
 				fee,
 				provider,
 				service,
@@ -296,7 +296,7 @@ public class ServiceRendered {
 	public void save() throws Exception{
 		if(this.transaction_id == -1){
 			insert_stmt.setDate(1, new java.sql.Date(service_logged.getTime()));
-			insert_stmt.setDate(2, new java.sql.Date(service_rendered.getTime()));
+			insert_stmt.setDate(2, new java.sql.Date(service_provided.getTime()));
 			insert_stmt.setString(3,fee.toString());
 			insert_stmt.setInt(4, provider.getProviderId());
 			insert_stmt.setInt(5, service.getServiceId());
@@ -311,7 +311,7 @@ public class ServiceRendered {
 			rs.close();
 		}else{
 			update_stmt.setDate(1, new java.sql.Date(service_logged.getTime()));
-			update_stmt.setDate(2, new java.sql.Date(service_rendered.getTime()));
+			update_stmt.setDate(2, new java.sql.Date(service_provided.getTime()));
 			update_stmt.setString(3,fee.toString());
 			update_stmt.setInt(4, provider.getProviderId());
 			update_stmt.setInt(5, service.getServiceId());
@@ -356,7 +356,6 @@ public class ServiceRendered {
 	public Date getServiceLogged() {
 		return service_logged;
 	}
-
 	
 	public BigDecimal getFee() {
 		return fee;
@@ -366,14 +365,8 @@ public class ServiceRendered {
 		this.fee = fee;
 	}
 
-	/**
-	 * Set the value of service_rendered
-	 * 
-	 * @param newVar
-	 *            the new value of service_rendered
-	 */
-	public void setServiceRendered(Date newVar) {
-		service_rendered = newVar;
+	public void setServiceProvided(Date newVar) {
+		service_provided = newVar;
 	}
 
 	/**
@@ -382,7 +375,7 @@ public class ServiceRendered {
 	 * @return the value of service_rendered
 	 */
 	public Date getServiceRendered() {
-		return service_rendered;
+		return service_provided;
 	}
 
 	/**

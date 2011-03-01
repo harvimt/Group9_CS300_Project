@@ -113,7 +113,7 @@ public class ServiceRenderedTest {
 		sr2.setProvider(provider2);
 		sr2.setService(service2);
 		sr2.setServiceLogged(dtf.parse("Dec 3, 2007 7:50:45 am"));
-		sr2.setServiceRendered(df.parse("Nov 25, 2006"));
+		sr2.setServiceProvided(df.parse("Nov 25, 2006"));
 		
 		sr2.save();
 		
