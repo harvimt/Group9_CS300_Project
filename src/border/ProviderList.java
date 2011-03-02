@@ -11,7 +11,17 @@
 
 package border;
 
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import org.jdesktop.application.Action;
+
+import entity.Provider;
 
 /**
  * 
@@ -47,35 +57,38 @@ public class ProviderList extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Doctor", "123456789"},
-                {"Therapist", "987654321"},
-                {null, ""},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Provider Name", "Provider Number"
-            }
-        ));
+        Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+        /*
+        try {
+			(new Provider("Yogi Bear","yogi@example.net")).save();
+			(new Provider("Boo Boo","boo_boo@example.net")).save();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+        
+        List<Provider> providers;
+		try {
+			providers = Provider.getProviders();
+	        for (Provider provider : providers){
+	        	rows.add(new Vector<Object>(Arrays.asList(new Object[]{
+	        			provider.getProviderName(),
+	        			new Integer(provider.getProviderId())
+	        	})));
+	        }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+        
+        model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number"})));
+        
+        jTable1.setModel(model);
         jTable1.setName("jTable1"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
 
