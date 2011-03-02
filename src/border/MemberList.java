@@ -44,7 +44,9 @@ public class MemberList extends javax.swing.JFrame {
         bannedCheckBox = new javax.swing.JCheckBox();
         suspendedCheckBox = new javax.swing.JCheckBox();
         allCheckBox = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(MemberList.class);
@@ -84,6 +86,8 @@ public class MemberList extends javax.swing.JFrame {
             }
         ));
         jTable1.setName("jTable1"); // NOI18N
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setName("jLabel1"); // NOI18N
@@ -110,9 +114,15 @@ public class MemberList extends javax.swing.JFrame {
         allCheckBox.setText(resourceMap.getString("allCheckBox.text")); // NOI18N
         allCheckBox.setName("allCheckBox"); // NOI18N
 
-        jButton1.setAction(actionMap.get("addButtonClicked")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setName("addButton"); // NOI18N
+
+        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+        editButton.setName("editButton"); // NOI18N
+
+        deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+        deleteButton.setName("deleteButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,8 +139,12 @@ public class MemberList extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(311, 311, 311))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(activeCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(suspendedCheckBox)
@@ -143,7 +157,7 @@ public class MemberList extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +171,9 @@ public class MemberList extends javax.swing.JFrame {
                     .addComponent(cancelledCheckBox)
                     .addComponent(bannedCheckBox)
                     .addComponent(allCheckBox)
-                    .addComponent(jButton1))
+                    .addComponent(addButton)
+                    .addComponent(editButton)
+                    .addComponent(deleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,10 +219,12 @@ public class MemberList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox activeCheckBox;
+    private javax.swing.JButton addButton;
     private javax.swing.JCheckBox allCheckBox;
     private javax.swing.JCheckBox bannedCheckBox;
     private javax.swing.JCheckBox cancelledCheckBox;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -126,6 +126,7 @@ public class MemberForm extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        addressField.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
         addressField.setName("addressField"); // NOI18N
 
         buttonGroup1.add(activeRadioButton);

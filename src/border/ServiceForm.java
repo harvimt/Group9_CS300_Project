@@ -83,6 +83,7 @@ public class ServiceForm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         serviceCodeField.setName("serviceCodeField"); // NOI18N
+        serviceCodeField.setEditable(false);
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
