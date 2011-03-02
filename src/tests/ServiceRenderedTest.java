@@ -166,7 +166,7 @@ public class ServiceRenderedTest {
 		Assert.assertFalse(sr1.equals(sr2));
 		
 		Map<ServiceRendered,Integer> map = new HashMap<ServiceRendered,Integer> ();
-		map.put(sr1, new Integer(2));
+		map.put(sr1, new Integer(1));
 		map.put(sr2, new Integer(2));
 		
 		Assert.assertEquals(new Integer(1),map.get(sr1));
