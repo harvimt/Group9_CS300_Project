@@ -3,7 +3,9 @@
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -81,7 +83,6 @@ public class ServiceRenderedTest {
 		for(Service i_service: services){
 			i_service.delete();
 		}
-		ChocAnApp.closeConnection();
 	}
 	
 	@Test
@@ -132,5 +133,45 @@ public class ServiceRenderedTest {
 		
 		sr1.delete();
 		sr2.delete();
+	}
+	
+	@Test
+	public void testEquals() throws Exception {
+		ServiceRendered sr1, sr2;
+		Object empty = new Object();
+		
+		DateFormat df = DateFormat.getDateInstance();
+		DateFormat dtf = DateFormat.getDateTimeInstance();
+		
+		sr1 = new ServiceRendered(
+			dtf.parse("Jan 16, 2011 8:13:24 PM"),
+			df.parse("Jan 16, 2011"),
+			new BigDecimal("200.03"), provider1, service1, member1, "FOOBAR");
+		sr1.save();
+		
+		sr2 = new ServiceRendered(
+			dtf.parse("Jan 19, 2011 8:27:55 PM"),
+			df.parse("Jan 18, 2011"),
+			new BigDecimal("200.03"), provider2, service2, member2, "BARFOO");
+		
+		sr2.save();
+
+		ServiceRendered sr1_dup = ServiceRendered.getServicesRenderedMember(member1).get(0);
+		
+		Assert.assertEquals(sr1,sr1);
+		Assert.assertEquals(sr1_dup,sr1);
+		Assert.assertEquals(sr1.toString(), sr1_dup.toString());
+		
+		Assert.assertFalse(sr1.equals(null));
+		Assert.assertFalse(sr1.equals(empty));
+		
+		Assert.assertFalse(sr1.equals(sr2));
+		
+		Map<ServiceRendered,Integer> map = new HashMap<ServiceRendered,Integer> ();
+		map.put(sr1, new Integer(2));
+		map.put(sr2, new Integer(2));
+		
+		Assert.assertEquals(new Integer(1),map.get(sr1));
+		Assert.assertEquals(new Integer(2),map.get(sr2));
 	}
 }
