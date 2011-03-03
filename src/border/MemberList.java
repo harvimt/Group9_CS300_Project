@@ -1,6 +1,17 @@
 package border;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import org.jdesktop.application.Action;
+
+import entity.Member;
+import entity.MemberStatus;
+import entity.Provider;
 
 /*
  * To change this template, choose Tools | Templates
@@ -31,157 +42,213 @@ public class MemberList extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        searchField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        activeCheckBox = new javax.swing.JCheckBox();
-        cancelledCheckBox = new javax.swing.JCheckBox();
-        bannedCheckBox = new javax.swing.JCheckBox();
-        suspendedCheckBox = new javax.swing.JCheckBox();
-        allCheckBox = new javax.swing.JCheckBox();
-        addButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jTable1 = new javax.swing.JTable();
+		jLabel1 = new javax.swing.JLabel();
+		searchField = new javax.swing.JTextField();
+		jLabel2 = new javax.swing.JLabel();
+		activeCheckBox = new javax.swing.JCheckBox();
+		cancelledCheckBox = new javax.swing.JCheckBox();
+		bannedCheckBox = new javax.swing.JCheckBox();
+		suspendedCheckBox = new javax.swing.JCheckBox();
+		allCheckBox = new javax.swing.JCheckBox();
+		addButton = new javax.swing.JButton();
+		editButton = new javax.swing.JButton();
+		deleteButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(MemberList.class);
-        setTitle(resourceMap.getString("Form.title")); // NOI18N
-        setName("Form"); // NOI18N
+		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(MemberList.class);
+		setTitle(resourceMap.getString("Form.title")); // NOI18N
+		setName("Form"); // NOI18N
+		addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusGained(java.awt.event.FocusEvent evt) {
+				formFocusGained(evt);
+			}
+		});
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"John Smith", "123456789", "Active", "123 N Smith Dr", "Smithonia", "OR", "12345"},
-                {"Jane Smith", "987654321", "Active", "123 N Smith Dr", "Smithonia", "OR", "12345"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Number", "Status", "Street", "City", "State", "Zip"
-            }
-        ));
-        jTable1.setName("jTable1"); // NOI18N
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		drawTable();
 
-        jScrollPane1.setViewportView(jTable1);
+		jLabel1.setName("jLabel1"); // NOI18N
 
-        jLabel1.setName("jLabel1"); // NOI18N
+		searchField.setName("searchField"); // NOI18N
+		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				searchFieldKeyReleased(evt);
+			}
+		});
 
-        searchField.setName("searchField"); // NOI18N
+		jLabel2.setName("jLabel2"); // NOI18N
 
-        jLabel2.setName("jLabel2"); // NOI18N
+		activeCheckBox.setSelected(true);
+		activeCheckBox.setText(resourceMap.getString("activeCheckBox.text")); // NOI18N
+		activeCheckBox.setName("activeCheckBox"); // NOI18N
 
-        activeCheckBox.setSelected(true);
-        activeCheckBox.setText(resourceMap.getString("activeCheckBox.text")); // NOI18N
-        activeCheckBox.setName("activeCheckBox"); // NOI18N
+		cancelledCheckBox.setText(resourceMap.getString("cancelledCheckBox.text")); // NOI18N
+		cancelledCheckBox.setName("cancelledCheckBox"); // NOI18N
 
-        cancelledCheckBox.setText(resourceMap.getString("cancelledCheckBox.text")); // NOI18N
-        cancelledCheckBox.setName("cancelledCheckBox"); // NOI18N
+		bannedCheckBox.setText(resourceMap.getString("bannedCheckBox.text")); // NOI18N
+		bannedCheckBox.setName("bannedCheckBox"); // NOI18N
 
-        bannedCheckBox.setText(resourceMap.getString("bannedCheckBox.text")); // NOI18N
-        bannedCheckBox.setName("bannedCheckBox"); // NOI18N
+		suspendedCheckBox.setText(resourceMap.getString("suspendedCheckBox.text")); // NOI18N
+		suspendedCheckBox.setName("suspendedCheckBox"); // NOI18N
 
-        suspendedCheckBox.setText(resourceMap.getString("suspendedCheckBox.text")); // NOI18N
-        suspendedCheckBox.setName("suspendedCheckBox"); // NOI18N
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(MemberList.class, this);
+		allCheckBox.setAction(actionMap.get("allCheckBoxChecked")); // NOI18N
+		allCheckBox.setText(resourceMap.getString("allCheckBox.text")); // NOI18N
+		allCheckBox.setName("allCheckBox"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(MemberList.class, this);
-        allCheckBox.setAction(actionMap.get("allCheckBoxChecked")); // NOI18N
-        allCheckBox.setText(resourceMap.getString("allCheckBox.text")); // NOI18N
-        allCheckBox.setName("allCheckBox"); // NOI18N
+		addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
+		addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+		addButton.setName("addButton"); // NOI18N
 
-        addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
-        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
-        addButton.setName("addButton"); // NOI18N
+		editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
+		editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+		editButton.setName("editButton"); // NOI18N
 
-        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
-        editButton.setName("editButton"); // NOI18N
+		deleteButton.setAction(actionMap.get("deleteButtonClicked")); // NOI18N
+		deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+		deleteButton.setName("deleteButton"); // NOI18N
 
-        deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
-        deleteButton.setName("deleteButton"); // NOI18N
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addGap(81, 81, 81)
+						.addComponent(jLabel1)
+						.addGap(525, 525, 525))
+						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addGroup(layout.createSequentialGroup()
+												.addComponent(jLabel2)
+												.addGap(311, 311, 311))
+												.addGroup(layout.createSequentialGroup()
+														.addComponent(addButton)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(editButton)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(deleteButton)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+														.addComponent(activeCheckBox)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(suspendedCheckBox)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(cancelledCheckBox)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(bannedCheckBox)
+														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(allCheckBox)
+														.addGap(18, 18, 18)))
+														.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addContainerGap())
+														.addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+		);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(jLabel2)
+								.addComponent(activeCheckBox)
+								.addComponent(suspendedCheckBox)
+								.addComponent(cancelledCheckBox)
+								.addComponent(bannedCheckBox)
+								.addComponent(allCheckBox)
+								.addComponent(addButton)
+								.addComponent(editButton)
+								.addComponent(deleteButton))
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+								.addComponent(jLabel1)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+		);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jLabel1)
-                .addGap(525, 525, 525))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(311, 311, 311))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(activeCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(suspendedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelledCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bannedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(allCheckBox)
-                        .addGap(18, 18, 18)))
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(activeCheckBox)
-                    .addComponent(suspendedCheckBox)
-                    .addComponent(cancelledCheckBox)
-                    .addComponent(bannedCheckBox)
-                    .addComponent(allCheckBox)
-                    .addComponent(addButton)
-                    .addComponent(editButton)
-                    .addComponent(deleteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+		pack();
+	}// </editor-fold>//GEN-END:initComponents
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+	private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+		drawTable();
+	}//GEN-LAST:event_formFocusGained
+
+	private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+		drawTable();
+	}//GEN-LAST:event_searchFieldKeyReleased
+
+	private void drawTable(){
+
+		/*try {
+			new Member("Yogi Bear", MemberStatus.ACTIVE, "yourstreet", "your City", "your state", "yourzip", "yogi@example.net").save();
+			(new Member("Boo Boo", MemberStatus.ACTIVE, "mystreet", "my city", "my state", "my zip","boo_boo@example.net")).save();
+			(new Member("sadfasd Boo", MemberStatus.SUSPENDED, "sadfgmystreet", "mdfgy city", "gmy state", "your gfdgzip","fdboo_boo@example.net")).save();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+
+
+		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+
+		List<Member> members;
+
+		MemberStatus[] status = new MemberStatus[3];
+
+		if( allCheckBox.isSelected() )
+			status = null;
+		else{
+			if( activeCheckBox.isSelected() )
+				status[0] = MemberStatus.ACTIVE;
+			if( suspendedCheckBox.isSelected() )
+				status[1] = MemberStatus.SUSPENDED;
+			if( suspendedCheckBox.isSelected() )
+				status[2] = MemberStatus.CANCELLED;
+			if( bannedCheckBox.isSelected() )
+				status[3] = MemberStatus.BANNED;
+		}
+
+
+
+		try {
+			members = Member.getMembers(searchField.getText());//, status);
+			for( Member member : members ){
+				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
+						member.getFullName(),
+						new Integer(member.getMemberId()),
+						member.getMemberStatus(),
+						member.getStreetAddress(),
+						member.getCity(),
+						member.getState(),
+						member.getZipCode(),
+						member.getEmail()
+				})));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+		model.setDataVector(rows, 
+				new Vector<String>( Arrays.asList(
+						new String[]{"Member Name","ID","Status","Address","City","State","Zip","Email"})
+				));
+		jTable1.getTableHeader().setReorderingAllowed(false);
+		jTable1.setModel(model);
+		jTable1.setName("jTable1");
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jScrollPane1.setViewportView(jTable1);
+
+
+	}
 
 	/**
 	 * @param args
@@ -195,42 +262,67 @@ public class MemberList extends javax.swing.JFrame {
 		});
 	}
 
-    @Action
-    public void allCheckBoxChecked() {
-        if( allCheckBox.isSelected() == true ){
-            activeCheckBox.setSelected(true);
-            suspendedCheckBox.setSelected(true);
-            cancelledCheckBox.setSelected(true);
-            bannedCheckBox.setSelected(true);
-        }
-        else{
-            activeCheckBox.setSelected(false);
-            suspendedCheckBox.setSelected(false);
-            cancelledCheckBox.setSelected(false);
-            bannedCheckBox.setSelected(false);
-        }
-    }
+	@Action
+	public void allCheckBoxChecked() {
+		if( allCheckBox.isSelected() == true ){
+			activeCheckBox.setSelected(true);
+			suspendedCheckBox.setSelected(true);
+			cancelledCheckBox.setSelected(true);
+			bannedCheckBox.setSelected(true);
+		}
+		else{
+			activeCheckBox.setSelected(false);
+			suspendedCheckBox.setSelected(false);
+			cancelledCheckBox.setSelected(false);
+			bannedCheckBox.setSelected(false);
+		}
+	}
 
-    @Action
-    public void addButtonClicked() {
-        MemberForm memberForm = new MemberForm();
-        memberForm.setVisible(true);
-    }
+	@Action
+	public void addButtonClicked() {
+		MemberForm memberForm = new MemberForm();
+		memberForm.setVisible(true);
+	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox activeCheckBox;
-    private javax.swing.JButton addButton;
-    private javax.swing.JCheckBox allCheckBox;
-    private javax.swing.JCheckBox bannedCheckBox;
-    private javax.swing.JCheckBox cancelledCheckBox;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField searchField;
-    private javax.swing.JCheckBox suspendedCheckBox;
-    // End of variables declaration//GEN-END:variables
+	@Action
+	public void editButtonClicked() {
+	}
+
+	@Action
+	public void deleteButtonClicked() {
+		int row = jTable1.getSelectedRow();
+		int val = (Integer) jTable1.getValueAt(row, 1);
+		int response = JOptionPane.showConfirmDialog(null, "Delete Member: " + jTable1.getValueAt(row, 0));
+		if( response == JOptionPane.YES_OPTION ){
+			Member member;
+			try {
+				member = new Member(val);
+				member.delete();
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			drawTable();
+		}
+	}
+
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JCheckBox activeCheckBox;
+	private javax.swing.JButton addButton;
+	private javax.swing.JCheckBox allCheckBox;
+	private javax.swing.JCheckBox bannedCheckBox;
+	private javax.swing.JCheckBox cancelledCheckBox;
+	private javax.swing.JButton deleteButton;
+	private javax.swing.JButton editButton;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JTable jTable1;
+	private javax.swing.JTextField searchField;
+	private javax.swing.JCheckBox suspendedCheckBox;
+	// End of variables declaration//GEN-END:variables
 
 }

@@ -69,7 +69,7 @@ public class ServiceList extends javax.swing.JFrame {
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
 		
-		drawTable(null);
+		drawTable();
 		/*jTable1.setModel(new javax.swing.table.DefaultTableModel(
 				new Object [][] {
 						{"Doctor", "123456", "$$$$$$.$$"},
@@ -164,20 +164,20 @@ public class ServiceList extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-		drawTable(null);
+		drawTable();
 	}//GEN-LAST:event_formWindowGainedFocus
 
 	private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
-		drawTable(searchField.getText());
+		drawTable();
 	}//GEN-LAST:event_searchFieldKeyReleased
 	
-	private void drawTable( String string ){
+	private void drawTable(){
 		
 		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
 		
 		List<Service> services;
 		try {
-			services = Service.getServices(string);
+			services = Service.getServices(searchField.getText());
 			for( Service service : services ){
 				rows.add(new Vector<Object>( Arrays.asList(new Object[]{
 						service.getServiceName(),
@@ -244,7 +244,7 @@ public class ServiceList extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			drawTable(null);
+			drawTable();
 		}
 	}
 

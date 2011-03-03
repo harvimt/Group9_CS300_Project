@@ -69,7 +69,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-		drawTable(null);
+		drawTable();
 		/*Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
 
         try {
@@ -175,14 +175,14 @@ public class ProviderList extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
-		drawTable(null);
+		drawTable();
 	}
 
 	private void searchFieldKeyReleased(java.awt.event.KeyEvent evt){
-		drawTable(searchField.getText());
+		drawTable();
 	}
 
-	private void drawTable(String string){
+	private void drawTable(){
 
 
 		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
@@ -200,7 +200,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		List<Provider> providers;
 		try {
-			providers = Provider.getProviders(string);
+			providers = Provider.getProviders(searchField.getText());
 			for (Provider provider : providers){
 				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
 						provider.getProviderName(),
@@ -273,7 +273,7 @@ public class ProviderList extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			drawTable(null);
+			drawTable();
 		}
 	}
 

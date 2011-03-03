@@ -216,7 +216,7 @@ public class ServiceForm extends javax.swing.JFrame {
     	}
     	else{
     		try {
-				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText()) ).save();
+				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText())).save();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
