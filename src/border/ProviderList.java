@@ -11,11 +11,14 @@
 
 package border;
 
+import java.awt.event.KeyAdapter;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -41,24 +44,149 @@ public class ProviderList extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
-        searchField = new javax.swing.JTextField();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jTable1 = new javax.swing.JTable();
+		jLabel1 = new javax.swing.JLabel();
+		addButton = new javax.swing.JButton();
+		searchField = new javax.swing.JTextField();
+		deleteButton = new javax.swing.JButton();
+		editButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
-        setTitle(resourceMap.getString("Form.title")); // NOI18N
-        setName("Form"); // NOI18N
+		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
+		setTitle(resourceMap.getString("Form.title")); // NOI18N
+		setName("Form"); // NOI18N
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+		jScrollPane1.setName("jScrollPane1"); // NOI18N
+		
+		drawTable(null);
+		/*Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+		
+        try {
+			(new Provider("Yogi Bear","yogi@example.net")).save();
+			(new Provider("Boo Boo","boo_boo@example.net")).save();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-        Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
-        /*
+		List<Provider> providers;
+		try {
+			providers = Provider.getProviders();
+			for (Provider provider : providers){
+				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
+						provider.getProviderName(),
+						new Integer(provider.getProviderId())
+				})));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+
+		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number"})));
+		
+		jTable1.getTableHeader().setReorderingAllowed(false);
+		
+		jTable1.setModel(model);
+
+		jTable1.setName("jTable1"); // NOI18N
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jScrollPane1.setViewportView(jTable1);
+		*/
+		jLabel1.setName("jLabel1"); // NOI18N
+
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
+		addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
+		addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+		addButton.setName("addButton"); // NOI18N
+
+		searchField.setName("searchField"); // NOI18N
+		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				searchFieldKeyPressed(evt);
+			}
+		});
+		
+		deleteButton.setAction(actionMap.get("deleteButtonClicked"));
+		deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+		deleteButton.setName("deleteButton"); // NOI18N
+
+		editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
+		editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+		editButton.setName("editButton"); // NOI18N
+
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addContainerGap(73, Short.MAX_VALUE)
+										.addComponent(jLabel1))
+										.addGroup(layout.createSequentialGroup()
+												.addContainerGap()
+												.addComponent(addButton)))
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						                        .addComponent(editButton)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(deleteButton)
+												.addGap(150, 150, 150)
+												.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addContainerGap())
+												.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+		);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(jLabel1)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(addButton)
+										.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(editButton)
+										.addComponent(deleteButton)))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+		);
+
+		pack();
+	}// </editor-fold>//GEN-END:initComponents
+	
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
+        drawTable(null);
+    }
+	
+	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt){
+		drawTable(searchField.getText());
+	}
+	
+	private void drawTable(String string){
+		
+		
+		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+		/*
         try {
 			(new Provider("Yogi Bear","yogi@example.net")).save();
 			(new Provider("Boo Boo","boo_boo@example.net")).save();
@@ -69,72 +197,38 @@ public class ProviderList extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}*/
-        
-        List<Provider> providers;
+
+		List<Provider> providers;
 		try {
-			providers = Provider.getProviders();
-	        for (Provider provider : providers){
-	        	rows.add(new Vector<Object>(Arrays.asList(new Object[]{
-	        			provider.getProviderName(),
-	        			new Integer(provider.getProviderId())
-	        	})));
-	        }
+			providers = Provider.getProviders(string);
+			for (Provider provider : providers){
+				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
+						provider.getProviderName(),
+						new Integer(provider.getProviderId()),
+						provider.getEmail()
+				})));
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
-        
-        model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number"})));
-        
-        jTable1.setModel(model);
-        jTable1.setName("jTable1"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setName("jLabel1"); // NOI18N
+		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number", "Provider Email"})));
+		
+		jTable1.getTableHeader().setReorderingAllowed(false);
+		
+		jTable1.setModel(model);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
-        addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
-        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
-        addButton.setName("addButton"); // NOI18N
+		jTable1.setName("jTable1"); // NOI18N
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        searchField.setName("searchField"); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(43, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGap(229, 229, 229)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addButton)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jScrollPane1.setViewportView(jTable1);
+		
+	}
 
 	/**
 	 * @param args
@@ -148,18 +242,50 @@ public class ProviderList extends javax.swing.JFrame {
 		});
 	}
 
-    @Action
-    public void addButtonClicked() {
-        ProviderForm providerForm = new ProviderForm();
-        providerForm.setVisible(true);
-    }
+	@Action
+	public void addButtonClicked(){
+		ProviderForm providerForm = new ProviderForm();
+		providerForm.setVisible(true);
+	}
+	
+	@Action
+	public void editButtonClicked(){
+		int col = jTable1.getSelectedColumn();
+		int row = jTable1.getSelectedRow();
+		if(row >= 0){
+			int val = (Integer) jTable1.getValueAt(row, 1);
+			ProviderForm providerForm = new ProviderForm(val);
+			providerForm.setVisible(true);
+		}
+	}
+	
+	@Action
+	public void deleteButtonClicked(){
+		int row = jTable1.getSelectedRow();
+		int val = (Integer) jTable1.getValueAt(row, 1);
+		int response = JOptionPane.showConfirmDialog(null, "Delete Provider: " + jTable1.getValueAt(row, 0));
+		if( response == JOptionPane.YES_OPTION ){
+			Provider prov;
+			try {
+				prov = new Provider(val);
+				prov.delete();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			drawTable(null);
+		}
+	}
+	
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField searchField;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton addButton;
+	private javax.swing.JButton deleteButton;
+	private javax.swing.JButton editButton;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JTable jTable1;
+	private javax.swing.JTextField searchField;
+	// End of variables declaration//GEN-END:variables
 
 }

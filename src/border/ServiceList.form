@@ -27,7 +27,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="225" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="editButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="deleteButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="searchField" min="-2" pref="100" max="-2" attributes="0"/>
@@ -45,6 +49,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deleteButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel1" alignment="1" min="0" pref="0" max="32767" attributes="0"/>
@@ -183,6 +189,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="searchField.text"/>
         <Property name="name" type="java.lang.String" value="searchField" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="editButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="editButton.text"/>
+        <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="deleteButton1.text"/>
+        <Property name="name" type="java.lang.String" value="deleteButton1" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

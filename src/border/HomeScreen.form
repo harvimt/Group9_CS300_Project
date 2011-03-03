@@ -235,58 +235,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="editMenu">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="editMenu.text"/>
-            <Property name="name" type="java.lang.String" value="editMenu" noResource="true"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="memberEditMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="memberEditMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="memberEditMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="providerEditMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="providerEditMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="providerEditMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="serviceEditMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="serviceEditMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="serviceEditMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="deleteMenu">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="deleteMenu.text"/>
-            <Property name="name" type="java.lang.String" value="deleteMenu" noResource="true"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="memberDeleteMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="memberDeleteMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="memberDeleteMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="providerDeleteMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="providerDeleteMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="providerDeleteMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="serviceDeleteMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="serviceDeleteMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="serviceDeleteMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="helpMenu">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">

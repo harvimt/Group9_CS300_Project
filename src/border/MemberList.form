@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
@@ -37,8 +37,12 @@
                       <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <Component id="addButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="editButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                       <Component id="activeCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="suspendedCheckBox" min="-2" max="-2" attributes="0"/>
@@ -54,7 +58,7 @@
               <Component id="searchField" min="-2" pref="100" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane1" alignment="1" pref="613" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="1" pref="636" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -69,7 +73,9 @@
                   <Component id="cancelledCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bannedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="allCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="6" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -311,10 +317,16 @@
               </TableColumnModel>
             </Property>
             <Property name="name" type="java.lang.String" value="jTable1" noResource="true"/>
+            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+              <JTableSelectionModel selectionMode="0"/>
+            </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTable1InputMethodTextChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -367,13 +379,25 @@
         <Property name="name" type="java.lang.String" value="allCheckBox" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="addButton">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="border.MemberList" id="addButtonClicked" methodName="addButtonClicked"/>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
-        <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="addButton.text"/>
+        <Property name="name" type="java.lang.String" value="addButton" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="editButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="editButton.text"/>
+        <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="deleteButton.text"/>
+        <Property name="name" type="java.lang.String" value="deleteButton" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
