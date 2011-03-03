@@ -11,12 +11,14 @@
 
 package border;
 
+import java.awt.event.KeyAdapter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -57,10 +59,17 @@ public class ProviderList extends javax.swing.JFrame {
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
 		setTitle(resourceMap.getString("Form.title")); // NOI18N
 		setName("Form"); // NOI18N
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
 		
-		drawTable();
+		drawTable(null);
 		/*Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
 		
         try {
@@ -111,6 +120,11 @@ public class ProviderList extends javax.swing.JFrame {
 		addButton.setName("addButton"); // NOI18N
 
 		searchField.setName("searchField"); // NOI18N
+		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				searchFieldKeyPressed(evt);
+			}
+		});
 		
 		deleteButton.setAction(actionMap.get("deleteButtonClicked"));
 		deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
@@ -160,8 +174,16 @@ public class ProviderList extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 	
-	private void drawTable(){
-		//jTable1.
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
+        drawTable(null);
+    }
+	
+	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt){
+		drawTable(searchField.getText());
+	}
+	
+	private void drawTable(String string){
+		
 		
 		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
 		/*
@@ -178,7 +200,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		List<Provider> providers;
 		try {
-			providers = Provider.getProviders();
+			providers = Provider.getProviders(string);
 			for (Provider provider : providers){
 				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
 						provider.getProviderName(),
@@ -230,24 +252,29 @@ public class ProviderList extends javax.swing.JFrame {
 	public void editButtonClicked(){
 		int col = jTable1.getSelectedColumn();
 		int row = jTable1.getSelectedRow();
-		int val = (Integer) jTable1.getValueAt(row, 1);
-		ProviderForm providerForm = new ProviderForm(val);
-		providerForm.setVisible(true);
+		if(row >= 0){
+			int val = (Integer) jTable1.getValueAt(row, 1);
+			ProviderForm providerForm = new ProviderForm(val);
+			providerForm.setVisible(true);
+		}
 	}
 	
 	@Action
 	public void deleteButtonClicked(){
 		int row = jTable1.getSelectedRow();
 		int val = (Integer) jTable1.getValueAt(row, 1);
-		Provider prov;
-		try {
-			prov = new Provider(val);
-			prov.delete();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int response = JOptionPane.showConfirmDialog(null, "Delete Provider: " + jTable1.getValueAt(row, 0));
+		if( response == JOptionPane.YES_OPTION ){
+			Provider prov;
+			try {
+				prov = new Provider(val);
+				prov.delete();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			drawTable(null);
 		}
-		drawTable();
 	}
 	
 

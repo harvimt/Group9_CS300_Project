@@ -12,6 +12,7 @@
 package border;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import org.jdesktop.application.Action;
 
@@ -32,8 +33,9 @@ public class ProviderForm extends javax.swing.JFrame {
 		initComponents();
 		try {
 			provider = new Provider(val);
-			providerNameField.setText( provider.getProviderName() );
-			providerNumberField.setText( Integer.toString(val) );
+			//providerNameField.setValue( provider.getProviderName().replaceAll(" ", "") );
+			providerNameField.setValue( provider.getProviderName() );
+			providerNumberField.setValue( new Integer(val));
 			providerEmailField.setText( provider.getEmail() );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -86,13 +88,14 @@ public class ProviderForm extends javax.swing.JFrame {
         jButton2.setName("jButton2"); // NOI18N
 
         try {
-            providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+			providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         providerNumberField.setName("providerNumberField"); // NOI18N
         providerNumberField.setEditable(false);
-        
+
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
 
@@ -100,7 +103,7 @@ public class ProviderForm extends javax.swing.JFrame {
         providerEmailField.setName("providerEmailField"); // NOI18N
 
         try {
-            providerNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("?????????????????????????")));
+            providerNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -183,6 +186,12 @@ public class ProviderForm extends javax.swing.JFrame {
 		if(provider != null){
 			provider.setProviderName(providerNameField.getText());
 			provider.setEmail(providerEmailField.getText());
+			try {
+				provider.save();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else{
 			try {

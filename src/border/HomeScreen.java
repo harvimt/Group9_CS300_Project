@@ -106,6 +106,7 @@ public class HomeScreen extends FrameView {
         invalidID.setForeground(resourceMap.getColor("invalidID.foreground")); // NOI18N
         invalidID.setText(resourceMap.getString("invalidID.text")); // NOI18N
         invalidID.setName("invalidID"); // NOI18N
+        invalidID.setVisible(false);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(HomeScreen.class, this);
         authenticateButton.setAction(actionMap.get("authenticateMember")); // NOI18N
