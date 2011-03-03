@@ -64,9 +64,11 @@ public class ChocAnApp {
 		//INSERT MemberStatus enum information into member_statuses (may already exist)
 		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO member_statuses (status_name) VALUES (?)");
 		for(MemberStatus status : MemberStatus.values()){
-			//Note not using batch so as to avoid going through the list twice.
-			pstmt.setString(1, status.name());
-			pstmt.addBatch();
+			if(status != MemberStatus.INVALID){
+				//INVALID members are members not in the db
+				pstmt.setString(1, status.name());
+				pstmt.addBatch();
+			}
 		}
 		try {
 			pstmt.executeBatch(); //Execution will fail if they already exist, in which case carry on.

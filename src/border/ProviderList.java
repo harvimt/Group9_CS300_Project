@@ -36,6 +36,9 @@ import entity.Provider;
  */
 public class ProviderList extends javax.swing.JFrame {
 
+        private ProviderListTableModel model;
+        private DefaultTableColumnModel columnModel;
+        
 	public class ProviderListTableModel
 		extends AbstractTableModel {
 		
@@ -169,7 +172,8 @@ public class ProviderList extends javax.swing.JFrame {
 	private static final long serialVersionUID = -7954895459629722542L;
 	/** Creates new form ProviderList */
 	public ProviderList() {
-		initComponents();
+            initTable();
+            initComponents();
 	}
 
 	/**
@@ -179,94 +183,88 @@ public class ProviderList extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
-		jLabel1 = new javax.swing.JLabel();
-		addButton = new javax.swing.JButton();
-		searchField = new javax.swing.JTextField();
-		deleteButton = new javax.swing.JButton();
-		editButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        deleteButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
-		setTitle(resourceMap.getString("Form.title")); // NOI18N
-		setName("Form"); // NOI18N
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
 
-		jScrollPane1.setName("jScrollPane1"); // NOI18N
-		
-		initTable();
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-		jLabel1.setName("jLabel1"); // NOI18N
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setModel(model);
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setName("jTable1"); // NOI18N
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.setColumnModel(columnModel);
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
-		addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
-		addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
-		addButton.setName("addButton"); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
 
-		searchField.setName("searchField"); // NOI18N
-		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
-				searchFieldKeyPressed(evt);
-			}
-		});
-		
-		deleteButton.setAction(actionMap.get("deleteButtonClicked"));
-		deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
-		deleteButton.setName("deleteButton"); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
+        addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setName("addButton"); // NOI18N
 
-		editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
-		editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
-		editButton.setName("editButton"); // NOI18N
+        searchField.setName("searchField"); // NOI18N
 
+        deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+        deleteButton.setName("deleteButton"); // NOI18N
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-										.addContainerGap(73, Short.MAX_VALUE)
-										.addComponent(jLabel1))
-										.addGroup(layout.createSequentialGroup()
-												.addContainerGap()
-												.addComponent(addButton)))
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						                        .addComponent(editButton)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(deleteButton)
-												.addGap(150, 150, 150)
-												.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addContainerGap())
-												.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-		);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jLabel1)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(addButton)
-										.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(editButton)
-										.addComponent(deleteButton)))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
-		);
+        editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
+        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+        editButton.setName("editButton"); // NOI18N
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(215, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)))
+                .addGap(107, 107, 107)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addButton)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editButton)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 	
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
     	reloadData();
@@ -277,7 +275,10 @@ public class ProviderList extends javax.swing.JFrame {
 	}
 	
 	private void reloadData(){
-		String search_string = searchField.getText();
+            String search_string = null;
+                if(searchField != null){
+                    search_string = searchField.getText();
+            }
 		try {
 			List<Provider> providers = Provider.getProviders(search_string);
 			model.setDataList(providers);
@@ -289,40 +290,28 @@ public class ProviderList extends javax.swing.JFrame {
 	private void initTable(){
 		model = new ProviderListTableModel();
 		
-		jTable1.getTableHeader().setReorderingAllowed(false);
-		jTable1.setAutoCreateRowSorter(true);
-		
-		DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
-		
+		columnModel = new DefaultTableColumnModel();
+
 		TableColumn col1 = new TableColumn(0);
 		col1.setIdentifier("Provider Name");
 		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
 		columnModel.addColumn(col1);
-		
+
 		TableColumn col2 = new TableColumn(1);
 		col2.setIdentifier("Provider Number");
 		FormattedRenderer prov_num_renderer = new FormattedRenderer();
 		prov_num_renderer.setFormatter(new DecimalFormat("00000000"));
 		col2.setCellRenderer(prov_num_renderer);
 		columnModel.addColumn(col2);
-		
+
 		TableColumn col3 = new TableColumn(2);
 		col3.setIdentifier("Provider Email");
-		
+
 		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
-		
+
 		columnModel.addColumn(col3);
 
-		jTable1.setModel(model);
-		jTable1.setColumnModel(columnModel);
-		
 		reloadData();
-
-		jTable1.setName("jTable1"); // NOI18N
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jScrollPane1.setViewportView(jTable1);
 	}
 
 	/**
@@ -395,15 +384,15 @@ public class ProviderList extends javax.swing.JFrame {
 	}
 	
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton addButton;
-	private javax.swing.JButton deleteButton;
-	private javax.swing.JButton editButton;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
-	private javax.swing.JTextField searchField;
-	// End of variables declaration//GEN-END:variables
-	private ProviderListTableModel model;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField searchField;
+    // End of variables declaration//GEN-END:variables
+
 
 }

@@ -20,6 +20,7 @@ public class DesktopApplication2 extends SingleFrameApplication {
 	@Override
 	protected void startup() {
 		show(new HomeScreen(this));
+		this.getMainFrame().setTitle("ChocAn Simulation");
 	}
 
 	/**
@@ -29,6 +30,7 @@ public class DesktopApplication2 extends SingleFrameApplication {
 	 */
 	@Override
 	protected void configureWindow(java.awt.Window root) {
+		
 	}
 
 	/**
