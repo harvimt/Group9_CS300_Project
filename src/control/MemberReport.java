@@ -1,5 +1,6 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.Member;
@@ -14,7 +15,20 @@ public class MemberReport {
 	//
 	// Fields
 	//
-
+	public class ReportItem {
+		public Member member;
+		public List<ServiceRendered> services;
+		
+		public ReportItem(
+			Member member,
+			List<ServiceRendered> services) {
+			this.member = member;
+			this.services = services;
+		}
+	}
+	
+	protected List<ReportItem> report_data;
+	
 	//
 	// Constructors
 	//
@@ -25,20 +39,17 @@ public class MemberReport {
 	// Methods
 	//
 	
-	public void runReport(){
+	public void runReport() throws Exception{
 		List<Member> members;
-		try{
-			members = Member.getMembers();
-		}catch(Exception ex){
-			//failed to get Members
-			return;
-		}
+		
+		members = Member.getMembers();
+		report_data = new ArrayList<ReportItem>(members.size());
+		
 		for(Member member : members){
-			try{
-				List<ServiceRendered> services = ServiceRendered.getServicesRenderedMember(member);
-			}catch(Exception ex){
-				//failed...
-			}
+			report_data.add(new ReportItem(
+				member,
+				ServiceRendered.getServicesRenderedMember(member)
+			));			
 		}
 	}
 
