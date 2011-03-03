@@ -12,7 +12,10 @@
 package border;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
+
+import javax.swing.text.NumberFormatter;
 
 import org.jdesktop.application.Action;
 
@@ -87,12 +90,9 @@ public class ProviderForm extends javax.swing.JFrame {
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
 
-        try {
-			providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+     
+		providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new DecimalFormat("000000"))));
+	
         providerNumberField.setName("providerNumberField"); // NOI18N
         providerNumberField.setEditable(false);
 

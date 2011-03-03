@@ -11,19 +11,23 @@
 
 package border;
 
-import java.awt.event.KeyAdapter;
-import java.math.BigDecimal;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Vector;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 
 import org.jdesktop.application.Action;
 
+import border.util.FormattedRenderer;
+import border.util.JTextFieldLimit;
 import entity.Provider;
 
 /**
@@ -32,6 +36,137 @@ import entity.Provider;
  */
 public class ProviderList extends javax.swing.JFrame {
 
+	public class ProviderListTableModel
+		extends AbstractTableModel {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 974082985600624015L;
+		private List<Provider> dataList;
+		
+		public List<Provider> getDataList() {
+			return dataList;
+		}
+
+		public void setDataList(
+			List<Provider> dataList) {
+			this.dataList = dataList;
+			fireTableDataChanged();
+		}
+
+		@Override
+		public int getRowCount() {
+			if(dataList == null){
+				return 0;
+			}else{
+				return dataList.size();
+			}
+		}
+
+		@Override
+		public int getColumnCount() {
+			return 3;
+		}
+
+		@Override
+		public String getColumnName(
+			int columnIndex) {
+			switch (columnIndex) {
+			case 0:
+				return "Provider Name";
+			case 1:
+				return "Provider Number";
+			case 2:
+				return "Provider Email";
+			default:
+				break;
+			}
+			return null;
+		}
+
+		@Override
+		public Class<?> getColumnClass(
+			int columnIndex) {
+			if(columnIndex == 0 || columnIndex == 2){
+				return String.class;
+			}else if(columnIndex == 1){
+				return Integer.class;
+			}else{
+				return null;
+			}
+		}
+
+		@Override
+		public boolean isCellEditable(
+			int rowIndex,
+			int columnIndex) {
+			if(columnIndex == 0 || columnIndex == 2){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		@Override
+		public Object getValueAt(
+			int rowIndex,
+			int columnIndex) {
+			
+			Provider row = dataList.get(rowIndex);
+			switch (columnIndex) {
+			case 0:
+				return row.getProviderName();
+				
+			case 1:
+				return row.getProviderId();
+				
+			case 2:
+				return row.getEmail();
+				
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public void setValueAt(
+			Object aValue,
+			int rowIndex,
+			int columnIndex) {
+			
+			Provider row = dataList.get(rowIndex);
+			switch (columnIndex) {
+			case 0:
+				row.setProviderName((String)aValue);
+				break;
+				
+			case 1:
+				//can't set ID
+				break;
+				
+			case 2:
+				row.setEmail((String)aValue);
+				break;
+				
+			default:
+				break;
+			}
+			
+			try {
+				row.save();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			fireTableCellUpdated(rowIndex, columnIndex);
+		}
+
+	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7954895459629722542L;
 	/** Creates new form ProviderList */
 	public ProviderList() {
 		initComponents();
@@ -69,49 +204,8 @@ public class ProviderList extends javax.swing.JFrame {
 
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
 		
-		drawTable(null);
-		/*Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
-		
-        try {
-			(new Provider("Yogi Bear","yogi@example.net")).save();
-			(new Provider("Boo Boo","boo_boo@example.net")).save();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		initTable();
 
-		List<Provider> providers;
-		try {
-			providers = Provider.getProviders();
-			for (Provider provider : providers){
-				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
-						provider.getProviderName(),
-						new Integer(provider.getProviderId())
-				})));
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
-
-		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number"})));
-		
-		jTable1.getTableHeader().setReorderingAllowed(false);
-		
-		jTable1.setModel(model);
-
-		jTable1.setName("jTable1"); // NOI18N
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jScrollPane1.setViewportView(jTable1);
-		*/
 		jLabel1.setName("jLabel1"); // NOI18N
 
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
@@ -175,64 +269,65 @@ public class ProviderList extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 	
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
-        drawTable(null);
+    	reloadData();
     }
 	
 	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt){
-		drawTable(searchField.getText());
+		reloadData();
 	}
 	
-	private void drawTable(String string){
-		
-		
-		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
-		/*
-        try {
-			(new Provider("Yogi Bear","yogi@example.net")).save();
-			(new Provider("Boo Boo","boo_boo@example.net")).save();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-
-		List<Provider> providers;
+	private void reloadData(){
+		String search_string = searchField.getText();
 		try {
-			providers = Provider.getProviders(string);
-			for (Provider provider : providers){
-				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
-						provider.getProviderName(),
-						new Integer(provider.getProviderId()),
-						provider.getEmail()
-				})));
-			}
+			List<Provider> providers = Provider.getProviders(search_string);
+			model.setDataList(providers);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Failed to Load Provider List","ERROR",JOptionPane.ERROR_MESSAGE);			
 		}
-
-		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
-
-		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number", "Provider Email"})));
+	}
+	
+	private void initTable(){
+		model = new ProviderListTableModel();
 		
 		jTable1.getTableHeader().setReorderingAllowed(false);
+		jTable1.setAutoCreateRowSorter(true);
 		
+		DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
+		
+		TableColumn col1 = new TableColumn(0);
+		col1.setIdentifier("Provider Name");
+		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
+		columnModel.addColumn(col1);
+		
+		TableColumn col2 = new TableColumn(1);
+		col2.setIdentifier("Provider Number");
+		FormattedRenderer prov_num_renderer = new FormattedRenderer();
+		prov_num_renderer.setFormatter(new DecimalFormat("00000000"));
+		col2.setCellRenderer(prov_num_renderer);
+		columnModel.addColumn(col2);
+		
+		TableColumn col3 = new TableColumn(2);
+		col3.setIdentifier("Provider Email");
+		
+		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
+		
+		columnModel.addColumn(col3);
+
 		jTable1.setModel(model);
+		jTable1.setColumnModel(columnModel);
+		
+		reloadData();
 
 		jTable1.setName("jTable1"); // NOI18N
 		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-
 		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jScrollPane1.setViewportView(jTable1);
-		
 	}
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * convenient for debugging; but shouldn't be used in real-world.
+	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -246,11 +341,30 @@ public class ProviderList extends javax.swing.JFrame {
 	public void addButtonClicked(){
 		ProviderForm providerForm = new ProviderForm();
 		providerForm.setVisible(true);
+		providerForm.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				reloadData();
+			}
+
+			@Override public void windowOpened(WindowEvent e) {}
+
+			@Override public void windowClosing(WindowEvent e) {}
+
+			@Override public void windowIconified(WindowEvent e) {}
+
+			@Override public void windowDeiconified(WindowEvent e) {}
+
+			@Override public void windowActivated(WindowEvent e) {}
+
+			@Override public void windowDeactivated(WindowEvent e) {}
+			
+		});
 	}
 	
 	@Action
 	public void editButtonClicked(){
-		int col = jTable1.getSelectedColumn();
 		int row = jTable1.getSelectedRow();
 		if(row >= 0){
 			int val = (Integer) jTable1.getValueAt(row, 1);
@@ -262,18 +376,21 @@ public class ProviderList extends javax.swing.JFrame {
 	@Action
 	public void deleteButtonClicked(){
 		int row = jTable1.getSelectedRow();
+		if(row == -1){
+			return; //no row selected
+		}
 		int val = (Integer) jTable1.getValueAt(row, 1);
-		int response = JOptionPane.showConfirmDialog(null, "Delete Provider: " + jTable1.getValueAt(row, 0));
+		int response = JOptionPane.showConfirmDialog(null, "Delete Provider: " + jTable1.getValueAt(row, 0), null, JOptionPane.YES_NO_OPTION);
+		
 		if( response == JOptionPane.YES_OPTION ){
 			Provider prov;
 			try {
 				prov = new Provider(val);
 				prov.delete();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to delete provider", "ERROR", ERROR);
 			}
-			drawTable(null);
+			reloadData();
 		}
 	}
 	
@@ -287,5 +404,6 @@ public class ProviderList extends javax.swing.JFrame {
 	private javax.swing.JTable jTable1;
 	private javax.swing.JTextField searchField;
 	// End of variables declaration//GEN-END:variables
+	private ProviderListTableModel model;
 
 }
