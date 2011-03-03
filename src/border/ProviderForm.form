@@ -30,7 +30,7 @@
               <EmptySpace pref="147" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="101" max="32767" attributes="0"/>
+              <EmptySpace pref="124" max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
@@ -44,12 +44,12 @@
                   <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="providerNameField" pref="104" max="32767" attributes="0"/>
-                  <Component id="providerEmailField" pref="104" max="32767" attributes="1"/>
-                  <Component id="providerNumberField" alignment="1" pref="104" max="32767" attributes="1"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="providerEmailField" max="32767" attributes="1"/>
+                  <Component id="providerNumberField" alignment="0" max="32767" attributes="1"/>
+                  <Component id="providerNameField" alignment="0" pref="174" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,9 +59,9 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="providerNameField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="providerNameField" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -122,8 +122,9 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="providerNumberField">
       <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="#########" subtype="-1" type="5"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="000000000" subtype="-1" type="0"/>
         </Property>
         <Property name="name" type="java.lang.String" value="providerNumberField" noResource="true"/>
       </Properties>
@@ -136,16 +137,17 @@
     </Component>
     <Component class="javax.swing.JTextField" name="providerEmailField">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="providerEmailField.text"/>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new JTextFieldLimit(128)" type="code"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="providerEmailField" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="providerNameField">
+    <Component class="javax.swing.JTextField" name="providerNameField">
       <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="*************************" subtype="-1" type="5"/>
+        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new JTextFieldLimit(25)" type="code"/>
         </Property>
-        <Property name="focusLostBehavior" type="int" value="3"/>
         <Property name="name" type="java.lang.String" value="providerNameField" noResource="true"/>
       </Properties>
     </Component>

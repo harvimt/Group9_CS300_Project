@@ -5,18 +5,16 @@
 package border;
 
 import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 
 import pdx.edu.cs300_group9.DesktopApplication2;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
-import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import entity.Member;
+import entity.MemberStatus;
+import java.awt.Color;
 
 /**
  * The application's main frame.
@@ -28,30 +26,8 @@ public class HomeScreen extends FrameView {
 
 		initComponents();
 
-
-		// status bar initialization - message timeout, idle icon and busy animation, etc
-		/*ResourceMap resourceMap = getResourceMap();
-		int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-		messageTimer = new Timer(messageTimeout, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		messageTimer.setRepeats(false);
-		int busyAnimationRate = resourceMap
-				.getInteger("StatusBar.busyAnimationRate");
-		for (int i = 0; i < busyIcons.length; i++) {
-			busyIcons[i] = resourceMap
-					.getIcon("StatusBar.busyIcons[" + i + "]");
-		}
-		busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
-
-			}
-		});
-		idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-		 */
+		invalidID.setVisible(false);
+	
 	}
 
 	@Action
@@ -78,8 +54,8 @@ public class HomeScreen extends FrameView {
         mainPanel = new javax.swing.JPanel();
         invalidID = new javax.swing.JLabel();
         authenticateButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         logServiceButton = new javax.swing.JButton();
+        memberNumberField = new javax.swing.JFormattedTextField();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         autenticateMenuItem = new javax.swing.JMenuItem();
@@ -106,18 +82,18 @@ public class HomeScreen extends FrameView {
         invalidID.setForeground(resourceMap.getColor("invalidID.foreground")); // NOI18N
         invalidID.setText(resourceMap.getString("invalidID.text")); // NOI18N
         invalidID.setName("invalidID"); // NOI18N
-        invalidID.setVisible(false);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(HomeScreen.class, this);
         authenticateButton.setAction(actionMap.get("authenticateMember")); // NOI18N
         authenticateButton.setText(resourceMap.getString("authenticateButton.text")); // NOI18N
         authenticateButton.setName("authenticateButton"); // NOI18N
 
-        jTextField1.setName("jTextField1"); // NOI18N
-
         logServiceButton.setAction(actionMap.get("openLogServiceForm")); // NOI18N
         logServiceButton.setText(resourceMap.getString("logServiceButton.text")); // NOI18N
         logServiceButton.setName("logServiceButton"); // NOI18N
+
+        memberNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
+        memberNumberField.setName("memberNumberField"); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -125,33 +101,31 @@ public class HomeScreen extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(authenticateButton)
-                        .addGap(69, 69, 69)
-                        .addComponent(logServiceButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(invalidID))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addComponent(authenticateButton)
+                .addGap(69, 69, 69)
+                .addComponent(logServiceButton)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(139, Short.MAX_VALUE)
+                .addComponent(invalidID)
+                .addGap(143, 143, 143))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(120, Short.MAX_VALUE)
+                .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(invalidID)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
+                .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authenticateButton)
                     .addComponent(logServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -271,12 +245,33 @@ public class HomeScreen extends FrameView {
 		logServiceForm.setVisible(true);
 	}
 
+	public boolean authMemberHelper(){
+		if(memberNumberField == null){
+			invalidID.setVisible(false);
+		} else {
+			MemberStatus status;
+			invalidID.setVisible(true);
+			try {
+				Member mem = new Member(((Number) memberNumberField.getValue()).intValue());
+				status = mem.getMemberStatus();
+			}catch(Exception e){
+				status = MemberStatus.INVALID;
+				invalidID.setText("Member " + status.toString());
+				if(status == MemberStatus.ACTIVE){
+					invalidID.setForeground(Color.green);
+					return true;
+				}else{
+					invalidID.setForeground(Color.red);
+				}
+			}
+		}
+		return false;
+	}
+
 	@Action
 	public void authenticateMember() {
-		if(jTextField1 == null)
-			invalidID.setVisible(false);
-		else
-			invalidID.setVisible(true);
+		authMemberHelper();
+
 	}
 
 	@Action
@@ -340,11 +335,11 @@ public class HomeScreen extends FrameView {
     private javax.swing.JMenuItem autenticateMenuItem;
     private javax.swing.JButton authenticateButton;
     private javax.swing.JLabel invalidID;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu listMenu;
     private javax.swing.JButton logServiceButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuItem memberMenuItem;
+    private javax.swing.JFormattedTextField memberNumberField;
     private javax.swing.JMenuItem memberReportMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem providerAddMenuItem;

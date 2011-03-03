@@ -43,7 +43,10 @@ public class Member {
 		this.member_id = member_id;
 		select_single_stmt.setInt(1, member_id);
 		ResultSet rs = select_single_stmt.executeQuery();
-		rs.next();
+		if(!rs.next()){
+			this.member_status = MemberStatus.INVALID;
+			return;
+		}
 
 		this.full_name = rs.getString("full_name");
 		this.member_status = MemberStatus.fromID(rs.getInt("member_status"));
