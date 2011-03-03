@@ -50,7 +50,7 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="serviceCodeField" alignment="0" max="32767" attributes="1"/>
                       <Component id="serviceNameField" alignment="0" pref="109" max="32767" attributes="1"/>
-                      <Component id="jFormattedTextField1" alignment="0" min="-2" pref="112" max="-2" attributes="1"/>
+                      <Component id="serviceFeeField" alignment="0" min="-2" pref="112" max="-2" attributes="1"/>
                   </Group>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -80,7 +80,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="serviceFeeField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
@@ -139,7 +139,7 @@
     <Component class="javax.swing.JFormattedTextField" name="serviceNameField">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="????????????????????????????????" subtype="-1" type="5"/>
+          <Format format="*************************" subtype="-1" type="5"/>
         </Property>
         <Property name="name" type="java.lang.String" value="serviceNameField" noResource="true"/>
       </Properties>
@@ -158,13 +158,13 @@
         <Property name="name" type="java.lang.String" value="jLabel6" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+    <Component class="javax.swing.JFormattedTextField" name="serviceFeeField">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format format="#0.00" subtype="-1" type="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="jFormattedTextField1.text"/>
-        <Property name="name" type="java.lang.String" value="jFormattedTextField1" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="serviceFeeField.text"/>
+        <Property name="name" type="java.lang.String" value="serviceFeeField" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

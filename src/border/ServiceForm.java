@@ -11,7 +11,12 @@
 
 package border;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+
 import org.jdesktop.application.Action;
+
+import entity.Service;
 
 /**
  * 
@@ -22,6 +27,20 @@ public class ServiceForm extends javax.swing.JFrame {
 	/** Creates new form LogService */
 	public ServiceForm() {
 		initComponents();
+	}
+	
+	public ServiceForm(int val){
+		initComponents();
+		try {
+			service = new Service(val);
+			serviceNameField.setValue(service.getServiceName());
+			serviceCodeField.setValue(val);
+			serviceFeeField.setValue(service.getFee());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -43,7 +62,7 @@ public class ServiceForm extends javax.swing.JFrame {
         serviceNameField = new javax.swing.JFormattedTextField();
         serviceCodeField = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        serviceFeeField = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ServiceForm.class);
@@ -71,26 +90,28 @@ public class ServiceForm extends javax.swing.JFrame {
         jButton2.setName("jButton2"); // NOI18N
 
         try {
-            serviceNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("????????????????????????????????")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+			serviceNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         serviceNameField.setName("serviceNameField"); // NOI18N
 
         try {
-            serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+			serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         serviceCodeField.setName("serviceCodeField"); // NOI18N
         serviceCodeField.setEditable(false);
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        jFormattedTextField1.setText(resourceMap.getString("jFormattedTextField1.text")); // NOI18N
-        jFormattedTextField1.setName("jFormattedTextField1"); // NOI18N
+        serviceFeeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        serviceFeeField.setText(resourceMap.getString("serviceFeeField.text")); // NOI18N
+        serviceFeeField.setName("serviceFeeField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +138,7 @@ public class ServiceForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(serviceFeeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton2))
                 .addGap(53, 53, 53))
         );
@@ -141,7 +162,7 @@ public class ServiceForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(serviceFeeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
@@ -183,18 +204,38 @@ public class ServiceForm extends javax.swing.JFrame {
 
     @Action
     public void finishButtonClicked() {
+    	if( service != null){
+    		service.setServiceName( serviceNameField.getText() );
+    		service.setFee( new BigDecimal(serviceFeeField.getText()) );
+    		try {
+				service.save();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	else{
+    		try {
+				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText()) ).save();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Service service;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JFormattedTextField serviceCodeField;
+    private javax.swing.JFormattedTextField serviceFeeField;
     private javax.swing.JFormattedTextField serviceNameField;
     // End of variables declaration//GEN-END:variables
 

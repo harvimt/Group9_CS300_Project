@@ -59,19 +59,19 @@ public class ProviderList extends javax.swing.JFrame {
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
 		setTitle(resourceMap.getString("Form.title")); // NOI18N
 		setName("Form"); // NOI18N
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
+		addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+			public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+				formWindowGainedFocus(evt);
+			}
+			public void windowLostFocus(java.awt.event.WindowEvent evt) {
+			}
+		});
 
 		jScrollPane1.setName("jScrollPane1"); // NOI18N
-		
+
 		drawTable(null);
 		/*Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
-		
+
         try {
 			(new Provider("Yogi Bear","yogi@example.net")).save();
 			(new Provider("Boo Boo","boo_boo@example.net")).save();
@@ -100,9 +100,9 @@ public class ProviderList extends javax.swing.JFrame {
 		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
 
 		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number"})));
-		
+
 		jTable1.getTableHeader().setReorderingAllowed(false);
-		
+
 		jTable1.setModel(model);
 
 		jTable1.setName("jTable1"); // NOI18N
@@ -111,7 +111,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jScrollPane1.setViewportView(jTable1);
-		*/
+		 */
 		jLabel1.setName("jLabel1"); // NOI18N
 
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ProviderList.class, this);
@@ -122,10 +122,10 @@ public class ProviderList extends javax.swing.JFrame {
 		searchField.setName("searchField"); // NOI18N
 		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
-				searchFieldKeyPressed(evt);
+				searchFieldKeyReleased(evt);
 			}
 		});
-		
+
 		deleteButton.setAction(actionMap.get("deleteButtonClicked"));
 		deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
 		deleteButton.setName("deleteButton"); // NOI18N
@@ -148,7 +148,7 @@ public class ProviderList extends javax.swing.JFrame {
 												.addContainerGap()
 												.addComponent(addButton)))
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						                        .addComponent(editButton)
+												.addComponent(editButton)
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(deleteButton)
 												.addGap(150, 150, 150)
@@ -173,18 +173,18 @@ public class ProviderList extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-	
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
-        drawTable(null);
-    }
-	
-	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt){
+
+	private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
+		drawTable(null);
+	}
+
+	private void searchFieldKeyReleased(java.awt.event.KeyEvent evt){
 		drawTable(searchField.getText());
 	}
-	
+
 	private void drawTable(String string){
-		
-		
+
+
 		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
 		/*
         try {
@@ -216,9 +216,9 @@ public class ProviderList extends javax.swing.JFrame {
 		DefaultTableModel model = new javax.swing.table.DefaultTableModel();
 
 		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Provider Name", "Provider Number", "Provider Email"})));
-		
+
 		jTable1.getTableHeader().setReorderingAllowed(false);
-		
+
 		jTable1.setModel(model);
 
 		jTable1.setName("jTable1"); // NOI18N
@@ -227,7 +227,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jScrollPane1.setViewportView(jTable1);
-		
+
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class ProviderList extends javax.swing.JFrame {
 		ProviderForm providerForm = new ProviderForm();
 		providerForm.setVisible(true);
 	}
-	
+
 	@Action
 	public void editButtonClicked(){
 		int col = jTable1.getSelectedColumn();
@@ -258,7 +258,7 @@ public class ProviderList extends javax.swing.JFrame {
 			providerForm.setVisible(true);
 		}
 	}
-	
+
 	@Action
 	public void deleteButtonClicked(){
 		int row = jTable1.getSelectedRow();
@@ -276,7 +276,7 @@ public class ProviderList extends javax.swing.JFrame {
 			drawTable(null);
 		}
 	}
-	
+
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton addButton;

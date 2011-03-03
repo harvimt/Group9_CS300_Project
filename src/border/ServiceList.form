@@ -9,6 +9,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowGainedFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowGainedFocus"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
@@ -190,15 +193,25 @@
         <Property name="text" type="java.lang.String" resourceKey="searchField.text"/>
         <Property name="name" type="java.lang.String" value="searchField" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchFieldKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchFieldKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="editButton">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.ServiceList" id="editButtonClicked" methodName="editButtonClicked"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="editButton.text"/>
         <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="deleteButton1">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.ServiceList" id="deleteButtonClicked" methodName="deleteButtonClicked"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="deleteButton1.text"/>
         <Property name="name" type="java.lang.String" value="deleteButton1" noResource="true"/>
       </Properties>
