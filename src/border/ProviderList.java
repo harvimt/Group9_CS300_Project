@@ -8,7 +8,6 @@
  *
  * Created on Feb 7, 2011, 6:19:14 PM
  */
-
 package border;
 
 import java.awt.event.WindowEvent;
@@ -36,33 +35,33 @@ import entity.Provider;
  */
 public class ProviderList extends javax.swing.JFrame {
 
-        private ProviderListTableModel model;
-        private DefaultTableColumnModel columnModel;
-        
+	private ProviderListTableModel model;
+	private DefaultTableColumnModel columnModel;
+
 	public class ProviderListTableModel
-		extends AbstractTableModel {
-		
+			extends AbstractTableModel {
+
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 974082985600624015L;
 		private List<Provider> dataList;
-		
+
 		public List<Provider> getDataList() {
 			return dataList;
 		}
 
 		public void setDataList(
-			List<Provider> dataList) {
+				List<Provider> dataList) {
 			this.dataList = dataList;
 			fireTableDataChanged();
 		}
 
 		@Override
 		public int getRowCount() {
-			if(dataList == null){
+			if (dataList == null) {
 				return 0;
-			}else{
+			} else {
 				return dataList.size();
 			}
 		}
@@ -74,106 +73,104 @@ public class ProviderList extends javax.swing.JFrame {
 
 		@Override
 		public String getColumnName(
-			int columnIndex) {
+				int columnIndex) {
 			switch (columnIndex) {
-			case 0:
-				return "Provider Name";
-			case 1:
-				return "Provider Number";
-			case 2:
-				return "Provider Email";
-			default:
-				break;
+				case 0:
+					return "Provider Name";
+				case 1:
+					return "Provider Number";
+				case 2:
+					return "Provider Email";
+				default:
+					break;
 			}
 			return null;
 		}
 
 		@Override
 		public Class<?> getColumnClass(
-			int columnIndex) {
-			if(columnIndex == 0 || columnIndex == 2){
+				int columnIndex) {
+			if (columnIndex == 0 || columnIndex == 2) {
 				return String.class;
-			}else if(columnIndex == 1){
+			} else if (columnIndex == 1) {
 				return Integer.class;
-			}else{
+			} else {
 				return null;
 			}
 		}
 
 		@Override
 		public boolean isCellEditable(
-			int rowIndex,
-			int columnIndex) {
-			if(columnIndex == 0 || columnIndex == 2){
+				int rowIndex,
+				int columnIndex) {
+			if (columnIndex == 0 || columnIndex == 2) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		}
 
 		@Override
 		public Object getValueAt(
-			int rowIndex,
-			int columnIndex) {
-			
+				int rowIndex,
+				int columnIndex) {
+
 			Provider row = dataList.get(rowIndex);
 			switch (columnIndex) {
-			case 0:
-				return row.getProviderName();
-				
-			case 1:
-				return row.getProviderId();
-				
-			case 2:
-				return row.getEmail();
-				
-			default:
-				return null;
+				case 0:
+					return row.getProviderName();
+
+				case 1:
+					return row.getProviderId();
+
+				case 2:
+					return row.getEmail();
+
+				default:
+					return null;
 			}
 		}
 
 		@Override
 		public void setValueAt(
-			Object aValue,
-			int rowIndex,
-			int columnIndex) {
-			
+				Object aValue,
+				int rowIndex,
+				int columnIndex) {
+
 			Provider row = dataList.get(rowIndex);
 			switch (columnIndex) {
-			case 0:
-				row.setProviderName((String)aValue);
-				break;
-				
-			case 1:
-				//can't set ID
-				break;
-				
-			case 2:
-				row.setEmail((String)aValue);
-				break;
-				
-			default:
-				break;
+				case 0:
+					row.setProviderName((String) aValue);
+					break;
+
+				case 1:
+					//can't set ID
+					break;
+
+				case 2:
+					row.setEmail((String) aValue);
+					break;
+
+				default:
+					break;
 			}
-			
+
 			try {
 				row.save();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			fireTableCellUpdated(rowIndex, columnIndex);
 		}
-
 	}
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -7954895459629722542L;
+
 	/** Creates new form ProviderList */
 	public ProviderList() {
-            initTable();
-            initComponents();
+		initTable();
+		initComponents();
 	}
 
 	/**
@@ -198,18 +195,21 @@ public class ProviderList extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ProviderList.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setAutoCreateColumnsFromModel(false);
         jTable1.setAutoCreateRowSorter(true);
+        jTable1.setColumnModel(columnModel);
         jTable1.setModel(model);
-        jTable1.setColumnSelectionAllowed(true);
         jTable1.setName("jTable1"); // NOI18N
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        jTable1.setColumnModel(columnModel);
 
         jLabel1.setName("jLabel1"); // NOI18N
 
@@ -219,7 +219,13 @@ public class ProviderList extends javax.swing.JFrame {
         addButton.setName("addButton"); // NOI18N
 
         searchField.setName("searchField"); // NOI18N
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchFieldKeyPressed(evt);
+            }
+        });
 
+        deleteButton.setAction(actionMap.get("deleteButtonClicked")); // NOI18N
         deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
         deleteButton.setName("deleteButton"); // NOI18N
 
@@ -265,36 +271,36 @@ public class ProviderList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-	
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {
-    	reloadData();
-    }
-	
-	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt){
+
+	private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
 		reloadData();
-	}
-	
-	private void reloadData(){
-            String search_string = null;
-                if(searchField != null){
-                    search_string = searchField.getText();
-            }
+	}//GEN-LAST:event_formFocusGained
+
+	private void searchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyPressed
+		reloadData();
+	}//GEN-LAST:event_searchFieldKeyPressed
+
+	private void reloadData() {
+		String search_string = null;
+		if (searchField != null) {
+			search_string = searchField.getText();
+		}
 		try {
 			List<Provider> providers = Provider.getProviders(search_string);
 			model.setDataList(providers);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Provider List","ERROR",JOptionPane.ERROR_MESSAGE);			
+			JOptionPane.showMessageDialog(this, "Failed to Load Provider List", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	private void initTable(){
+
+	private void initTable() {
 		model = new ProviderListTableModel();
-		
+
 		columnModel = new DefaultTableColumnModel();
 
 		TableColumn col1 = new TableColumn(0);
 		col1.setIdentifier("Provider Name");
-		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
+		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
 		columnModel.addColumn(col1);
 
 		TableColumn col2 = new TableColumn(1);
@@ -306,9 +312,7 @@ public class ProviderList extends javax.swing.JFrame {
 
 		TableColumn col3 = new TableColumn(2);
 		col3.setIdentifier("Provider Email");
-
-		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(30),"",0)));
-
+		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(128), "", 0)));
 		columnModel.addColumn(col3);
 
 		reloadData();
@@ -320,6 +324,7 @@ public class ProviderList extends javax.swing.JFrame {
 	 */
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
+
 			public void run() {
 				new ProviderList().setVisible(true);
 			}
@@ -327,51 +332,62 @@ public class ProviderList extends javax.swing.JFrame {
 	}
 
 	@Action
-	public void addButtonClicked(){
+	public void addButtonClicked() {
 		ProviderForm providerForm = new ProviderForm();
 		providerForm.setVisible(true);
 		providerForm.addWindowListener(new WindowListener() {
-			
+
 			@Override
 			public void windowClosed(WindowEvent e) {
 				reloadData();
 			}
 
-			@Override public void windowOpened(WindowEvent e) {}
+			@Override
+			public void windowOpened(WindowEvent e) {
+			}
 
-			@Override public void windowClosing(WindowEvent e) {}
+			@Override
+			public void windowClosing(WindowEvent e) {
+			}
 
-			@Override public void windowIconified(WindowEvent e) {}
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
 
-			@Override public void windowDeiconified(WindowEvent e) {}
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
 
-			@Override public void windowActivated(WindowEvent e) {}
+			@Override
+			public void windowActivated(WindowEvent e) {
+			}
 
-			@Override public void windowDeactivated(WindowEvent e) {}
-			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+			}
 		});
 	}
-	
+
 	@Action
-	public void editButtonClicked(){
+	public void editButtonClicked() {
 		int row = jTable1.getSelectedRow();
-		if(row >= 0){
+		if (row >= 0) {
 			int val = (Integer) jTable1.getValueAt(row, 1);
 			ProviderForm providerForm = new ProviderForm(val);
 			providerForm.setVisible(true);
 		}
 	}
-	
+
 	@Action
-	public void deleteButtonClicked(){
+	public void deleteButtonClicked() {
 		int row = jTable1.getSelectedRow();
-		if(row == -1){
+		if (row == -1) {
 			return; //no row selected
 		}
 		int val = (Integer) jTable1.getValueAt(row, 1);
 		int response = JOptionPane.showConfirmDialog(null, "Delete Provider: " + jTable1.getValueAt(row, 0), null, JOptionPane.YES_NO_OPTION);
-		
-		if( response == JOptionPane.YES_OPTION ){
+
+		if (response == JOptionPane.YES_OPTION) {
 			Provider prov;
 			try {
 				prov = new Provider(val);
@@ -382,8 +398,6 @@ public class ProviderList extends javax.swing.JFrame {
 			reloadData();
 		}
 	}
-	
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;
@@ -393,6 +407,4 @@ public class ProviderList extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
-
-
 }
