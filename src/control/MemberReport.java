@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Test;
+
 import entity.Member;
 import entity.ServiceRendered;
 
@@ -82,4 +84,5 @@ public class MemberReport {
 	public List<ReportItem> getReportData() {
 		return report_data;
 	}
+	
 }

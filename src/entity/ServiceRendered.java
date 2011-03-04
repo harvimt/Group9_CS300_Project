@@ -240,27 +240,27 @@ public class ServiceRendered {
 		if (comments == null) {
 			if (other.comments != null)
 				return false;
-		} else if (!comments
-			.equals(other.comments))
+		} else if (!comments.equals(other.comments))
 			return false;
+		
 		if (fee == null) {
 			if (other.fee != null)
 				return false;
-		} else if (fee
-			.compareTo(other.fee) != 0)
+		} else if (fee.compareTo(other.fee) != 0)
 			return false;
+		
 		if (member == null) {
 			if (other.member != null)
 				return false;
-		} else if (!member
-			.equals(other.member))
+		} else if (!member.equals(other.member))
 			return false;
+		
 		if (provider == null) {
 			if (other.provider != null)
 				return false;
-		} else if (!provider
-			.equals(other.provider))
+		} else if (!provider.equals(other.provider))
 			return false;
+		
 		if (service == null) {
 			if (other.service != null)
 				return false;
@@ -348,20 +348,12 @@ public class ServiceRendered {
 		return transaction_id;
 	}
 	
-	/**
-	 * Set the value of service_logged
-	 * 
-	 * @param newVar
-	 *            the new value of service_logged
-	 */
 	public void setServiceLogged(Date newVar) {
 		service_logged = newVar;
 	}
 
 	/**
-	 * Get the value of service_logged
-	 * 
-	 * @return the value of service_logged
+	 * Only guaranteed accurate to the second.
 	 */
 	public Date getServiceLogged() {
 		return service_logged;
@@ -375,72 +367,39 @@ public class ServiceRendered {
 		this.fee = fee;
 	}
 
+	
 	public void setServiceProvided(Date newVar) {
 		service_provided = newVar;
 	}
-
-	/**
-	 * Get the value of service_rendered
+	/*
+	 * Only guaranteed accurate to the day.
 	 * 
-	 * @return the value of service_rendered
 	 */
-	public Date getServiceRendered() {
+	public Date getServiceProvided() {
 		return service_provided;
 	}
 
-	/**
-	 * Set the value of provider
-	 * 
-	 * @param newVar
-	 *            the new value of provider
-	 */
+	
 	public void setProvider(Provider newVar) {
 		provider = newVar;
 	}
 
-	/**
-	 * Get the value of provider
-	 * 
-	 * @return the value of provider
-	 */
 	public Provider getProvider() {
 		return provider;
 	}
 
-	/**
-	 * Set the value of service
-	 * 
-	 * @param newVar
-	 *            the new value of service
-	 */
 	public void setService(Service newVar) {
 		service = newVar;
 	}
 
-	/**
-	 * Get the value of service
-	 * 
-	 * @return the value of service
-	 */
 	public Service getService() {
 		return service;
 	}
 
-	/**
-	 * Set the value of member
-	 * 
-	 * @param newVar
-	 *            the new value of member
-	 */
 	public void setMember(Member newVar) {
 		member = newVar;
 	}
 
-	/**
-	 * Get the value of member
-	 * 
-	 * @return the value of member
-	 */
 	public Member getMember() {
 		return member;
 	}
