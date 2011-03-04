@@ -1,5 +1,6 @@
 package control;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,12 +21,15 @@ public class ProviderReport {
 	public  class ReportItem {
 		public Provider provider;
 		public List<ServiceRendered> services;
+		public BigDecimal total;
 		
 		public ReportItem(
 			Provider provider,
-			List<ServiceRendered> services) {
+			List<ServiceRendered> services,
+			BigDecimal total) {
 			this.provider = provider;
 			this.services = services;
+			this.total = total;
 		}
 	}
 	
@@ -54,9 +58,20 @@ public class ProviderReport {
 		report_data = new ArrayList<ReportItem>(providers.size());
 		
 		for(Provider provider : providers){
+			
+			List<ServiceRendered> services =
+				ServiceRendered.getServicesRenderedByProvider(provider, from, to);
+			
+			BigDecimal total = new BigDecimal(0);
+			
+			for(ServiceRendered sr : services){
+				total = total.add(sr.getFee());
+			}
+			
 			report_data.add(new ReportItem(
 				provider,
-				ServiceRendered.getServicesRenderedByProvider(provider, from, to)
+				services,
+				total
 			));
 		}
 		

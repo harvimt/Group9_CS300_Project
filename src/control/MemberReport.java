@@ -1,5 +1,6 @@
 package control;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,12 +18,15 @@ public class MemberReport {
 	public class ReportItem {
 		public Member member;
 		public List<ServiceRendered> services;
+		public BigDecimal total;
 		
 		public ReportItem(
 			Member member,
-			List<ServiceRendered> services) {
+			List<ServiceRendered> services,
+			BigDecimal total) {
 			this.member = member;
 			this.services = services;
+			this.total = total;
 		}
 	}
 	
@@ -50,10 +54,18 @@ public class MemberReport {
 		report_data = new ArrayList<ReportItem>(members.size());
 		
 		for(Member member : members){
+			List<ServiceRendered> services = 
+				ServiceRendered.getServicesRenderedByMember(member, from, to);
+			
+			BigDecimal total = new BigDecimal(0);
+			
+			for(ServiceRendered sr : services){
+				total = total.add(sr.getFee());
+			}
+			
 			report_data.add(new ReportItem(
-				member,
-				ServiceRendered.getServicesRenderedByMember(member, from, to)
-			));			
+				member, services, total
+			));
 		}
 	}
 	

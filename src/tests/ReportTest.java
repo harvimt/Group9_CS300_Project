@@ -64,9 +64,11 @@ public class ReportTest extends ServiceRenderedTest{
 			if(item.member.equals(member1)){
 				Assert.assertEquals(sr_arr[0], item.services.get(0));
 				Assert.assertEquals(sr_arr[1], item.services.get(1));
+				Assert.assertEquals(item.total, sr_arr[0].getFee().add(sr_arr[1].getFee()));
 			}else if(item.member.equals(member2)){
 				Assert.assertEquals(sr_arr[2], item.services.get(0));
 				Assert.assertEquals(sr_arr[3], item.services.get(1));
+				Assert.assertEquals(item.total, sr_arr[2].getFee().add(sr_arr[3].getFee()));
 			}else{
 				throw new Exception("Whoops");
 			}
@@ -86,9 +88,11 @@ public class ReportTest extends ServiceRenderedTest{
 			if(item.provider.equals(provider1)){
 				Assert.assertEquals(sr_arr[0], item.services.get(0));
 				Assert.assertEquals(sr_arr[2], item.services.get(1));
+				Assert.assertEquals(item.total, sr_arr[0].getFee().add(sr_arr[2].getFee()));
 			}else if(item.provider.equals(provider2)){
 				Assert.assertEquals(sr_arr[1], item.services.get(0));
 				Assert.assertEquals(sr_arr[3], item.services.get(1));
+				Assert.assertEquals(item.total, sr_arr[1].getFee().add(sr_arr[3].getFee()));
 			}else{
 				throw new Exception("Whoops");
 			}
