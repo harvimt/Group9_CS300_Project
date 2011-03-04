@@ -38,7 +38,7 @@ public class ProviderList extends javax.swing.JFrame {
 	private ProviderListTableModel model;
 	private DefaultTableColumnModel columnModel;
 
-	public class ProviderListTableModel
+	public static class ProviderListTableModel
 			extends AbstractTableModel {
 
 		/**

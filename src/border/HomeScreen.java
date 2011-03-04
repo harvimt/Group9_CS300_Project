@@ -251,19 +251,22 @@ public class HomeScreen extends FrameView {
 		} else {
 			MemberStatus status;
 			invalidID.setVisible(true);
+			
 			try {
 				Member mem = new Member(((Number) memberNumberField.getValue()).intValue());
 				status = mem.getMemberStatus();
 			}catch(Exception e){
 				status = MemberStatus.INVALID;
 				invalidID.setText("Member " + status.toString());
-				if(status == MemberStatus.ACTIVE){
-					invalidID.setForeground(Color.green);
-					return true;
-				}else{
-					invalidID.setForeground(Color.red);
-				}
 			}
+			
+			if(status == MemberStatus.ACTIVE){
+				invalidID.setForeground(Color.green);
+				return true;
+			}else{
+				invalidID.setForeground(Color.red);
+			}
+			
 		}
 		return false;
 	}

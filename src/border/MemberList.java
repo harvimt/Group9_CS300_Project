@@ -212,14 +212,12 @@ public class MemberList extends javax.swing.JFrame {
 				status[3] = MemberStatus.BANNED;
 		}
 
-
-
 		try {
 			members = Member.getMembers(searchField.getText());//, status);
 			for( Member member : members ){
 				rows.add(new Vector<Object>(Arrays.asList(new Object[]{
 						member.getFullName(),
-						new Integer(member.getMemberId()),
+						Integer.valueOf(member.getMemberId()),
 						member.getMemberStatus(),
 						member.getStreetAddress(),
 						member.getCity(),
@@ -229,7 +227,7 @@ public class MemberList extends javax.swing.JFrame {
 				})));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO create error pop-up
 			e.printStackTrace();
 		}
 

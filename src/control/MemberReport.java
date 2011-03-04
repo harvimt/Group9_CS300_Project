@@ -15,7 +15,7 @@ public class MemberReport {
 	//
 	
 	///struct
-	public class ReportItem {
+	public static class ReportItem {
 		public Member member;
 		public List<ServiceRendered> services;
 		public BigDecimal total;

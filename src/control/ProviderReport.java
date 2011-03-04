@@ -18,7 +18,7 @@ public class ProviderReport {
 	// Fields
 	//
 	///struct
-	public  class ReportItem {
+	public static class ReportItem {
 		public Provider provider;
 		public List<ServiceRendered> services;
 		public BigDecimal total;

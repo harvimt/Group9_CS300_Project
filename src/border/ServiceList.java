@@ -20,9 +20,6 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.application.Action;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
-import entity.Provider;
 import entity.Service;
 
 /**
@@ -181,7 +178,8 @@ public class ServiceList extends javax.swing.JFrame {
 			for( Service service : services ){
 				rows.add(new Vector<Object>( Arrays.asList(new Object[]{
 						service.getServiceName(),
-						new Integer(service.getServiceId()),
+						Integer
+							.valueOf(service.getServiceId()),
 						service.getFee()
 				})));
 			}
@@ -221,7 +219,7 @@ public class ServiceList extends javax.swing.JFrame {
 
 	@Action
 	public void editButtonClicked() {
-		int col = jTable1.getSelectedColumn();
+		//int col = jTable1.getSelectedColumn();
 		int row = jTable1.getSelectedRow();
 		if(row >= 0){
 			int val = (Integer) jTable1.getValueAt(row, 1);

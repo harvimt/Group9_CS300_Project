@@ -11,10 +11,8 @@
 
 package border;
 
-import java.text.ParseException;
-
 import javax.swing.ButtonModel;
-import javax.swing.text.MaskFormatter;
+
 import org.jdesktop.application.Action;
 
 import entity.Member;
@@ -53,7 +51,7 @@ public class MemberForm extends javax.swing.JFrame {
 				buttonGroup1.setSelected((ButtonModel) bannedRadioButton, true);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// add Error Message Pop-Up
 			e.printStackTrace();
 		}
 		
@@ -334,7 +332,7 @@ public class MemberForm extends javax.swing.JFrame {
     		try {
 				member.save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				// TODO add Error Message Pop-Up
 				e.printStackTrace();
 			}
     	}
@@ -342,7 +340,7 @@ public class MemberForm extends javax.swing.JFrame {
     		try {
 				(new Member(nameField.getText(), status, addressField.getText(), cityField.getText(), stateField.getText(), zipField.getText(), emailField.getText())).save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				// TODO add Error Message Pop-Up
 				e.printStackTrace();
 			}
     	}

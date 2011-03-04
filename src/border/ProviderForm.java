@@ -35,7 +35,8 @@ public class ProviderForm extends javax.swing.JFrame {
 		try {
 			provider = new Provider(val);
 			providerNameField.setText(provider.getProviderName());
-			providerNumberField.setValue(new Integer(val));
+			providerNumberField.setValue(Integer
+				.valueOf(val));
 			providerEmailField.setText(provider.getEmail());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Provider info","ERROR",JOptionPane.ERROR_MESSAGE);

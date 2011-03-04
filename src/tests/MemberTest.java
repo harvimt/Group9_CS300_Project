@@ -106,8 +106,10 @@ public class MemberTest {
 		map.put(member2, new Integer(2));
 		map.put(member3, new Integer(3));
 		
-		Assert.assertEquals(new Integer(1), map.get(member1));
-		Assert.assertEquals(new Integer(3), map.get(member3));
+		Assert.assertEquals(Integer
+			.valueOf(1), map.get(member1));
+		Assert.assertEquals(Integer
+			.valueOf(3), map.get(member3));
 		Assert.assertEquals(member3.toString(),member3.toString());
 	}
 }

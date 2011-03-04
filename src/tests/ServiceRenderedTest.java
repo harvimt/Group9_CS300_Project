@@ -192,8 +192,10 @@ public class ServiceRenderedTest {
 		map.put(sr1, new Integer(1));
 		map.put(sr2, new Integer(2));
 		
-		Assert.assertEquals(new Integer(1),map.get(sr1));
-		Assert.assertEquals(new Integer(2),map.get(sr2));
+		Assert.assertEquals(Integer
+			.valueOf(1),map.get(sr1));
+		Assert.assertEquals(Integer
+			.valueOf(2),map.get(sr2));
 		
 		sr1.delete();
 		sr2.delete();
