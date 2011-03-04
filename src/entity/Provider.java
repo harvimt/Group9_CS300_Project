@@ -78,7 +78,8 @@ public class Provider {
 				"SELECT " +
 					"provider_id, provider_name, email " +
 				"FROM providers " +
-				"WHERE provider_name LIKE ('%' || ? || '%') ESCAPE '!'");
+				"WHERE provider_name LIKE ('%' || ? || '%') ESCAPE '!' " +
+				"ORDER BY provider_name");
 		}
 	}
 

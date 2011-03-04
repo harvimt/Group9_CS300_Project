@@ -147,7 +147,8 @@ public class ServiceRendered {
 					"SR.provider_id = ? AND " +
 					"SR.service_provided BETWEEN " +
 						"datetime(? / 1000, 'unixepoch') AND " +
-						"datetime(? / 1000, 'unixepoch')");
+						"datetime(? / 1000, 'unixepoch') " +
+				"ORDER BY SR.service_provided");
 		}
 		
 		if (search_by_member_stmt == null) {
@@ -171,7 +172,8 @@ public class ServiceRendered {
 					"SR.member_id = ? AND " +
 					"SR.service_provided BETWEEN " +
 						"datetime(? / 1000, 'unixepoch') AND " +
-						"datetime(? / 1000, 'unixepoch')");
+						"datetime(? / 1000, 'unixepoch') " +
+				"ORDER BY service_provided");
 		}
 	}
 	

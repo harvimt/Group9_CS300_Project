@@ -90,7 +90,8 @@ public class Service {
 				"SELECT " +
 					"service_id , service_name, fee " +
 				"FROM services " +
-				"WHERE service_name LIKE ('%' || ? || '%') ESCAPE '!'");
+				"WHERE service_name LIKE ('%' || ? || '%') ESCAPE '!' " +
+				"ORDER BY service_name");
 		}
 	}
 	

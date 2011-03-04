@@ -480,6 +480,7 @@ public class Member {
 				builder.append(")");
 			}
 		}
+		builder.append(" ORDER BY full_name");
 		
 		Connection conn = ChocAnApp.getConnection();
 		PreparedStatement search_stmt = conn.prepareStatement(builder.toString());
