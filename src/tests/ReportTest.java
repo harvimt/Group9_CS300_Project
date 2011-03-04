@@ -53,6 +53,10 @@ public class ReportTest extends ServiceRenderedTest{
 	@Test
 	public void testMemberReport() throws Exception{
 		MemberReport report = new MemberReport(df.parse("Jan 01, 2011"), df.parse("Jan 10, 2011"));
+		
+		report.setFrom(report.getFrom());
+		report.setTo(report.getTo());
+		
 		report.runReport();
 		for(MemberReport.ReportItem item : report.getReportData()){
 			if(item.member.equals(member1)){
