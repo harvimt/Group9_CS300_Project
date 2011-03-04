@@ -14,7 +14,6 @@ package border;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JTextArea;
 import org.jdesktop.application.Action;
 
 

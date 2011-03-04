@@ -22,6 +22,7 @@ import entity.Service;
  * 
  * @author Brandon
  */
+@SuppressWarnings("serial")
 public class ServiceForm extends javax.swing.JFrame {
 
 	/** Creates new form LogService */

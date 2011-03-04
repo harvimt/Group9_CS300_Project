@@ -11,7 +11,6 @@ import org.jdesktop.application.Action;
 
 import entity.Member;
 import entity.MemberStatus;
-import entity.Provider;
 
 /*
  * To change this template, choose Tools | Templates

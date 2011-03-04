@@ -15,6 +15,7 @@ package border;
  * 
  * @author Brandon
  */
+@SuppressWarnings("serial")
 public class MemberReportUI extends javax.swing.JFrame {
 
 	/** Creates new form MemberList */

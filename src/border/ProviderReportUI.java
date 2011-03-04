@@ -15,6 +15,7 @@ package border;
  * 
  * @author Brandon
  */
+@SuppressWarnings("serial")
 public class ProviderReportUI extends javax.swing.JFrame {
 
 	/** Creates new form ProviderReport */

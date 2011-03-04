@@ -26,6 +26,7 @@ import entity.Service;
  * 
  * @author Brandon
  */
+@SuppressWarnings("serial")
 public class ServiceList extends javax.swing.JFrame {
 
 	/** Creates new form ServiceList */

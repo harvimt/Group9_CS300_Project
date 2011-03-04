@@ -23,6 +23,7 @@ import entity.Provider;
  * 
  * @author Brandon
  */
+@SuppressWarnings("serial")
 public class ProviderForm extends javax.swing.JFrame {
 
 	/** Creates new form ProviderForm */
