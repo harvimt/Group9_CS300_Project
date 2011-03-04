@@ -116,8 +116,16 @@ public class ServiceRenderedTest {
 		
 		sr2.save();
 		
-		sr1 = ServiceRendered.getServicesRenderedByProvider(provider1).get(0);
-		sr2 = ServiceRendered.getServicesRenderedMember(member2).get(0);
+		sr1 = ServiceRendered.getServicesRenderedByProvider(
+				provider1,
+				df.parse("Jan 15, 2011"),
+				df.parse("Jan 17, 2011")
+			).get(0);
+		sr2 = ServiceRendered.getServicesRenderedByMember(
+				member2,
+				df.parse("Nov 24, 2006"),
+				df.parse("Nov 26, 2006")
+			).get(0);
 		
 		Assert.assertEquals(trans_id, sr1.getTransactionID());
 		Assert.assertEquals(df.parse("Jan 16, 2011"),sr1.getServiceRendered());
@@ -154,7 +162,12 @@ public class ServiceRenderedTest {
 		
 		sr2.save();
 
-		ServiceRendered sr1_dup = ServiceRendered.getServicesRenderedMember(member1).get(0);
+		ServiceRendered sr1_dup =
+			ServiceRendered.getServicesRenderedByMember(
+				member1,
+				df.parse("Jan 16, 2011"),
+				df.parse("Jan 16, 2011")
+			).get(0);
 		
 		Assert.assertEquals(sr1,sr1);
 		Assert.assertEquals(sr1_dup,sr1);

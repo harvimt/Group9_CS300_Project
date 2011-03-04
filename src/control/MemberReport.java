@@ -1,20 +1,19 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import entity.Member;
 import entity.ServiceRendered;
 
-
-/**
- * Class MemberReport
- */
 public class MemberReport {
 
 	//
 	// Fields
 	//
+	
+	///struct
 	public class ReportItem {
 		public Member member;
 		public List<ServiceRendered> services;
@@ -28,11 +27,16 @@ public class MemberReport {
 	}
 	
 	protected List<ReportItem> report_data;
+	private Date from;
+	private Date to;
 	
 	//
 	// Constructors
 	//
-	public MemberReport() {
+	
+	public MemberReport(Date from, Date to) {
+		this.from = from;
+		this.to = to;
 	};
 
 	//
@@ -48,17 +52,34 @@ public class MemberReport {
 		for(Member member : members){
 			report_data.add(new ReportItem(
 				member,
-				ServiceRendered.getServicesRenderedMember(member)
+				ServiceRendered.getServicesRenderedByMember(member, from, to)
 			));			
 		}
 	}
-
+	
 	//
 	// Accessor methods
 	//
+	
+	public Date getFrom() {
+		return from;
+	}
 
-	//
-	// Other methods
-	//
+	public void setFrom(
+		Date from) {
+		this.from = from;
+	}
 
+	public Date getTo() {
+		return to;
+	}
+
+	public void setTo(
+		Date to) {
+		this.to = to;
+	}
+
+	public List<ReportItem> getReportData() {
+		return report_data;
+	}
 }

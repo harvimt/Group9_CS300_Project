@@ -143,7 +143,11 @@ public class ServiceRendered {
 				"FROM services_rendered SR " +
 				"LEFT JOIN services S ON S.service_id = SR.service_id " +
 				"LEFT JOIN members M ON M.member_id = SR.member_id " +
-				"WHERE SR.provider_id = ?");
+				"WHERE " +
+					"SR.provider_id = ? AND " +
+					"SR.service_provided BETWEEN " +
+						"datetime(? / 1000, 'unixepoch') AND " +
+						"datetime(? / 1000, 'unixepoch')");
 		}
 		
 		if (search_by_member_stmt == null) {
@@ -163,7 +167,11 @@ public class ServiceRendered {
 				"FROM services_rendered SR " +
 				"LEFT JOIN services S ON S.service_id = SR.service_id " +
 				"LEFT JOIN providers P ON P.provider_id = SR.provider_id " +
-				"WHERE SR.member_id = ?");
+				"WHERE " +
+					"SR.member_id = ? AND " +
+					"SR.service_provided BETWEEN " +
+						"datetime(? / 1000, 'unixepoch') AND " +
+						"datetime(? / 1000, 'unixepoch')");
 		}
 	}
 	
@@ -460,13 +468,20 @@ public class ServiceRendered {
 
 	/**
 	 * @param provider
+	 * @param from get services rendered starting on this date
+	 * @param to and going until this date  
 	 * @throws Exception 
 	 */
-	public static final List<ServiceRendered> getServicesRenderedByProvider(Provider provider) throws Exception {
+	public static final List<ServiceRendered>
+		getServicesRenderedByProvider(Provider provider, Date from, Date to)
+		throws Exception {
 		initializeQueries();
 		List<ServiceRendered> list = new LinkedList<ServiceRendered>();
 		
 		search_by_provider_stmt.setInt(1, provider.getProviderId());
+		search_by_provider_stmt.setDate(2, new java.sql.Date(from.getTime()));
+		search_by_provider_stmt.setDate(3, new java.sql.Date(to.getTime()));
+		
 		ResultSet rs = search_by_provider_stmt.executeQuery();
 		while(rs.next()){
 			Member member = new Member(
@@ -500,14 +515,20 @@ public class ServiceRendered {
 	}
 
 	/**
-	 * @param member
+	 * @param member to get services rendered for
+	 * @param from get services rendered starting on this date
+	 * @param to and going until this date 
 	 * @throws Exception 
 	 */
-	public static final List<ServiceRendered> getServicesRenderedMember(Member member) throws Exception {
+	public static final List<ServiceRendered>
+		getServicesRenderedByMember(Member member, Date from, Date to)
+		throws Exception {
 		initializeQueries();
 		List<ServiceRendered> list = new LinkedList<ServiceRendered>();
 		
 		search_by_member_stmt.setInt(1, member.getMemberId());
+		search_by_member_stmt.setDate(2, new java.sql.Date(from.getTime()));
+		search_by_member_stmt.setDate(3, new java.sql.Date(to.getTime()));
 		
 		ResultSet rs = search_by_member_stmt.executeQuery();
 		while(rs.next()){
@@ -535,5 +556,4 @@ public class ServiceRendered {
 		}
 		return list;
 	}
-
 }
