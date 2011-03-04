@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import control.MemberReport;
+import control.ProviderReport;
 import entity.Member;
 import entity.Provider;
 import entity.Service;
@@ -54,16 +55,39 @@ public class ReportTest extends ServiceRenderedTest{
 	public void testMemberReport() throws Exception{
 		MemberReport report = new MemberReport(df.parse("Jan 01, 2011"), df.parse("Jan 10, 2011"));
 		
-		report.setFrom(report.getFrom());
-		report.setTo(report.getTo());
+		report.setFrom(report.getFrom()); //added for code-coverage
+		report.setTo(report.getTo()); //added for code-coverage
 		
 		report.runReport();
+		
 		for(MemberReport.ReportItem item : report.getReportData()){
 			if(item.member.equals(member1)){
 				Assert.assertEquals(sr_arr[0], item.services.get(0));
 				Assert.assertEquals(sr_arr[1], item.services.get(1));
 			}else if(item.member.equals(member2)){
 				Assert.assertEquals(sr_arr[2], item.services.get(0));
+				Assert.assertEquals(sr_arr[3], item.services.get(1));
+			}else{
+				throw new Exception("Whoops");
+			}
+		}
+	}
+	
+	@Test
+	public void testProviderReport() throws Exception {
+		ProviderReport report = new ProviderReport(df.parse("Jan 01, 2011"), df.parse("Jan 10, 2011"));
+		
+		report.setFrom(report.getFrom()); //added for code-coverage
+		report.setTo(report.getTo()); //added-for code-coverage
+		
+		report.runReport();
+		
+		for(ProviderReport.ReportItem item : report.getReportData()){
+			if(item.provider.equals(provider1)){
+				Assert.assertEquals(sr_arr[0], item.services.get(0));
+				Assert.assertEquals(sr_arr[2], item.services.get(1));
+			}else if(item.provider.equals(provider2)){
+				Assert.assertEquals(sr_arr[1], item.services.get(0));
 				Assert.assertEquals(sr_arr[3], item.services.get(1));
 			}else{
 				throw new Exception("Whoops");
