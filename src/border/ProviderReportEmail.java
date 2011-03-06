@@ -67,7 +67,7 @@ public class ProviderReportEmail {
 		for(ProviderReport.ReportItem item : report.getReportData()){
 			try{
 				String filename = MessageFormat.format(
-					"emails/{0,number,000000000}-{1,date,yyyy-MM-dd}-{2,date,yyyy-MM-dd}.txt",
+					"emails/P{0,number,000000000}-{1,date,yyyy-MM-dd}-{2,date,yyyy-MM-dd}.txt",
 					new Object[]{
 						Integer.valueOf(item.provider.getProviderId()),
 						report.getFrom(),
