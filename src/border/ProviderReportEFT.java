@@ -58,8 +58,8 @@ public class ProviderReportEFT {
 	//
 	
 	public void writeEFTRecords(){
-		String filename = MessageFormat.format(
-			"eft/{1,date,yyyy-MM-dd}-{2,date,yyyy-MM-dd}.txt",
+		final String filename = MessageFormat.format(
+			"eft/{0,date,yyyy-MM-dd}-{1,date,yyyy-MM-dd}.txt",
 			new Object[]{
 				report.getFrom(),
 				report.getTo()
@@ -73,11 +73,11 @@ public class ProviderReportEFT {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			List<ProviderReport.ReportItem> report_data = report.getReportData();
 
-			//only append \n for lines
+			//only append \n for lines that aren't the last line
 			//not sure if this is the most efficient way, not sure that it isn't... either.
 			//if only they had sub-list iterators
 
-			for(ProviderReport.ReportItem item : report_data.subList(0, report_data.size() - 2)){
+			for(ProviderReport.ReportItem item : report_data.subList(0, report_data.size() - 1)){
 				writer.write(EFTFormat.format(new Object[]{
 					item.total,
 					item.provider.getProviderName()

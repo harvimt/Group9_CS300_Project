@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 
 import junit.framework.Assert;
 
@@ -32,6 +33,7 @@ public class ProviderReportTest
 		
 		report.runReport();
 	}
+	
 	@After
 	public void tearDown() throws Exception{
 		super.tearDown();
@@ -40,22 +42,23 @@ public class ProviderReportTest
 	@Test
 	public void testProviderReport()
 		throws Exception {
-			for(ProviderReport.ReportItem item : report.getReportData()){
-				if(item.provider.equals(provider1)){
-					Assert.assertEquals(sr_arr[0], item.services.get(0));
-					Assert.assertEquals(sr_arr[2], item.services.get(1));
-					Assert.assertEquals(2, item.services.size());
-					Assert.assertEquals(item.total, sr_arr[0].getFee().add(sr_arr[2].getFee()));
-				}else if(item.provider.equals(provider2)){
-					Assert.assertEquals(sr_arr[1], item.services.get(0));
-					Assert.assertEquals(sr_arr[3], item.services.get(1));
-					Assert.assertEquals(2, item.services.size());
-					Assert.assertEquals(item.total, sr_arr[1].getFee().add(sr_arr[3].getFee()));
-				}else{
-					throw new Exception("Whoops");
-				}
+		
+		for(ProviderReport.ReportItem item : report.getReportData()){
+			if(item.provider.equals(provider1)){
+				Assert.assertEquals(sr_arr[0], item.services.get(0));
+				Assert.assertEquals(sr_arr[2], item.services.get(1));
+				Assert.assertEquals(2, item.services.size());
+				Assert.assertEquals(item.total, sr_arr[0].getFee().add(sr_arr[2].getFee()));
+			}else if(item.provider.equals(provider2)){
+				Assert.assertEquals(sr_arr[1], item.services.get(0));
+				Assert.assertEquals(sr_arr[3], item.services.get(1));
+				Assert.assertEquals(2, item.services.size());
+				Assert.assertEquals(item.total, sr_arr[1].getFee().add(sr_arr[3].getFee()));
+			}else{
+				throw new Exception("Whoops");
 			}
 		}
+	}
 
 	@Test
 	public void testProviderReportEmail()
@@ -130,10 +133,32 @@ public class ProviderReportTest
 			ProviderReportEFT eft = new ProviderReportEFT(report);
 			report = eft.getReport();
 			eft.setReport(report);
+			eft.writeEFTRecords();
+			
+			final String filename = MessageFormat.format(
+				"eft/{0,date,yyyy-MM-dd}-{1,date,yyyy-MM-dd}.txt",
+				new Object[]{
+					report.getFrom(),
+					report.getTo()
+				}
+			);
 			
 			final String[] expected_file = new String[]{
-				"",
+				"Tansfer $350.55 to Boo Boo",
+				"Tansfer $350.55 to Yogi Bear",
 			};
-			final String filename = "";
+			
+			BufferedReader reader;
+			String line;
+			int i;
+			
+			reader = new BufferedReader(new FileReader(filename));
+			i=0;
+			while((line = reader.readLine()) != null){
+				Assert.assertEquals(expected_file[i], line);
+				i+=1;
+			}
+			
+			new File(filename).delete();
 		}
 }
