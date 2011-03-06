@@ -104,7 +104,8 @@ public class MemberTest {
 		
 		map.put(member1, new Integer(1));
 		map.put(member2, new Integer(2));
-		map.put(member3, new Integer(3));
+		map.put(member3, Integer
+			.valueOf(3));
 		
 		Assert.assertEquals(Integer
 			.valueOf(1), map.get(member1));
