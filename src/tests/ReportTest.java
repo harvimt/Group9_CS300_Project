@@ -13,6 +13,12 @@ import entity.Provider;
 import entity.Service;
 import entity.ServiceRendered;
 
+/**
+ * 
+ * @author Mark Harviston
+ * Don't Run this Test. It's just shared setup between ProviderReportTest & MemberReportTest
+ *
+ */
 public class ReportTest extends ServiceRenderedTest{
 	protected ServiceRendered[] sr_arr = new ServiceRendered[5];
 	
