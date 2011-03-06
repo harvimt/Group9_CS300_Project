@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.List;
 
 import control.ProviderReport;
 
@@ -70,15 +71,27 @@ public class ProviderReportEFT {
 		
 		try{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-			
-			for(ProviderReport.ReportItem item : report.getReportData()){
+			List<ProviderReport.ReportItem> report_data = report.getReportData();
+
+			//only append \n for lines
+			//not sure if this is the most efficient way, not sure that it isn't... either.
+			//if only they had sub-list iterators
+
+			for(ProviderReport.ReportItem item : report_data.subList(0, report_data.size() - 2)){
 				writer.write(EFTFormat.format(new Object[]{
 					item.total,
 					item.provider.getProviderName()
 				}));
+					
 				writer.write('\n');
-				
 			}
+			
+			ProviderReport.ReportItem item = report_data.get(report_data.size() - 1);
+			
+			writer.write(EFTFormat.format(new Object[]{
+				item.total,
+				item.provider.getProviderName()
+			}));
 			
 			writer.close();
 		}catch(IOException ex){
