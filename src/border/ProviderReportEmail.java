@@ -58,12 +58,6 @@ public class ProviderReportEmail {
 	//
 	
 	public void sendEmails(){
-		try{
-			report.runReport();
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
 		for(ProviderReport.ReportItem item : report.getReportData()){
 			try{
 				String filename = MessageFormat.format(

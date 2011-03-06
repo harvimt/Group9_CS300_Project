@@ -57,12 +57,6 @@ public class MemberReportEmail {
 	// Other methods
 	//
 	public void sendEmails(){
-		try{
-			report.runReport();
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		
 		for(MemberReport.ReportItem item : report.getReportData()){
 			try{
 				String filename = MessageFormat.format(
