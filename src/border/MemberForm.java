@@ -323,7 +323,7 @@ public class MemberForm extends javax.swing.JFrame {
     		status = MemberStatus.CANCELLED;
     	else if(buttonGroup1.getSelection() == bannedRadioButton)
     		status = MemberStatus.BANNED;
-    	
+
     	if( member != null ){
     		member.setFullName(nameField.getText());
     		member.setMemberStatus(status);
