@@ -10,7 +10,15 @@ public class FormattedRenderer
 	
 	private static final long serialVersionUID = 5246937088298071463L;
 	private Format formatter;
+
+	public FormattedRenderer(Format formatter) {
+		this.formatter = formatter;
+	}
+
+	public FormattedRenderer() {
+	}
 	
+	@Override
 	public void setValue(Object value) {
         setText((value == null) ? "" : formatter.format(value));
     }

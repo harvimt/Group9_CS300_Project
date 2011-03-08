@@ -3,6 +3,8 @@ package tests;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,9 +57,18 @@ public class CronTest {
 				"671 Excellent St","Winning","OR","99871","betty@example.net"),
 		};
 		
+		DateFormat df = new SimpleDateFormat("MMM dd, yyyy");
+		DateFormat dtf = DateFormat.getDateTimeInstance();
+		
 		sr_log = new ServiceRendered[]{
-			//TODO
-			//new ServiceRendered(service_logged, service_provided, fee, provider, service, member, comments),
+			new ServiceRendered(
+				dtf.parse("Jan 16, 2011 8:13:24 PM"),
+				df.parse("Jan 16, 2011"),
+				new BigDecimal("200.03"), providers[0], services[0], members[0], "FOOBAR"),
+			new ServiceRendered(
+				dtf.parse("Jan 19, 2011 8:27:55 PM"),
+				df.parse("Jan 18, 2011"),
+				new BigDecimal("200.30"), providers[1], services[1], members[1], "BARFOO")
 		};
 		
 		for(Service service : services){
@@ -81,6 +92,7 @@ public class CronTest {
 	public void tearDown()
 		throws Exception {
 		
+		/*
 		for(Service service : services){
 			service.delete();
 		}
@@ -96,6 +108,7 @@ public class CronTest {
 		for(ServiceRendered sr : sr_log){
 			sr.delete();
 		}
+		*/
 	}
 	
 	@Test

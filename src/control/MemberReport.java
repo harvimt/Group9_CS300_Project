@@ -56,6 +56,10 @@ public class MemberReport {
 		for(Member member : members){
 			List<ServiceRendered> services = 
 				ServiceRendered.getServicesRenderedByMember(member, from, to);
+
+			if(services.isEmpty()){
+				continue;
+			}
 			
 			BigDecimal total = new BigDecimal(0);
 			

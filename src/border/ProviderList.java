@@ -38,12 +38,9 @@ public class ProviderList extends javax.swing.JFrame {
 	private ProviderListTableModel model;
 	private DefaultTableColumnModel columnModel;
 
-	public static class ProviderListTableModel
+	protected static class ProviderListTableModel
 			extends AbstractTableModel {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 974082985600624015L;
 		private List<Provider> dataList;
 
@@ -69,22 +66,6 @@ public class ProviderList extends javax.swing.JFrame {
 		@Override
 		public int getColumnCount() {
 			return 3;
-		}
-
-		@Override
-		public String getColumnName(
-				int columnIndex) {
-			switch (columnIndex) {
-				case 0:
-					return "Provider Name";
-				case 1:
-					return "Provider Number";
-				case 2:
-					return "Provider Email";
-				default:
-					break;
-			}
-			return null;
 		}
 
 		@Override
@@ -171,6 +152,7 @@ public class ProviderList extends javax.swing.JFrame {
 	public ProviderList() {
 		initTable();
 		initComponents();
+		reloadData();
 	}
 
 	/**
@@ -203,6 +185,7 @@ public class ProviderList extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        jTable1.setAutoCreateColumnsFromModel(false);
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setColumnModel(columnModel);
         jTable1.setModel(model);
@@ -299,23 +282,22 @@ public class ProviderList extends javax.swing.JFrame {
 		columnModel = new DefaultTableColumnModel();
 
 		TableColumn col1 = new TableColumn(0);
-		col1.setIdentifier("Provider Name");
+		col1.setHeaderValue("Provider Name");
 		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
 		columnModel.addColumn(col1);
 
 		TableColumn col2 = new TableColumn(1);
-		col2.setIdentifier("Provider Number");
+		col2.setHeaderValue("Provider Number");
 		FormattedRenderer prov_num_renderer = new FormattedRenderer();
 		prov_num_renderer.setFormatter(new DecimalFormat("00000000"));
 		col2.setCellRenderer(prov_num_renderer);
 		columnModel.addColumn(col2);
 
 		TableColumn col3 = new TableColumn(2);
-		col3.setIdentifier("Provider Email");
+		col3.setHeaderValue("Provider Email");
 		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(128), "", 0)));
 		columnModel.addColumn(col3);
-
-		reloadData();
+		
 	}
 
 	/**
