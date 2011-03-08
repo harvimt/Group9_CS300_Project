@@ -72,8 +72,7 @@ public class ProviderList extends javax.swing.JFrame {
 		}
 
 		@Override
-		public String getColumnName(
-				int columnIndex) {
+		public String getColumnName(int columnIndex) {
 			switch (columnIndex) {
 				case 0:
 					return "Provider Name";

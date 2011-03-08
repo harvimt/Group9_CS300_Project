@@ -11,9 +11,12 @@
 
 package border;
 
+import border.util.JTextFieldLimit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,15 +27,97 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import entity.Provider;
 import entity.Service;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
 
 /**
- * 
  * @author Brandon
  */
 public class ServiceList extends javax.swing.JFrame {
 
+	private ServiceListTableModel model;
+	private DefaultTableColumnModel columnModel;
+
+	public class ServiceListTableModel
+			extends AbstractTableModel{
+
+		private List<Service> dataList;
+
+		public List<Service> getDataList(){
+			return dataList;
+		}
+
+		public int getRowCount() {
+			if( dataList == null )
+				return 0;
+			else
+				return dataList.size();
+
+		}
+
+		public int getColumnCount() {
+			return 3;
+		}
+
+		@Override
+		public String getColumnName(int columnIndex){
+			switch(columnIndex){
+				case 0:
+					return "Sevice Name";
+				case 1:
+					return "Service Number";
+				case 2:
+					return "Service Fee";
+				default:
+					break;
+			}
+			return null;
+		}
+
+		@Override
+		public Class<?> getColumnClass(int columnIndex){
+			if( columnIndex == 0 || columnIndex == 2 ){
+				return String.class;
+			} else if( columnIndex == 1 ){
+				return Integer.class;
+			} else {
+				return null;
+			}
+		}
+
+		@Override
+		public boolean isCellEditable( int rowIntex, int columnIndex){
+			if(columnIndex == 0 || columnIndex == 2){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			Service row = dataList.get(rowIndex);
+			switch(columnIndex){
+				case 0:
+					return row.getServiceName();
+				case 1:
+					return Integer.valueOf(row.getServiceId());
+				case 2:
+					return row.getFee();
+				default:
+					return null;
+			}
+		}
+
+	}
+
 	/** Creates new form ServiceList */
 	public ServiceList() {
+		initTable();
 		initComponents();
 	}
 
@@ -43,162 +128,141 @@ public class ServiceList extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
-		jLabel1 = new javax.swing.JLabel();
-		addButton = new javax.swing.JButton();
-		searchField = new javax.swing.JTextField();
-		editButton = new javax.swing.JButton();
-		deleteButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        editButton = new javax.swing.JButton();
+        deleteButton1 = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ServiceList.class);
-		setTitle(resourceMap.getString("Form.title")); // NOI18N
-		setName("Form"); // NOI18N
-		addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-			public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-				formWindowGainedFocus(evt);
-			}
-			public void windowLostFocus(java.awt.event.WindowEvent evt) {
-			}
-		});
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ServiceList.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
-		jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-		
-		drawTable();
-		/*jTable1.setModel(new javax.swing.table.DefaultTableModel(
-				new Object [][] {
-						{"Doctor", "123456", "$$$$$$.$$"},
-						{"Therapist", "987654321", "$$$$$$.$$"},
-						{null, "", null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null},
-						{null, null, null}
-				},
-				new String [] {
-						"Service Name", "Service Number", "Fee "
-				}
-		));
-		jTable1.setName("jTable1"); // NOI18N
-		
-		jScrollPane1.setViewportView(jTable1);
-		*/
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setColumnModel(columnModel);
+        jTable1.setModel(model);
+        jTable1.setName("jTable1"); // NOI18N
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
 
-		jLabel1.setName("jLabel1"); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ServiceList.class, this);
-		addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
-		addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
-		addButton.setName("addButton"); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ServiceList.class, this);
+        addButton.setAction(actionMap.get("addButtonClicked")); // NOI18N
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setName("addButton"); // NOI18N
 
-		searchField.setText(resourceMap.getString("searchField.text")); // NOI18N
-		searchField.setName("searchField"); // NOI18N
-		searchField.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
-				searchFieldKeyReleased(evt);
-			}
+        searchField.setText(resourceMap.getString("searchField.text")); // NOI18N
+        searchField.setName("searchField"); // NOI18N
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
 
-		});
+        editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
+        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
+        editButton.setName("editButton"); // NOI18N
 
-		editButton.setAction(actionMap.get("editButtonClicked")); // NOI18N
-		editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
-		editButton.setName("editButton"); // NOI18N
+        deleteButton1.setAction(actionMap.get("deleteButtonClicked")); // NOI18N
+        deleteButton1.setText(resourceMap.getString("deleteButton1.text")); // NOI18N
+        deleteButton1.setName("deleteButton1"); // NOI18N
 
-		deleteButton1.setAction(actionMap.get("deleteButtonClicked")); // NOI18N
-		deleteButton1.setText(resourceMap.getString("deleteButton1.text")); // NOI18N
-		deleteButton1.setName("deleteButton1"); // NOI18N
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addButton)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deleteButton1)
+                            .addComponent(editButton)))
+                    .addComponent(jLabel1, 0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(addButton)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(editButton)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(deleteButton1)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-						.addComponent(jLabel1)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-		);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addGroup(layout.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(addButton)
-												.addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(deleteButton1)
-												.addComponent(editButton)))
-												.addComponent(jLabel1, 0, 0, Short.MAX_VALUE))
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-		);
-
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-		drawTable();
+		reloadData();
 	}//GEN-LAST:event_formWindowGainedFocus
 
 	private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
-		drawTable();
+		reloadData();
 	}//GEN-LAST:event_searchFieldKeyReleased
 	
-	private void drawTable(){
-		
-		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
-		
-		List<Service> services;
+	private void reloadData(){
 		try {
-			services = Service.getServices(searchField.getText());
-			for( Service service : services ){
-				rows.add(new Vector<Object>( Arrays.asList(new Object[]{
-						service.getServiceName(),
-						new Integer(service.getServiceId()),
-						service.getFee()
-				})));
+			String search_string = null;
+			if (searchField != null) {
+				search_string = searchField.getText();
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			List<Provider> services = Provider.getProviders(search_string);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, "Failed to load Servce List", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
-		DefaultTableModel model = new DefaultTableModel();
-		
-		model.setDataVector(rows, new Vector<String>( Arrays.asList(new String[]{"Service Name","Service Code","Service Fee"})));
-		
-		jTable1.getTableHeader().setReorderingAllowed(false);
-		jTable1.setModel(model);
-		jTable1.setName("jTable1");
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jScrollPane1.setViewportView(jTable1);
+	}
+
+	private void initTable(){
+		model = new ServiceListTableModel();
+
+		columnModel = new DefaultTableColumnModel();
+
+		TableColumn col1 = new TableColumn(0);
+		col1.setIdentifier("Service Name");
+		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
+		columnModel.addColumn(col1);
+
+		TableColumn col2 = new TableColumn(1);
+		col1.setIdentifier("Service Number");
+		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
+		columnModel.addColumn(col2);
+
+		TableColumn col3 = new TableColumn(2);
+		col1.setIdentifier("Service Fee");
+		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
+		columnModel.addColumn(col3);
+
+		reloadData();
+
 	}
 
 	/**
@@ -217,11 +281,41 @@ public class ServiceList extends javax.swing.JFrame {
 	public void addButtonClicked() {
 		ServiceForm serviceForm = new ServiceForm();
 		serviceForm.setVisible(true);
+		serviceForm.addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+				reloadData();
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+			}
+		});
 	}
 
 	@Action
 	public void editButtonClicked() {
-		int col = jTable1.getSelectedColumn();
 		int row = jTable1.getSelectedRow();
 		if(row >= 0){
 			int val = (Integer) jTable1.getValueAt(row, 1);
@@ -233,8 +327,10 @@ public class ServiceList extends javax.swing.JFrame {
 	@Action
 	public void deleteButtonClicked() {
 		int row = jTable1.getSelectedRow();
+		if(row >= 0)
+			return; // no row selected
 		int val = (Integer) jTable1.getValueAt(row, 1);
-		int response = JOptionPane.showConfirmDialog(null, "Delete Service: " + jTable1.getValueAt(row, 0));
+		int response = JOptionPane.showConfirmDialog(null, "Delete Service: " + jTable1.getValueAt(row, 0), null, JOptionPane.YES_NO_OPTION);
 		if( response == JOptionPane.YES_OPTION ){
 			Service serv;
 			try {
@@ -244,18 +340,18 @@ public class ServiceList extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			drawTable();
+			reloadData();
 		}
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton addButton;
-	private javax.swing.JButton deleteButton1;
-	private javax.swing.JButton editButton;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
-	private javax.swing.JTextField searchField;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton deleteButton1;
+    private javax.swing.JButton editButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField searchField;
+    // End of variables declaration//GEN-END:variables
 
 }

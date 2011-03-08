@@ -116,9 +116,6 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="model = new MemberListTableModel();&#xa;columnModel = new DefaultTableColumnModel();"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

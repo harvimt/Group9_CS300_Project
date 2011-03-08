@@ -49,10 +49,10 @@ public class MemberList extends javax.swing.JFrame {
 
 	public class MemberListTableModel
 			extends AbstractTableModel{
-/**
-		 *
-		 */
-		private static final long serialVersionUID = 974082985600624015L;
+
+		 
+		private static final long serialVersionUID = -2590145503825646055L;
+
 		private List<Member> dataList;
 
 		public List<Member> getDataList() {
@@ -76,7 +76,7 @@ public class MemberList extends javax.swing.JFrame {
 
 		@Override
 		public int getColumnCount() {
-			return 3;
+			return 8;
 		}
 
 		@Override
@@ -108,7 +108,7 @@ public class MemberList extends javax.swing.JFrame {
 		@Override
 		public Class<?> getColumnClass(
 				int columnIndex) {
-			if (columnIndex == 0 || columnIndex == 2) {
+			if (columnIndex == 0 || 2 <= columnIndex && columnIndex <= 7) {
 				return String.class;
 			} else if (columnIndex == 1) {
 				return Integer.class;
@@ -121,7 +121,7 @@ public class MemberList extends javax.swing.JFrame {
 		public boolean isCellEditable(
 				int rowIndex,
 				int columnIndex) {
-			if (columnIndex == 0 || columnIndex == 2) {
+			if (columnIndex == 0 || 2 <= columnIndex && columnIndex <= 7) {
 				return true;
 			} else {
 				return false;
@@ -137,11 +137,19 @@ public class MemberList extends javax.swing.JFrame {
 			switch (columnIndex) {
 				case 0:
 					return row.getFullName();
-
 				case 1:
-					return row.getMemberId();
-
+					return Integer.valueOf(row.getMemberId());
 				case 2:
+					return row.getMemberStatus().toString();
+				case 3:
+					return row.getStreetAddress();
+				case 4:
+					return row.getCity();
+				case 5:
+					return row.getState();
+				case 6:
+					return row.getZipCode();
+				case 7:
 					return row.getEmail();
 
 				default:
@@ -188,8 +196,9 @@ public class MemberList extends javax.swing.JFrame {
 	}
 	/** Creates new form Report */
 	public MemberList() {
-		initComponents();
 		initTable();
+		initComponents();
+		reloadData();
 	}
 
 	/**
@@ -228,8 +237,6 @@ public class MemberList extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        model = new MemberListTableModel();
-        columnModel = new DefaultTableColumnModel();
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setColumnModel(columnModel);
         jTable1.setModel(model);
@@ -348,7 +355,7 @@ public class MemberList extends javax.swing.JFrame {
 
 
 	private void reloadData() {
-		/*ArrayList<MemberStatus> status;
+		ArrayList<MemberStatus> status;
 		status = new ArrayList<MemberStatus>();
 		if(allCheckBox.isSelected())
 			status = null;
@@ -361,8 +368,7 @@ public class MemberList extends javax.swing.JFrame {
 				status.add(MemberStatus.CANCELLED);
 			if(bannedCheckBox.isSelected())
 				status.add(MemberStatus.BANNED);
-		}*/
-
+		}
 
 		String search_string = null;
 		if (searchField != null) {
@@ -377,55 +383,57 @@ public class MemberList extends javax.swing.JFrame {
 	}
 
 	private void initTable() {
+		model = new MemberListTableModel();
+        columnModel = new DefaultTableColumnModel();
 
 		TableColumn col1 = new TableColumn(0);
 		col1.setIdentifier("Member Name");
 		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "",0)));
 		columnModel.addColumn(col1);
 
-		TableColumn col2 = new TableColumn(0);
+		TableColumn col2 = new TableColumn(1);
 		col2.setIdentifier("Number");
 		col2.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(9), "",0)));
 		columnModel.addColumn(col2);
 
 
 
-		String rows[][] = { { "A", "a" }, { "B", "b" }, { "E", "e" } };
+		/*String rows[][] = { { "A", "a" }, { "B", "b" }, { "E", "e" } };
 		JComboBox comboBox = new JComboBox(rows[0]);
 		comboBox.setMaximumRowCount(4);
 		TableCellEditor editor = new DefaultCellEditor(comboBox);
-		
-		TableColumn col3 = new TableColumn(0);
+		*/
+		TableColumn col3 = new TableColumn(2);
 		col3.setIdentifier("Status");
-		col3.setCellEditor(editor);
+		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(9), "",0)));
 		columnModel.addColumn(col3);
 
-		TableColumn col4 = new TableColumn(0);
+		TableColumn col4 = new TableColumn(3);
 		col4.setIdentifier("Street");
 		col4.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "",0)));
 		columnModel.addColumn(col4);
 
-		TableColumn col5 = new TableColumn(0);
+		TableColumn col5 = new TableColumn(4);
 		col5.setIdentifier("City");
 		col5.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(14), "",0)));
 		columnModel.addColumn(col5);
 
-		TableColumn col6 = new TableColumn(0);
+		TableColumn col6 = new TableColumn(5);
 		col6.setIdentifier("State");
 		col6.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(2), "",0)));
 		columnModel.addColumn(col6);
 
-		TableColumn col7 = new TableColumn(0);
+		TableColumn col7 = new TableColumn(6);
 		col7.setIdentifier("Zip");
 		col7.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(5), "",0)));
 		columnModel.addColumn(col7);
 
-		TableColumn col8 = new TableColumn(0);
+		TableColumn col8 = new TableColumn(7);
 		col8.setIdentifier("Email");
 		col8.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(5), "",0)));
 		columnModel.addColumn(col8);
 
-		reloadData();
+		//reloadData();
 	}
 
 
