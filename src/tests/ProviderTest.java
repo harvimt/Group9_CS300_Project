@@ -86,8 +86,10 @@ public class ProviderTest {
 		map.put(provider2, new Integer(2));
 		map.put(provider3, new Integer(3));
 		
-		Assert.assertEquals(new Integer(1), map.get(provider1));
-		Assert.assertEquals(new Integer(3), map.get(provider3));
+		Assert.assertEquals(Integer
+			.valueOf(1), map.get(provider1));
+		Assert.assertEquals(Integer
+			.valueOf(3), map.get(provider3));
 		Assert.assertEquals(provider2.toString(),provider2_dup.toString());
 		
 		provider1.delete();

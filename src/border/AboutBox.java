@@ -9,6 +9,11 @@ import org.jdesktop.application.Action;
 public class AboutBox extends javax.swing.JDialog {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7954974092373728377L;
+
 	public AboutBox(java.awt.Frame parent) {
 		super(parent);
 		initComponents();

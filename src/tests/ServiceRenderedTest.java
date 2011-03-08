@@ -21,9 +21,11 @@ import entity.ServiceRendered;
 
 public class ServiceRenderedTest {
 
-	private Service service1, service2;
-	private Member member1, member2;
-	private Provider provider1, provider2;
+	protected Service service1, service2;
+	protected Member member1, member2;
+	protected Provider provider1, provider2;
+	protected DateFormat df;
+	protected DateFormat dtf;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,6 +43,9 @@ public class ServiceRenderedTest {
 		for(Service i_service: services){
 			i_service.delete();
 		}
+		
+		df = DateFormat.getDateInstance();
+		dtf = DateFormat.getDateTimeInstance();
 		
 		member1 = new Member("John Doe",MemberStatus.ACTIVE,
 			"123 foobar st.","Foobar City","OR","96502",
@@ -86,8 +91,7 @@ public class ServiceRenderedTest {
 	@Test
 	public void testServicesRendered() throws Exception{
 		ServiceRendered sr1, sr2;
-		DateFormat df = DateFormat.getDateInstance();
-		DateFormat dtf = DateFormat.getDateTimeInstance();
+	
 		
 		sr1 = new ServiceRendered(
 			dtf.parse("Jan 16, 2011 8:13:24 PM"),
@@ -98,7 +102,7 @@ public class ServiceRenderedTest {
 		sr2 = new ServiceRendered(
 			dtf.parse("Jan 19, 2011 8:27:55 PM"),
 			df.parse("Jan 18, 2011"),
-			new BigDecimal("200.03"), provider1, service1, member1, "BARFOO");
+			new BigDecimal("200.30"), provider1, service1, member1, "BARFOO");
 		sr2.save();
 		
 		sr1.delete();
@@ -116,11 +120,19 @@ public class ServiceRenderedTest {
 		
 		sr2.save();
 		
-		sr1 = ServiceRendered.getServicesRenderedByProvider(provider1).get(0);
-		sr2 = ServiceRendered.getServicesRenderedMember(member2).get(0);
+		sr1 = ServiceRendered.getServicesRenderedByProvider(
+				provider1,
+				df.parse("Jan 15, 2011"),
+				df.parse("Jan 17, 2011")
+			).get(0);
+		sr2 = ServiceRendered.getServicesRenderedByMember(
+				member2,
+				df.parse("Nov 24, 2006"),
+				df.parse("Nov 26, 2006")
+			).get(0);
 		
 		Assert.assertEquals(trans_id, sr1.getTransactionID());
-		Assert.assertEquals(df.parse("Jan 16, 2011"),sr1.getServiceRendered());
+		Assert.assertEquals(df.parse("Jan 16, 2011"),sr1.getServiceProvided());
 		Assert.assertEquals(dtf.parse("Jan 16, 2011 8:13:24 pm"), sr1.getServiceLogged());
 		Assert.assertTrue(new BigDecimal("200.03").compareTo(sr1.getFee()) == 0);
 		
@@ -138,9 +150,6 @@ public class ServiceRenderedTest {
 		ServiceRendered sr1, sr2;
 		Object empty = new Object();
 		
-		DateFormat df = DateFormat.getDateInstance();
-		DateFormat dtf = DateFormat.getDateTimeInstance();
-		
 		sr1 = new ServiceRendered(
 			dtf.parse("Jan 16, 2011 8:13:24 PM"),
 			df.parse("Jan 16, 2011"),
@@ -150,11 +159,23 @@ public class ServiceRenderedTest {
 		sr2 = new ServiceRendered(
 			dtf.parse("Jan 19, 2011 8:27:55 PM"),
 			df.parse("Jan 18, 2011"),
-			new BigDecimal("200.03"), provider2, service2, member2, "BARFOO");
+			new BigDecimal("200.30"), provider2, service2, member2, "BARFOO");
 		
 		sr2.save();
 
-		ServiceRendered sr1_dup = ServiceRendered.getServicesRenderedMember(member1).get(0);
+		ServiceRendered sr1_dup =
+			ServiceRendered.getServicesRenderedByMember(
+				member1,
+				df.parse("Jan 16, 2011"),
+				df.parse("Jan 16, 2011")
+			).get(0);
+		
+		ServiceRendered sr2_dup =
+			ServiceRendered.getServicesRenderedByMember(
+				member2,
+				df.parse("Jan 18, 2011"),
+				df.parse("Jan 18, 2011")
+			).get(0);
 		
 		Assert.assertEquals(sr1,sr1);
 		Assert.assertEquals(sr1_dup,sr1);
@@ -165,11 +186,18 @@ public class ServiceRenderedTest {
 		
 		Assert.assertFalse(sr1.equals(sr2));
 		
+		Assert.assertEquals(sr2,sr2_dup);
+		
 		Map<ServiceRendered,Integer> map = new HashMap<ServiceRendered,Integer> ();
 		map.put(sr1, new Integer(1));
 		map.put(sr2, new Integer(2));
 		
-		Assert.assertEquals(new Integer(1),map.get(sr1));
-		Assert.assertEquals(new Integer(2),map.get(sr2));
+		Assert.assertEquals(Integer
+			.valueOf(1),map.get(sr1));
+		Assert.assertEquals(Integer
+			.valueOf(2),map.get(sr2));
+		
+		sr1.delete();
+		sr2.delete();
 	}
 }

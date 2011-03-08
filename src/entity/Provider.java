@@ -78,7 +78,8 @@ public class Provider {
 				"SELECT " +
 					"provider_id, provider_name, email " +
 				"FROM providers " +
-				"WHERE provider_name LIKE ('%' || ? || '%') ESCAPE '!'");
+				"WHERE provider_name LIKE ('%' || ? || '%') ESCAPE '!' " +
+				"ORDER BY provider_name ASC");
 		}
 	}
 
@@ -244,8 +245,11 @@ public class Provider {
 		List<Provider> list = new LinkedList<Provider>();
 
 		while (rs.next()) {
-			Provider provider = new Provider(rs.getInt("provider_id"),
-					rs.getString("provider_name"), rs.getString("email"));
+			Provider provider = new Provider(
+				rs.getInt("provider_id"),
+				rs.getString("provider_name"),
+				rs.getString("email")
+			);
 			list.add(provider);
 		}
 

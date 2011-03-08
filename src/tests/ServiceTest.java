@@ -95,8 +95,10 @@ public class ServiceTest {
 		map.put(service2, new Integer(2));
 		map.put(service3, new Integer(3));
 		
-		Assert.assertEquals(new Integer(2), map.get(service2));
-		Assert.assertEquals(new Integer(3), map.get(service3_dup));
+		Assert.assertEquals(Integer
+			.valueOf(2), map.get(service2));
+		Assert.assertEquals(Integer
+			.valueOf(3), map.get(service3_dup));
 		Assert.assertEquals(service3.toString(), service3_dup.toString());
 		
 		service1.delete();
