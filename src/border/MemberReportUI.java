@@ -79,8 +79,10 @@ public class MemberReportUI extends javax.swing.JFrame {
 		public int getColumnCount() {
 			return 4;
 		}
-
-		public Class<?> getColClass(int columnIndex){
+		
+		@Override
+		public Class<?> getColumnClass(
+			int columnIndex) {
 			switch(columnIndex){
 				case 0:
 					return Date.class;

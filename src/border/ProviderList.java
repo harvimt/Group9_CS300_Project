@@ -139,7 +139,7 @@ public class ProviderList extends javax.swing.JFrame {
 			try {
 				row.save();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Failed to Edit Provider Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -223,7 +223,7 @@ public class ProviderList extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(215, Short.MAX_VALUE)
+                        .addContainerGap(217, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -289,7 +289,7 @@ public class ProviderList extends javax.swing.JFrame {
 		TableColumn col2 = new TableColumn(1);
 		col2.setHeaderValue("Provider Number");
 		FormattedRenderer prov_num_renderer = new FormattedRenderer();
-		prov_num_renderer.setFormatter(new DecimalFormat("00000000"));
+		prov_num_renderer.setFormatter(new DecimalFormat("000000000"));
 		col2.setCellRenderer(prov_num_renderer);
 		columnModel.addColumn(col2);
 
