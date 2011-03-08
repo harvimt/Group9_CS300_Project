@@ -1,5 +1,6 @@
 package border;
 
+import border.util.EmailValidator;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.DecimalFormat;
@@ -19,27 +20,15 @@ import border.util.FormattedRenderer;
 import border.util.JTextFieldLimit;
 import entity.Member;
 import entity.MemberStatus;
+import java.util.Arrays;
+import javax.swing.JComboBox;
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Report.java
- *
  * Created on Feb 7, 2011, 1:35:39 PM
- */
-
-/**
  * 
  * @author Brandon
  */
 public class MemberList extends javax.swing.JFrame {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -484134655678221995L;
 	private MemberListTableModel model;
 	private DefaultTableColumnModel columnModel;
@@ -74,33 +63,6 @@ public class MemberList extends javax.swing.JFrame {
 		public int getColumnCount() {
 			return 8;
 		}
-
-		@Override
-		public String getColumnName(
-				int columnIndex) {
-			switch (columnIndex) {
-				case 0:
-					return "Member Name";
-				case 1:
-					return "Member Number";
-				case 2:
-					return "Member Status";
-				case 3:
-					return "Member Street";
-				case 4:
-					return "Member City";
-				case 5:
-					return "Member State";
-				case 6:
-					return "Member Zip";
-				case 7:
-					return "Member Email";
-				default:
-					break;
-			}
-			return null;
-		}
-
 		@Override
 		public Class<?> getColumnClass(
 				int columnIndex) {
@@ -119,11 +81,16 @@ public class MemberList extends javax.swing.JFrame {
 		public boolean isCellEditable(
 				int rowIndex,
 				int columnIndex) {
-			if (columnIndex == 0 || 3 <= columnIndex && columnIndex <= 7) {
+			
+			if(columnIndex == 0){
 				return true;
-			} else {
+			}else if (columnIndex == 1) {
 				return false;
+			} else if (columnIndex <= 7){
+				return true;
 			}
+
+			return false;
 		}
 
 		@Override
@@ -138,7 +105,7 @@ public class MemberList extends javax.swing.JFrame {
 				case 1:
 					return Integer.valueOf(row.getMemberId());
 				case 2:
-					return row.getMemberStatus().toString();
+					return row.getMemberStatus();
 				case 3:
 					return row.getStreetAddress();
 				case 4:
@@ -165,25 +132,30 @@ public class MemberList extends javax.swing.JFrame {
 			switch (columnIndex) {
 				case 0:
 					row.setFullName((String) aValue);
+					reloadData();
 					break;
-
 				case 1:
 					//can't set ID
 					break;
-
 				case 2:
-					row.setEmail((String) aValue);
+					row.setMemberStatus((MemberStatus)aValue);
+					reloadData();
 					break;
 				case 3:
 					row.setStreetAddress((String) aValue);
+					break;
 				case 4:
 					row.setCity((String) aValue);
+					break;
 				case 5:
 					row.setState((String) aValue);
+					break;
 				case 6:
 					row.setZipCode((String) aValue);
+					break;
 				case 7:
 					row.setEmail((String) aValue);
+					break;
 				default:
 					break;
 			}
@@ -192,7 +164,8 @@ public class MemberList extends javax.swing.JFrame {
 				row.save();
 			}
 			catch (Exception ex) {
-				//TODO error pop-up
+				JOptionPane.showMessageDialog(null, "Could not save Member",
+						"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -240,6 +213,7 @@ public class MemberList extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        jTable1.setAutoCreateColumnsFromModel(false);
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setColumnModel(columnModel);
         jTable1.setModel(model);
@@ -326,7 +300,7 @@ public class MemberList extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,9 +336,9 @@ public class MemberList extends javax.swing.JFrame {
 
 
 	private void reloadData() {
-		ArrayList<MemberStatus> status;
-		status = new ArrayList<MemberStatus>();
-		if(allCheckBox.isSelected()){
+		ArrayList<MemberStatus> status = new ArrayList<MemberStatus>();
+		MemberStatus[] status_arr = null;
+		if(allCheckBox != null && !allCheckBox.isSelected()){
 			if(activeCheckBox.isSelected())
 				status.add(MemberStatus.ACTIVE);
 			if(suspendedCheckBox.isSelected())
@@ -373,6 +347,8 @@ public class MemberList extends javax.swing.JFrame {
 				status.add(MemberStatus.CANCELLED);
 			if(bannedCheckBox.isSelected())
 				status.add(MemberStatus.BANNED);
+
+			status_arr = (MemberStatus[]) status.toArray(new MemberStatus[0]);
 		}
 
 		String search_string = null;
@@ -380,7 +356,7 @@ public class MemberList extends javax.swing.JFrame {
 			search_string = searchField.getText();
 		}
 		try {
-			List<Member> members = Member.getMembers(search_string, (MemberStatus[]) status.toArray());
+			List<Member> members = Member.getMembers(search_string,status_arr);
 			model.setDataList(members);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member List", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -392,45 +368,51 @@ public class MemberList extends javax.swing.JFrame {
         columnModel = new DefaultTableColumnModel();
 
 		TableColumn col1 = new TableColumn(0);
-		col1.setIdentifier("Member Name");
+		col1.setHeaderValue("Member Name");
 		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "",0)));
 		columnModel.addColumn(col1);
 
 		TableColumn col2 = new TableColumn(1);
-		col2.setIdentifier("Number");
+		col2.setHeaderValue("Number");
 		FormattedRenderer mem_num_renderer = new FormattedRenderer();
 		mem_num_renderer.setFormatter(new DecimalFormat("00000000"));
 		col2.setCellRenderer(mem_num_renderer);
 		columnModel.addColumn(col2);
 
 		TableColumn col3 = new TableColumn(2);
-		col3.setIdentifier("Status");
-		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(9), "",0)));
+		col3.setHeaderValue("Status");
+		
+		MemberStatus[] statuses = MemberStatus.values();
+		MemberStatus[] statuses_not_invalid = Arrays.copyOfRange(statuses, 0, statuses.length - 1);
+		JComboBox cbo = new JComboBox(statuses_not_invalid);
+		col3.setCellEditor(new DefaultCellEditor(cbo));
 		columnModel.addColumn(col3);
 
 		TableColumn col4 = new TableColumn(3);
-		col4.setIdentifier("Street");
+		col4.setHeaderValue("Street");
 		col4.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "",0)));
 		columnModel.addColumn(col4);
 
 		TableColumn col5 = new TableColumn(4);
-		col5.setIdentifier("City");
+		col5.setHeaderValue("City");
 		col5.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(14), "",0)));
 		columnModel.addColumn(col5);
 
 		TableColumn col6 = new TableColumn(5);
-		col6.setIdentifier("State");
+		col6.setHeaderValue("State");
 		col6.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(2), "",0)));
 		columnModel.addColumn(col6);
 
 		TableColumn col7 = new TableColumn(6);
-		col7.setIdentifier("Zip");
+		col7.setHeaderValue("Zip");
 		col7.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(5), "",0)));
 		columnModel.addColumn(col7);
 
 		TableColumn col8 = new TableColumn(7);
-		col8.setIdentifier("Email");
-		col8.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(5), "",0)));
+		col8.setHeaderValue("Email");
+		JTextField emailField = new JTextField(new JTextFieldLimit(128), "", 0);
+		emailField.setInputVerifier(new EmailValidator());
+		col8.setCellEditor(new DefaultCellEditor(emailField));
 		columnModel.addColumn(col8);
 	}
 

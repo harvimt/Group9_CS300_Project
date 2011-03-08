@@ -13,6 +13,7 @@ package border;
 
 
 
+import border.util.EmailValidator;
 import org.jdesktop.application.Action;
 
 import entity.Member;
@@ -34,6 +35,12 @@ public class MemberForm extends javax.swing.JFrame {
 	/** Creates new form MemberForm */
 	public MemberForm() {
 		initComponents();
+		
+		activeRadioButton.setActionCommand(MemberStatus.ACTIVE.toString());
+		suspendedRadioButton.setActionCommand(MemberStatus.SUSPENDED.toString());
+		cancelledRadioButton.setActionCommand(MemberStatus.CANCELLED.toString());
+		bannedRadioButton.setActionCommand(MemberStatus.BANNED.toString());
+		
 	}
 
 	public MemberForm(int val){
@@ -47,7 +54,7 @@ public class MemberForm extends javax.swing.JFrame {
 			stateField.setValue(member.getState());
 			zipField.setValue(member.getZipCode());
 			emailField.setText(member.getEmail());
-			
+
 			if(member.getMemberStatus() == MemberStatus.ACTIVE)
 				activeRadioButton.setSelected(true);
 			else if(member.getMemberStatus() == MemberStatus.SUSPENDED)
@@ -198,6 +205,7 @@ public class MemberForm extends javax.swing.JFrame {
         jLabel9.setName("jLabel9"); // NOI18N
 
         emailField.setText(resourceMap.getString("emailField.text")); // NOI18N
+        emailField.setInputVerifier(new EmailValidator());
         emailField.setName("emailField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,13 +236,13 @@ public class MemberForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(zipField, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(stateField, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(addressField, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(numberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(zipField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(stateField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(addressField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(numberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                             .addGap(94, 94, 94))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,15 +325,10 @@ public class MemberForm extends javax.swing.JFrame {
 
     @Action
     public void finishButtonClicked() {
-    	MemberStatus status = null;
-    	if(buttonGroup1.getSelection() == activeRadioButton)
-    		status = MemberStatus.ACTIVE;
-    	else if(buttonGroup1.getSelection() == suspendedRadioButton)
-    		status = MemberStatus.SUSPENDED;
-    	else if(buttonGroup1.getSelection() == cancelledRadioButton)
-    		status = MemberStatus.CANCELLED;
-    	else if(buttonGroup1.getSelection() == bannedRadioButton)
-    		status = MemberStatus.BANNED;
+		if(buttonGroup1.getSelection() == null){
+			JOptionPane.showMessageDialog(this, "Must Select a Member Status","ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+		MemberStatus status = MemberStatus.valueOf(buttonGroup1.getSelection().getActionCommand());
 
     	if( member != null ){
     		member.setFullName(nameField.getText());

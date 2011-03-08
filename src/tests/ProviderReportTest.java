@@ -115,6 +115,7 @@ public class ProviderReportTest
 				Assert.assertEquals(expected_file1[i], line);
 				i+=1;
 			}
+			reader.close();
 			
 			reader = new BufferedReader(new FileReader(filename2));
 			i=0;

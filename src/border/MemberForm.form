@@ -55,13 +55,13 @@
                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="emailField" pref="106" max="32767" attributes="0"/>
-                              <Component id="zipField" pref="106" max="32767" attributes="0"/>
-                              <Component id="stateField" pref="106" max="32767" attributes="0"/>
-                              <Component id="cityField" alignment="0" pref="106" max="32767" attributes="0"/>
-                              <Component id="addressField" alignment="0" pref="106" max="32767" attributes="0"/>
-                              <Component id="nameField" alignment="1" pref="106" max="32767" attributes="1"/>
-                              <Component id="numberField" alignment="1" pref="106" max="32767" attributes="1"/>
+                              <Component id="emailField" pref="135" max="32767" attributes="0"/>
+                              <Component id="zipField" pref="135" max="32767" attributes="0"/>
+                              <Component id="stateField" pref="135" max="32767" attributes="0"/>
+                              <Component id="cityField" alignment="0" pref="135" max="32767" attributes="0"/>
+                              <Component id="addressField" alignment="0" pref="135" max="32767" attributes="0"/>
+                              <Component id="nameField" alignment="1" pref="135" max="32767" attributes="1"/>
+                              <Component id="numberField" alignment="1" pref="135" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace min="94" pref="94" max="-2" attributes="0"/>
                       </Group>
@@ -306,6 +306,9 @@
     <Component class="javax.swing.JTextField" name="emailField">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="emailField.text"/>
+        <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new EmailValidator()" type="code"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="emailField" noResource="true"/>
       </Properties>
     </Component>

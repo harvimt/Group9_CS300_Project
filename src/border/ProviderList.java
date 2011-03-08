@@ -10,6 +10,7 @@
  */
 package border;
 
+import border.util.EmailValidator;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
@@ -295,7 +296,9 @@ public class ProviderList extends javax.swing.JFrame {
 
 		TableColumn col3 = new TableColumn(2);
 		col3.setHeaderValue("Provider Email");
-		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(128), "", 0)));
+		JTextField emailField = new JTextField(new JTextFieldLimit(128), "", 0);
+		emailField.setInputVerifier(new EmailValidator());
+		col3.setCellEditor(new DefaultCellEditor(emailField));
 		columnModel.addColumn(col3);
 		
 	}
