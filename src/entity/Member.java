@@ -468,6 +468,9 @@ public class Member {
 				builder.append("full_name LIKE ('%' || ? || '%') ESCAPE '!' ");
 			}
 			if(statuses_allowed != null && statuses_allowed.length > 0){
+				if(partial_name != null){
+					builder.append(" AND ");
+				}
 				builder.append("member_status IN (");
 				int i = 0;
 				for(MemberStatus status : statuses_allowed){

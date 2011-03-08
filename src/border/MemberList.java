@@ -1,28 +1,24 @@
 package border;
 
-import border.util.FormattedRenderer;
-import border.util.JTextFieldLimit;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.swing.JOptionPane;
-
-import org.jdesktop.application.Action;
-
-import entity.Member;
-import entity.MemberStatus;
-
-import java.awt.event.WindowListener;
-import java.sql.SQLException;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
+
+import org.jdesktop.application.Action;
+
+import border.util.FormattedRenderer;
+import border.util.JTextFieldLimit;
+import entity.Member;
+import entity.MemberStatus;
 
 /*
  * To change this template, choose Tools | Templates
@@ -178,7 +174,16 @@ public class MemberList extends javax.swing.JFrame {
 				case 2:
 					row.setEmail((String) aValue);
 					break;
-
+				case 3:
+					row.setStreetAddress((String) aValue);
+				case 4:
+					row.setCity((String) aValue);
+				case 5:
+					row.setState((String) aValue);
+				case 6:
+					row.setZipCode((String) aValue);
+				case 7:
+					row.setEmail((String) aValue);
 				default:
 					break;
 			}
@@ -186,11 +191,8 @@ public class MemberList extends javax.swing.JFrame {
 			try {
 				row.save();
 			}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 			catch (Exception ex) {
-					Logger.getLogger(MemberList.class.getName()).log(Level.SEVERE, null, ex);
+				//TODO error pop-up
 			}
 
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -362,9 +364,7 @@ public class MemberList extends javax.swing.JFrame {
 	private void reloadData() {
 		ArrayList<MemberStatus> status;
 		status = new ArrayList<MemberStatus>();
-		if(allCheckBox.isSelected())
-			status = null;
-		else{
+		if(allCheckBox.isSelected()){
 			if(activeCheckBox.isSelected())
 				status.add(MemberStatus.ACTIVE);
 			if(suspendedCheckBox.isSelected())
@@ -380,8 +380,7 @@ public class MemberList extends javax.swing.JFrame {
 			search_string = searchField.getText();
 		}
 		try {
-
-			List<Member> members = Member.getMembers(search_string);//, (MemberStatus[]) status.toArray());
+			List<Member> members = Member.getMembers(search_string, (MemberStatus[]) status.toArray());
 			model.setDataList(members);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member List", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -404,13 +403,6 @@ public class MemberList extends javax.swing.JFrame {
 		col2.setCellRenderer(mem_num_renderer);
 		columnModel.addColumn(col2);
 
-
-
-		/*String rows[][] = { { "A", "a" }, { "B", "b" }, { "E", "e" } };
-		JComboBox comboBox = new JComboBox(rows[0]);
-		comboBox.setMaximumRowCount(4);
-		TableCellEditor editor = new DefaultCellEditor(comboBox);
-		*/
 		TableColumn col3 = new TableColumn(2);
 		col3.setIdentifier("Status");
 		col3.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(9), "",0)));
@@ -440,8 +432,6 @@ public class MemberList extends javax.swing.JFrame {
 		col8.setIdentifier("Email");
 		col8.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(5), "",0)));
 		columnModel.addColumn(col8);
-
-		//reloadData();
 	}
 
 

@@ -11,6 +11,18 @@
 
 package border;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.List;
+
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
+
+import border.util.FormattedRenderer;
+
+import control.ProviderReport;
+
 /**
  * 
  * @author Brandon
@@ -18,9 +30,93 @@ package border;
 @SuppressWarnings("serial")
 public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 
+	public static class AccountsPayableTableModel
+		extends
+		AbstractTableModel {
+		
+		private List<ProviderReport.ReportItem> report_data;
+		
+		public List<ProviderReport.ReportItem> getReportData() {
+			return report_data;
+		}
+
+		@Override
+		public int getRowCount() {
+			if(report_data == null){
+				return 0;
+			}else{
+				return report_data.size();
+			}
+		}
+
+		@Override
+		public int getColumnCount() {
+			return 3;
+		}
+
+		@Override
+		public Class<?> getColumnClass(int columnIndex){
+			switch (columnIndex) {
+			case 0:
+				return String.class;
+			case 1: 
+				return Integer.class;
+			case 2:
+				return BigDecimal.class;
+			default:
+				return null;
+			}
+		}
+		
+		@Override
+		public Object getValueAt(
+			int rowIndex,
+			int columnIndex) {
+			
+			ProviderReport.ReportItem row = report_data.get(rowIndex);
+			switch (columnIndex) {
+			case 0:
+				return row.provider.getProviderName();
+			case 1:
+				return Integer.valueOf(row.services.size());
+			case 2:
+				return row.total;
+			default:
+				return null;
+			}
+		}
+	}
+	
+	private AccountsPayableTableModel table_model;
+	private DefaultTableColumnModel col_model;
+	
 	/** Creates new form ReportToAccountsPayable */
 	public ReportToAccountsPayableUI() {
+		initTable();
 		initComponents();
+	}
+
+	private void initTable() {
+		table_model = new AccountsPayableTableModel();
+		col_model = new DefaultTableColumnModel();
+		
+		TableColumn col1 = new TableColumn(0);
+		col1.setHeaderValue("Provider");
+		col_model.addColumn(col1);
+		
+		TableColumn col2 = new TableColumn(1);
+		col2.setHeaderValue("# of consultations");
+		col_model.addColumn(col2);
+		
+		TableColumn col3 = new TableColumn(2);
+		col3.setHeaderValue("Fee");
+		col3.setCellRenderer(new FormattedRenderer(NumberFormat.getCurrencyInstance()));
+		col_model.addColumn(col3);
+		
+	}
+	
+	private void reloadData(){
+		//TODO
 	}
 
 	/**
@@ -81,7 +177,10 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         pack();

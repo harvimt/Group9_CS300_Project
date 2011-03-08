@@ -61,10 +61,10 @@ public class MemberTest {
 			i_member.delete();
 			i_member.save();
 		}
-		Assert.assertTrue(Member.getMembers("John").get(0).getFullName().equals("John Doe"));
+		Assert.assertEquals("John Doe",Member.getMembers("John").get(0).getFullName());
 		MemberStatus[] statuses = {MemberStatus.SUSPENDED,MemberStatus.BANNED};
-		Assert.assertTrue(Member.getMembers(statuses).get(0).getFullName().equals("Jane Doe"));
-		assert(Member.getMembers("Jane",statuses).get(0).getFullName().equals("Jane Doe"));
+		Assert.assertEquals("Jane Doe",Member.getMembers(statuses).get(0).getFullName());
+		Assert.assertEquals("Jane Doe",Member.getMembers("Jane",statuses).get(0).getFullName());
 		
 		members = Member.getMembers();
 		Assert.assertTrue(members.size() == 2);
@@ -112,5 +112,11 @@ public class MemberTest {
 		Assert.assertEquals(Integer
 			.valueOf(3), map.get(member3));
 		Assert.assertEquals(member3.toString(),member3.toString());
+	}
+	
+	@Test 
+	public void testInvalid() throws Exception {
+		Member mem = new Member(Integer.MAX_VALUE);
+		Assert.assertEquals(MemberStatus.INVALID, mem.getMemberStatus());
 	}
 }
