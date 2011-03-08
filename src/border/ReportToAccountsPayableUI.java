@@ -22,6 +22,11 @@ import javax.swing.table.TableColumn;
 import border.util.FormattedRenderer;
 
 import control.ProviderReport;
+import java.text.MessageFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import org.jdesktop.application.Action;
 
 /**
  * 
@@ -29,6 +34,7 @@ import control.ProviderReport;
  */
 @SuppressWarnings("serial")
 public class ReportToAccountsPayableUI extends javax.swing.JFrame {
+	private ProviderReport report;
 
 	public static class AccountsPayableTableModel
 		extends
@@ -36,8 +42,13 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 		
 		private List<ProviderReport.ReportItem> report_data;
 		
-		public List<ProviderReport.ReportItem> getReportData() {
+		public List<ProviderReport.ReportItem> getData() {
 			return report_data;
+		}
+
+		public void setData(List<ProviderReport.ReportItem> report_data) {
+			this.report_data = report_data;
+			fireTableDataChanged();
 		}
 
 		@Override
@@ -94,6 +105,28 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 	public ReportToAccountsPayableUI() {
 		initTable();
 		initComponents();
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.DATE, -(cal.get(Calendar.DAY_OF_WEEK) + 2)); // go to previous Saturday
+
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE,0);
+		cal.set(Calendar.SECOND,0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		Date from = cal.getTime();
+
+		cal.add(Calendar.DATE, 7); //now at beginning of next Friday
+		cal.add(Calendar.MILLISECOND, -1); //now at beginning of
+		Date to = cal.getTime();
+
+		fromField.setValue(from);
+		toField.setValue(to);
+
+		report = new ProviderReport(from,to);
+
+		reloadData();
 	}
 
 	private void initTable() {
@@ -115,8 +148,22 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 		
 	}
 	
-	private void reloadData(){
-		//TODO
+	@Action
+	public void reloadData(){
+		BigDecimal total = BigDecimal.valueOf(0);
+		if(report != null){
+			try{
+				report.setFrom((Date)fromField.getValue());
+				report.setTo((Date)toField.getValue());
+				report.runReport();
+				table_model.setData(report.getReportData());
+				total = report.getGrandTotal();
+			}catch(Exception ex){
+				JOptionPane.showMessageDialog(this, "Failed to load report data","Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+
+		totalLabel.setText(MessageFormat.format("Total: {0,number,currency}", new Object[]{total}));
 	}
 
 	/**
@@ -130,6 +177,12 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        toField = new javax.swing.JFormattedTextField();
+        fromField = new javax.swing.JFormattedTextField();
+        totalLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ReportToAccountsPayableUI.class);
@@ -138,53 +191,89 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Doctor", "1", "$1500", null},
-                {"Therapist", "3", "$150", null},
-                {null, null, null, "$1650"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Provider", "# of Consultations", "Fee", "Total Fee"
-            }
-        ));
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setColumnModel(col_model);
+        jTable1.setModel(table_model);
         jTable1.setName("jTable1"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(ReportToAccountsPayableUI.class, this);
+        jButton1.setAction(actionMap.get("reloadData")); // NOI18N
+        jButton1.setText("Refresh"); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("From:"); // NOI18N
+        jLabel1.setToolTipText(resourceMap.getString("jLabel1.toolTipText")); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        jLabel2.setText("To:"); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        toField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        toField.setName("toField"); // NOI18N
+
+        fromField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        fromField.setName("fromField"); // NOI18N
+
+        totalLabel.setText(resourceMap.getString("totalLabel.text")); // NOI18N
+        totalLabel.setName("totalLabel"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fromField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(toField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton1)
+                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(totalLabel)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(fromField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalLabel)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		reloadData();
+}//GEN-LAST:event_jButton1ActionPerformed
 
 	/**
 	 * @param args
@@ -199,8 +288,14 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField fromField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JFormattedTextField toField;
+    private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
 
 }

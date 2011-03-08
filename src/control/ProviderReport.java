@@ -7,6 +7,7 @@ import java.util.List;
 
 import entity.Provider;
 import entity.ServiceRendered;
+import java.math.BigInteger;
 
 
 /**
@@ -34,6 +35,7 @@ public class ProviderReport {
 	}
 	
 	protected List<ReportItem> report_data;
+	private BigDecimal grand_total;
 	private Date from;
 	private Date to;
 	
@@ -56,6 +58,7 @@ public class ProviderReport {
 		List <Provider> providers = Provider.getProviders();
 		
 		report_data = new ArrayList<ReportItem>(providers.size());
+		grand_total = new BigDecimal(0);
 		
 		for(Provider provider : providers){
 			
@@ -71,7 +74,8 @@ public class ProviderReport {
 			for(ServiceRendered sr : services){
 				total = total.add(sr.getFee());
 			}
-			
+
+			grand_total = grand_total.add(total);
 			report_data.add(new ReportItem(
 				provider,
 				services,
@@ -104,5 +108,9 @@ public class ProviderReport {
 
 	public List<ReportItem> getReportData() {
 		return report_data;
+	}
+
+	public BigDecimal getGrandTotal() {
+		return grand_total;
 	}
 }
