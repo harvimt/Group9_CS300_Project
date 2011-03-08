@@ -48,13 +48,13 @@
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="serviceCodeField" alignment="0" max="32767" attributes="1"/>
                       <Component id="serviceNameField" alignment="0" pref="109" max="32767" attributes="1"/>
-                      <Component id="serviceFeeField" alignment="0" min="-2" pref="112" max="-2" attributes="1"/>
+                      <Component id="serviceCodeField" alignment="0" pref="125" max="32767" attributes="1"/>
+                      <Component id="serviceFeeField" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,11 +146,11 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="serviceCodeField">
       <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="######" subtype="-1" type="5"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="serviceCodeField" noResource="true"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="serviceCodeField.setEditable(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>

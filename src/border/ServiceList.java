@@ -11,7 +11,10 @@
 
 package border;
 
+import border.util.FormattedRenderer;
 import border.util.JTextFieldLimit;
+
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -29,6 +32,7 @@ import entity.Provider;
 import entity.Service;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.math.BigDecimal;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
@@ -52,6 +56,12 @@ public class ServiceList extends javax.swing.JFrame {
 			return dataList;
 		}
 
+		public void setDataList(List<Service> dataList){
+			this.dataList = dataList;
+			fireTableDataChanged();
+		}
+		
+		@Override
 		public int getRowCount() {
 			if( dataList == null )
 				return 0;
@@ -59,7 +69,8 @@ public class ServiceList extends javax.swing.JFrame {
 				return dataList.size();
 
 		}
-
+		
+		@Override
 		public int getColumnCount() {
 			return 3;
 		}
@@ -81,10 +92,12 @@ public class ServiceList extends javax.swing.JFrame {
 
 		@Override
 		public Class<?> getColumnClass(int columnIndex){
-			if( columnIndex == 0 || columnIndex == 2 ){
+			if( columnIndex == 0 ){
 				return String.class;
 			} else if( columnIndex == 1 ){
 				return Integer.class;
+			} else if( columnIndex == 2) {
+				return BigDecimal.class;
 			} else {
 				return null;
 			}
@@ -99,6 +112,7 @@ public class ServiceList extends javax.swing.JFrame {
 			}
 		}
 
+		@Override
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			Service row = dataList.get(rowIndex);
 			switch(columnIndex){
@@ -111,6 +125,30 @@ public class ServiceList extends javax.swing.JFrame {
 				default:
 					return null;
 			}
+		}
+
+		@Override
+		public void setValueAt(
+				Object aValue,
+				int rowIndex,
+				int ColumnIndex){
+			Service row = dataList.get(rowIndex);
+			switch(ColumnIndex){
+				case 0:
+					row.setServiceName((String) aValue);
+					break;
+				case 1:
+					// can't set Code
+					break;
+				case 2:
+					row.setFee((BigDecimal)aValue);
+			}
+			try {
+				row.save();
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Failed to Edit Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			fireTableCellUpdated(rowIndex, ColumnIndex);
 		}
 
 	}
@@ -230,12 +268,13 @@ public class ServiceList extends javax.swing.JFrame {
 	}//GEN-LAST:event_searchFieldKeyReleased
 	
 	private void reloadData(){
+		String search_string = null;
+		if (searchField != null) {
+			search_string = searchField.getText();
+		}
 		try {
-			String search_string = null;
-			if (searchField != null) {
-				search_string = searchField.getText();
-			}
-			List<Provider> services = Provider.getProviders(search_string);
+			List<Service> services = Service.getServices(search_string);
+			model.setDataList(services);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, "Failed to load Servce List", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -253,7 +292,9 @@ public class ServiceList extends javax.swing.JFrame {
 
 		TableColumn col2 = new TableColumn(1);
 		col1.setIdentifier("Service Number");
-		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
+		FormattedRenderer serv_num_renderer = new FormattedRenderer();
+		serv_num_renderer.setFormatter(new DecimalFormat("000000"));
+		col1.setCellRenderer(serv_num_renderer);
 		columnModel.addColumn(col2);
 
 		TableColumn col3 = new TableColumn(2);
@@ -321,13 +362,44 @@ public class ServiceList extends javax.swing.JFrame {
 			int val = (Integer) jTable1.getValueAt(row, 1);
 			ServiceForm serviceForm = new ServiceForm(val);
 			serviceForm.setVisible(true);
+			serviceForm.addWindowListener(new WindowListener() {
+				
+				@Override
+				public void windowClosed(WindowEvent arg0) {
+					reloadData();
+				}
+				
+				@Override
+				public void windowOpened(WindowEvent arg0) {
+				}
+				
+				@Override
+				public void windowIconified(WindowEvent arg0) {
+				}
+				
+				@Override
+				public void windowDeiconified(WindowEvent arg0) {
+				}
+				
+				@Override
+				public void windowDeactivated(WindowEvent arg0) {
+				}
+				
+				@Override
+				public void windowClosing(WindowEvent arg0) {
+				}
+				
+				@Override
+				public void windowActivated(WindowEvent arg0) {
+				}
+			});
 		}
 	}
 
 	@Action
 	public void deleteButtonClicked() {
 		int row = jTable1.getSelectedRow();
-		if(row >= 0)
+		if(row == -1 )
 			return; // no row selected
 		int val = (Integer) jTable1.getValueAt(row, 1);
 		int response = JOptionPane.showConfirmDialog(null, "Delete Service: " + jTable1.getValueAt(row, 0), null, JOptionPane.YES_NO_OPTION);
@@ -337,8 +409,7 @@ public class ServiceList extends javax.swing.JFrame {
 				serv = new Service(val);
 				serv.delete();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to delete Service", "ERROR", ERROR);
 			}
 			reloadData();
 		}

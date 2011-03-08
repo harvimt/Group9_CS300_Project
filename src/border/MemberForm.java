@@ -12,6 +12,8 @@
 package border;
 
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ButtonModel;
 import javax.swing.text.MaskFormatter;
@@ -19,12 +21,15 @@ import org.jdesktop.application.Action;
 
 import entity.Member;
 import entity.MemberStatus;
+import javax.swing.JOptionPane;
 
 /**
  * 
  * @author Brandon
  */
 public class MemberForm extends javax.swing.JFrame {
+
+	Member member;
 
 	/** Creates new form MemberForm */
 	public MemberForm() {
@@ -44,17 +49,16 @@ public class MemberForm extends javax.swing.JFrame {
 			emailField.setText(member.getEmail());
 			
 			if(member.getMemberStatus() == MemberStatus.ACTIVE)
-				buttonGroup1.setSelected((ButtonModel) activeRadioButton, true);
+				activeRadioButton.setSelected(true);
 			else if(member.getMemberStatus() == MemberStatus.SUSPENDED)
-				buttonGroup1.setSelected((ButtonModel) suspendedRadioButton, true);
+				suspendedRadioButton.setSelected(true);
 			else if(member.getMemberStatus() == MemberStatus.CANCELLED)
-				buttonGroup1.setSelected((ButtonModel) cancelledRadioButton, true);
+				cancelledRadioButton.setSelected(true);
 			else if(member.getMemberStatus() == MemberStatus.BANNED)
-				buttonGroup1.setSelected((ButtonModel) bannedRadioButton, true);
+				bannedRadioButton.setSelected(true);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Failed to Load Member info", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -126,19 +130,19 @@ public class MemberForm extends javax.swing.JFrame {
         }
         nameField.setName("nameField"); // NOI18N
 
+        numberField.setEditable(false);
         try {
             numberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
         numberField.setName("numberField"); // NOI18N
-        numberField.setEditable(false);
 
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
 
         try {
-            cityField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("***************")));
+            cityField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**************")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -334,23 +338,20 @@ public class MemberForm extends javax.swing.JFrame {
     		try {
 				member.save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Edit Member Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	else{
     		try {
-				(new Member(nameField.getText(), status, addressField.getText(), cityField.getText(), stateField.getText(), zipField.getText(), emailField.getText())).save();
+				new Member(nameField.getText().toString(), status, addressField.getText().toString(), cityField.getText().toString(), stateField.getText().toString(), zipField.getText().toString(), emailField.getText().toString()).save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Save New Member Info ", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	dispose();	
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Member member;
     private javax.swing.JRadioButton activeRadioButton;
     private javax.swing.JFormattedTextField addressField;
     private javax.swing.JRadioButton bannedRadioButton;

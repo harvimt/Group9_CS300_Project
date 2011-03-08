@@ -157,7 +157,7 @@ public class ProviderList extends javax.swing.JFrame {
 			try {
 				row.save();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Failed to Edit Provider Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -305,7 +305,7 @@ public class ProviderList extends javax.swing.JFrame {
 		TableColumn col2 = new TableColumn(1);
 		col2.setIdentifier("Provider Number");
 		FormattedRenderer prov_num_renderer = new FormattedRenderer();
-		prov_num_renderer.setFormatter(new DecimalFormat("00000000"));
+		prov_num_renderer.setFormatter(new DecimalFormat("000000000"));
 		col2.setCellRenderer(prov_num_renderer);
 		columnModel.addColumn(col2);
 
@@ -374,6 +374,30 @@ public class ProviderList extends javax.swing.JFrame {
 			int val = (Integer) jTable1.getValueAt(row, 1);
 			ProviderForm providerForm = new ProviderForm(val);
 			providerForm.setVisible(true);
+			providerForm.addWindowListener(new WindowListener() {
+
+				public void windowOpened(WindowEvent e) {
+				}
+
+				public void windowClosing(WindowEvent e) {
+				}
+
+				public void windowClosed(WindowEvent e) {
+					reloadData();
+				}
+
+				public void windowIconified(WindowEvent e) {
+				}
+
+				public void windowDeiconified(WindowEvent e) {
+				}
+
+				public void windowActivated(WindowEvent e) {
+				}
+
+				public void windowDeactivated(WindowEvent e) {
+				}
+			});
 		}
 	}
 
@@ -392,7 +416,7 @@ public class ProviderList extends javax.swing.JFrame {
 				prov = new Provider(val);
 				prov.delete();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to delete provider", "ERROR", ERROR);
+				JOptionPane.showMessageDialog(this, "Failed to delete Provider", "ERROR", ERROR);
 			}
 			reloadData();
 		}

@@ -12,11 +12,11 @@
 package border;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 
 import org.jdesktop.application.Action;
 
 import entity.Service;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -37,8 +37,7 @@ public class ServiceForm extends javax.swing.JFrame {
 			serviceCodeField.setValue(val);
 			serviceFeeField.setValue(service.getFee());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Failed to Load Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -90,21 +89,14 @@ public class ServiceForm extends javax.swing.JFrame {
         jButton2.setName("jButton2"); // NOI18N
 
         try {
-			serviceNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+            serviceNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         serviceNameField.setName("serviceNameField"); // NOI18N
 
-        try {
-			serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        serviceCodeField.setName("serviceCodeField"); // NOI18N
         serviceCodeField.setEditable(false);
+        serviceCodeField.setName("serviceCodeField"); // NOI18N
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
@@ -136,11 +128,11 @@ public class ServiceForm extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                        .addComponent(serviceFeeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                        .addComponent(serviceFeeField, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jButton2))
-                .addGap(53, 53, 53))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,18 +165,6 @@ public class ServiceForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField6ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField6ActionPerformed
-
-	private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField5ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField5ActionPerformed
-
-	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jTextField1ActionPerformed
-
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -210,23 +190,20 @@ public class ServiceForm extends javax.swing.JFrame {
     		try {
 				service.save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Edit Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	else{
     		try {
 				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText())).save();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Save New Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Service service;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -239,4 +216,5 @@ public class ServiceForm extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField serviceNameField;
     // End of variables declaration//GEN-END:variables
 
+	private Service service;
 }

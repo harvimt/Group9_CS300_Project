@@ -38,7 +38,7 @@ public class ProviderForm extends javax.swing.JFrame {
 			providerNumberField.setValue(new Integer(val));
 			providerEmailField.setText(provider.getEmail());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Provider info","ERROR",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to Load Provider Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -180,18 +180,15 @@ public class ProviderForm extends javax.swing.JFrame {
 			try {
 				provider.save();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Edit Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			try {
 				new Provider(providerNameField.getText(), providerEmailField.getText()).save();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		dispose();

@@ -1,7 +1,9 @@
 package border;
 
+import border.util.FormattedRenderer;
 import border.util.JTextFieldLimit;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,7 @@ import org.jdesktop.application.Action;
 import entity.Member;
 import entity.MemberStatus;
 import entity.Provider;
+import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import javax.swing.DefaultCellEditor;
@@ -52,7 +55,6 @@ public class MemberList extends javax.swing.JFrame {
 
 		 
 		private static final long serialVersionUID = -2590145503825646055L;
-
 		private List<Member> dataList;
 
 		public List<Member> getDataList() {
@@ -108,10 +110,12 @@ public class MemberList extends javax.swing.JFrame {
 		@Override
 		public Class<?> getColumnClass(
 				int columnIndex) {
-			if (columnIndex == 0 || 2 <= columnIndex && columnIndex <= 7) {
+			if (columnIndex == 0 || 3 <= columnIndex && columnIndex <= 7) {
 				return String.class;
 			} else if (columnIndex == 1) {
 				return Integer.class;
+			} else if(columnIndex == 2){
+				return MemberStatus.class;
 			} else {
 				return null;
 			}
@@ -121,7 +125,7 @@ public class MemberList extends javax.swing.JFrame {
 		public boolean isCellEditable(
 				int rowIndex,
 				int columnIndex) {
-			if (columnIndex == 0 || 2 <= columnIndex && columnIndex <= 7) {
+			if (columnIndex == 0 || 3 <= columnIndex && columnIndex <= 7) {
 				return true;
 			} else {
 				return false;
@@ -393,7 +397,9 @@ public class MemberList extends javax.swing.JFrame {
 
 		TableColumn col2 = new TableColumn(1);
 		col2.setIdentifier("Number");
-		col2.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(9), "",0)));
+		FormattedRenderer mem_num_renderer = new FormattedRenderer();
+		mem_num_renderer.setFormatter(new DecimalFormat("00000000"));
+		col2.setCellRenderer(mem_num_renderer);
 		columnModel.addColumn(col2);
 
 
@@ -510,6 +516,30 @@ public class MemberList extends javax.swing.JFrame {
 			int val = (Integer) jTable1.getValueAt(row, 1);
 			MemberForm memberForm = new MemberForm(val);
 			memberForm.setVisible(true);
+			memberForm.addWindowListener(new WindowListener() {
+
+				public void windowOpened(WindowEvent e) {
+				}
+
+				public void windowClosing(WindowEvent e) {
+				}
+
+				public void windowClosed(WindowEvent e) {
+					reloadData();
+				}
+
+				public void windowIconified(WindowEvent e) {
+				}
+
+				public void windowDeiconified(WindowEvent e) {
+				}
+
+				public void windowActivated(WindowEvent e) {
+				}
+
+				public void windowDeactivated(WindowEvent e) {
+				}
+			});
 		}
 
 	}
