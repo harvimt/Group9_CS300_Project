@@ -4,17 +4,18 @@
 
 package border;
 
+import control.ChocAnApp;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 
 import pdx.edu.cs300_group9.DesktopApplication2;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import entity.Member;
 import entity.MemberStatus;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  * The application's main frame.
@@ -23,22 +24,18 @@ public class HomeScreen extends FrameView {
 
 	public HomeScreen(SingleFrameApplication app) {
 		super(app);
+		try {
+			ChocAnApp.getConnection();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null,
+					"Failed to initialize DB connection",
+					"ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 
 		initComponents();
 
 		invalidID.setVisible(false);
 	
-	}
-
-	@Action
-	public void showAboutBox() {
-		if (aboutBox == null) {
-
-			JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
-			aboutBox = new AboutBox(mainFrame);
-			aboutBox.setLocationRelativeTo(mainFrame);
-		}
-		DesktopApplication2.getApplication().show(aboutBox);
 	}
 
 	/**
@@ -71,15 +68,14 @@ public class HomeScreen extends FrameView {
         addMemberMenuItem = new javax.swing.JMenuItem();
         providerAddMenuItem = new javax.swing.JMenuItem();
         serviceAddMenuItem = new javax.swing.JMenuItem();
-        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(HomeScreen.class);
         invalidID.setFont(resourceMap.getFont("invalidID.font")); // NOI18N
         invalidID.setForeground(resourceMap.getColor("invalidID.foreground")); // NOI18N
-        invalidID.setText(resourceMap.getString("invalidID.text")); // NOI18N
+        invalidID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        invalidID.setText("Invalid ID"); // NOI18N
         invalidID.setName("invalidID"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(HomeScreen.class, this);
@@ -101,26 +97,26 @@ public class HomeScreen extends FrameView {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(authenticateButton)
-                .addGap(69, 69, 69)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(logServiceButton)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
-                .addComponent(invalidID)
-                .addGap(143, 143, 143))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
-                .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(51, 51, 51))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(invalidID, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(59, 59, 59)
                 .addComponent(invalidID)
-                .addGap(27, 27, 27)
+                .addGap(50, 50, 50)
                 .addComponent(memberNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(32, 32, 32)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authenticateButton)
                     .addComponent(logServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,37 +200,9 @@ public class HomeScreen extends FrameView {
 
         menuBar.add(addMenu);
 
-        helpMenu.setAction(actionMap.get("showAboutBox")); // NOI18N
-        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
-        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                helpMenuMouseClicked(evt);
-            }
-        });
-        helpMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                helpMenuActionPerformed(evt);
-            }
-        });
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
         setComponent(mainPanel);
         setMenuBar(menuBar);
     }// </editor-fold>//GEN-END:initComponents
-
-	private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_helpMenuActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_helpMenuActionPerformed
-
-	private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_helpMenuMouseClicked
-		// TODO add your handling code here:
-	}// GEN-LAST:event_helpMenuMouseClicked
 
 	@Action
 	public void openLogServiceForm() {
@@ -256,16 +224,16 @@ public class HomeScreen extends FrameView {
 				status = mem.getMemberStatus();
 			}catch(Exception e){
 				status = MemberStatus.INVALID;
-				invalidID.setText("Member " + status.toString());
 			}
+
+			invalidID.setText("Member " + status.toString());
 			
 			if(status == MemberStatus.ACTIVE){
-				invalidID.setForeground(Color.green);
+				invalidID.setForeground(Color.green);	
 				return true;
 			}else{
 				invalidID.setForeground(Color.red);
 			}
-			
 		}
 		return false;
 	}
@@ -352,13 +320,6 @@ public class HomeScreen extends FrameView {
     private javax.swing.JMenuItem servicesMenuItem;
     // End of variables declaration//GEN-END:variables
 
-	/*private final Timer messageTimer;
-	private final Timer busyIconTimer;
-	private final Icon idleIcon;
-	private final Icon[] busyIcons = new Icon[15];
-	private int busyIconIndex = 0;
-	 */
-	private JDialog aboutBox;
 	private javax.swing.JFrame logServiceForm;
 	private javax.swing.JFrame memberList;
 	private javax.swing.JFrame providerList;

@@ -61,6 +61,10 @@ public class ProviderReport {
 			
 			List<ServiceRendered> services =
 				ServiceRendered.getServicesRenderedByProvider(provider, from, to);
+
+			if(services.isEmpty()){
+				continue;
+			}
 			
 			BigDecimal total = new BigDecimal(0);
 			
