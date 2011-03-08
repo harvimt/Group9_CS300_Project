@@ -139,6 +139,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="activeCheckBox">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.MemberList" id="activeBoxChecked" methodName="activeBoxChecked"/>
+        </Property>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" resourceKey="activeCheckBox.text"/>
         <Property name="name" type="java.lang.String" value="activeCheckBox" noResource="true"/>
@@ -146,18 +149,27 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="cancelledCheckBox">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.MemberList" id="cancelledBoxChecked" methodName="cancelledBoxChecked"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="cancelledCheckBox.text"/>
         <Property name="name" type="java.lang.String" value="cancelledCheckBox" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="bannedCheckBox">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.MemberList" id="bannedBoxChecked" methodName="bannedBoxChecked"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="bannedCheckBox.text"/>
         <Property name="name" type="java.lang.String" value="bannedCheckBox" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="suspendedCheckBox">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="border.MemberList" id="suspendedBoxChecked" methodName="suspendedBoxChecked"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="suspendedCheckBox.text"/>
         <Property name="name" type="java.lang.String" value="suspendedCheckBox" noResource="true"/>
       </Properties>

@@ -381,7 +381,7 @@ public class MemberList extends javax.swing.JFrame {
 		}
 		try {
 
-			List<Member> members = Member.getMembers(search_string, (MemberStatus[]) status.toArray());
+			List<Member> members = Member.getMembers(search_string);//, (MemberStatus[]) status.toArray());
 			model.setDataList(members);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member List", "ERROR", JOptionPane.ERROR_MESSAGE);
