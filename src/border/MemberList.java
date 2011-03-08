@@ -257,20 +257,24 @@ public class MemberList extends javax.swing.JFrame {
 
         jLabel2.setName("jLabel2"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(MemberList.class, this);
+        activeCheckBox.setAction(actionMap.get("activeBoxChecked")); // NOI18N
         activeCheckBox.setSelected(true);
         activeCheckBox.setText(resourceMap.getString("activeCheckBox.text")); // NOI18N
         activeCheckBox.setName("activeCheckBox"); // NOI18N
 
+        cancelledCheckBox.setAction(actionMap.get("cancelledBoxChecked")); // NOI18N
         cancelledCheckBox.setText(resourceMap.getString("cancelledCheckBox.text")); // NOI18N
         cancelledCheckBox.setName("cancelledCheckBox"); // NOI18N
 
+        bannedCheckBox.setAction(actionMap.get("bannedBoxChecked")); // NOI18N
         bannedCheckBox.setText(resourceMap.getString("bannedCheckBox.text")); // NOI18N
         bannedCheckBox.setName("bannedCheckBox"); // NOI18N
 
+        suspendedCheckBox.setAction(actionMap.get("suspendedBoxChecked")); // NOI18N
         suspendedCheckBox.setText(resourceMap.getString("suspendedCheckBox.text")); // NOI18N
         suspendedCheckBox.setName("suspendedCheckBox"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getActionMap(MemberList.class, this);
         allCheckBox.setAction(actionMap.get("allCheckBoxChecked")); // NOI18N
         allCheckBox.setText(resourceMap.getString("allCheckBox.text")); // NOI18N
         allCheckBox.setName("allCheckBox"); // NOI18N
@@ -377,7 +381,7 @@ public class MemberList extends javax.swing.JFrame {
 		}
 		try {
 
-			List<Member> members = Member.getMembers(search_string);//, (MemberStatus[]) status.toArray());
+			List<Member> members = Member.getMembers(search_string, (MemberStatus[]) status.toArray());
 			model.setDataList(members);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member List", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -453,22 +457,7 @@ public class MemberList extends javax.swing.JFrame {
 		});
 	}
 
-	@Action
-	public void allCheckBoxChecked() {
-		if( allCheckBox.isSelected() == true ){
-			activeCheckBox.setSelected(true);
-			suspendedCheckBox.setSelected(true);
-			cancelledCheckBox.setSelected(true);
-			bannedCheckBox.setSelected(true);
-		}
-		else{
-			activeCheckBox.setSelected(false);
-			suspendedCheckBox.setSelected(false);
-			cancelledCheckBox.setSelected(false);
-			bannedCheckBox.setSelected(false);
-		}
-		reloadData();
-	}
+
 
 	@Action
 	public void addButtonClicked() {
@@ -562,6 +551,64 @@ public class MemberList extends javax.swing.JFrame {
 			}
 			reloadData();
 		}
+	}
+
+	@Action
+	public void allCheckBoxChecked() {
+		if( allCheckBox.isSelected() == true ){
+			activeCheckBox.setSelected(true);
+			suspendedCheckBox.setSelected(true);
+			cancelledCheckBox.setSelected(true);
+			bannedCheckBox.setSelected(true);
+		}
+		else{
+			activeCheckBox.setSelected(false);
+			suspendedCheckBox.setSelected(false);
+			cancelledCheckBox.setSelected(false);
+			bannedCheckBox.setSelected(false);
+		}
+		reloadData();
+	}
+
+	@Action
+	public void activeBoxChecked() {
+		if( activeCheckBox.isSelected() != true ){
+			allCheckBox.setSelected(false);
+		}
+		checkSelected();
+		reloadData();
+	}
+
+	@Action
+	public void suspendedBoxChecked() {
+		if( !suspendedCheckBox.isSelected() )
+			allCheckBox.setSelected(false);
+		checkSelected();
+		reloadData();
+	}
+
+	@Action
+	public void cancelledBoxChecked() {
+		if( !cancelledCheckBox.isSelected() )
+			allCheckBox.setSelected(false);
+		checkSelected();
+		reloadData();
+	}
+
+	@Action
+	public void bannedBoxChecked() {
+		if( !bannedCheckBox.isSelected() )
+			allCheckBox.setSelected(false);
+		checkSelected();
+		reloadData();
+	}
+
+	private void checkSelected(){
+		if(		activeCheckBox.isSelected() &&
+				suspendedCheckBox.isSelected() &&
+				cancelledCheckBox.isSelected() &&
+				bannedCheckBox.isSelected() )
+			allCheckBox.setSelected(true);
 	}
 
 
