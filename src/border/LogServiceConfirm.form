@@ -57,7 +57,7 @@
                           <Component id="memberNumberField" alignment="0" max="32767" attributes="1"/>
                           <Component id="comments" alignment="0" max="32767" attributes="1"/>
                           <Component id="serviceCode" alignment="0" pref="176" max="32767" attributes="1"/>
-                          <Component id="dateTextField" alignment="0" min="-2" pref="213" max="-2" attributes="1"/>
+                          <Component id="dateServiceEntered" alignment="0" min="-2" pref="213" max="-2" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -76,7 +76,7 @@
               <Component id="titleLabel" min="-2" max="-2" attributes="1"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="dateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateServiceEntered" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -157,10 +157,10 @@
         <Property name="name" type="java.lang.String" value="jLabel5" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="dateTextField">
+    <Component class="javax.swing.JFormattedTextField" name="dateServiceEntered">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="dateTextField" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="dateServiceEntered" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dateServiceRendered">

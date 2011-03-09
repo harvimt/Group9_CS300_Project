@@ -29,15 +29,17 @@ public class MemberForm extends javax.swing.JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 6822738359999263635L;
-	Member member;
+	private Member member;
 
 	/** Creates new form MemberForm */
 	public MemberForm() {
 		initComponents();
+		initX();
 	}
 
 	public MemberForm(int val){
 		initComponents();
+		initX();
 		try {
 			member = new Member(val);
 			nameField.setValue(member.getFullName());
@@ -60,6 +62,10 @@ public class MemberForm extends javax.swing.JFrame {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member info", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
+		
+	}
+
+	private void initX(){
 		
 	}
 	

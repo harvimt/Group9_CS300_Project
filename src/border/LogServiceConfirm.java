@@ -13,8 +13,20 @@ package border;
 
 
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.jdesktop.application.Action;
+
+import entity.Member;
+import entity.Provider;
+import entity.Service;
+import entity.ServiceRendered;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -31,6 +43,7 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 	/** Creates new form ConfirmLogService */
 	public LogServiceConfirm() {
 		initComponents();
+		recordCommitted = false;
 	}
 
 	public void setFields( javax.swing.JFormattedTextField dateEntered,
@@ -39,12 +52,12 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 			javax.swing.JTextField memberNumber,
 			javax.swing.JTextField serviceCode,
 			javax.swing.JTextArea comments){
-		dateTextField.setText( dateEntered.getText() );
+		dateServiceEntered.setText( dateEntered.getText() );
 		dateServiceRendered.setText( dateRendered.getText() );
 		providerNumberField.setText( providerNumber.getText() );
 		memberNumberField.setText( memberNumber.getText() );
 		this.serviceCode.setText( serviceCode.getText() );
-		this.commentsTextArea.setText( comments.getText());
+		commentsTextArea.setText( comments.getText() );
 	}
 
 	/**
@@ -65,7 +78,7 @@ public class LogServiceConfirm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        dateTextField = new javax.swing.JFormattedTextField();
+        dateServiceEntered = new javax.swing.JFormattedTextField();
         dateServiceRendered = new javax.swing.JTextField();
         providerNumberField = new javax.swing.JTextField();
         memberNumberField = new javax.swing.JTextField();
@@ -105,8 +118,8 @@ public class LogServiceConfirm extends javax.swing.JFrame {
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
 
-        dateTextField.setEditable(false);
-        dateTextField.setName("dateTextField"); // NOI18N
+        dateServiceEntered.setEditable(false);
+        dateServiceEntered.setName("dateServiceEntered"); // NOI18N
 
         dateServiceRendered.setEditable(false);
         dateServiceRendered.setName("dateServiceRendered"); // NOI18N
@@ -182,7 +195,7 @@ public class LogServiceConfirm extends javax.swing.JFrame {
                             .addComponent(memberNumberField)
                             .addComponent(comments)
                             .addComponent(serviceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                            .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dateServiceEntered, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(titleLabel)))
@@ -195,7 +208,7 @@ public class LogServiceConfirm extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateServiceEntered, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -270,15 +283,36 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 
 	@Action
 	public void commitRecordToDatabase() {
-		// TODO finalizing code
+		
+		try {
+			new ServiceRendered(
+					(Date) (new SimpleDateFormat("MM/dd/YYYY").parse(dateServiceEntered.getText())),
+					(Date) (new SimpleDateFormat("MM/dd/YYYY").parse(dateServiceRendered.getText())), 
+					new Service(Integer.parseInt(serviceCode.getText())).getFee(), 
+					new Provider(Integer.parseInt(providerNumberField.getText())), 
+					new Service(Integer.parseInt(serviceCode.getText())), 
+					new Member(Integer.parseInt(memberNumberField.getText())), 
+					commentsTextArea.getText()).save();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Failed to save Service Record to database", "ERROR(0)", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Failed to save Service Record to database", "ERROR(1)", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		recordCommitted = true;
+		dispose();
+	}
+	
+	public boolean recordCommitted(){
+		return recordCommitted;
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane comments;
     private javax.swing.JTextArea commentsTextArea;
+    private javax.swing.JFormattedTextField dateServiceEntered;
     private javax.swing.JTextField dateServiceRendered;
-    private javax.swing.JFormattedTextField dateTextField;
     private javax.swing.JButton finishButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -294,4 +328,5 @@ public class LogServiceConfirm extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
+	private boolean recordCommitted;
 }

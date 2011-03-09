@@ -93,6 +93,11 @@ public class HomeScreen extends FrameView {
 
         memberNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
         memberNumberField.setName("memberNumberField"); // NOI18N
+        memberNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                memberNumberFieldFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -103,9 +108,9 @@ public class HomeScreen extends FrameView {
                 .addComponent(authenticateButton)
                 .addGap(69, 69, 69)
                 .addComponent(logServiceButton)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(137, Short.MAX_VALUE)
                 .addComponent(invalidID)
                 .addGap(143, 143, 143))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
@@ -124,7 +129,7 @@ public class HomeScreen extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authenticateButton)
                     .addComponent(logServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -228,6 +233,10 @@ public class HomeScreen extends FrameView {
         setMenuBar(menuBar);
     }// </editor-fold>//GEN-END:initComponents
 
+	private void memberNumberFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_memberNumberFieldFocusGained
+		memberNumberField.setText("");
+	}//GEN-LAST:event_memberNumberFieldFocusGained
+
 	private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_helpMenuActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_helpMenuActionPerformed
@@ -238,10 +247,12 @@ public class HomeScreen extends FrameView {
 
 	@Action
 	public void openLogServiceForm() {
-		logServiceForm = new LogServiceForm();
-		JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
-		logServiceForm.setLocale(mainFrame.getLocale());
-		logServiceForm.setVisible(true);
+		if(authMemberHelper()){
+			logServiceForm = new LogServiceForm(memberNumberField.getText());
+			JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
+			logServiceForm.setLocale(mainFrame.getLocale());
+			logServiceForm.setVisible(true);
+		}
 	}
 
 	public boolean authMemberHelper(){
