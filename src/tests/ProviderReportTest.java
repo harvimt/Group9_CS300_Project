@@ -122,6 +122,7 @@ public class ProviderReportTest
 				Assert.assertEquals(expected_file2[i], line);
 				i+=1;
 			}
+			reader.close();
 			
 			new File(filename1).delete();
 			new File(filename2).delete();
@@ -158,6 +159,7 @@ public class ProviderReportTest
 				Assert.assertEquals(expected_file[i], line);
 				i+=1;
 			}
+			reader.close();
 			
 			new File(filename).delete();
 		}

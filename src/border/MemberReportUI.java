@@ -11,6 +11,24 @@
 
 package border;
 
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableColumn;
+
+import border.util.FormattedRenderer;
+import control.MemberReport;
+import entity.ServiceRendered;
+import javax.swing.JOptionPane;
+
 /**
  * 
  * @author Brandon
@@ -18,9 +36,141 @@ package border;
 @SuppressWarnings("serial")
 public class MemberReportUI extends javax.swing.JFrame {
 
+	static private class MemberReportListModel extends AbstractListModel {
+		
+		private List<MemberReport.ReportItem> report_data;
+
+		public void setData(List<MemberReport.ReportItem> report_data){
+			this.report_data = report_data;
+			fireContentsChanged(this, 0, report_data.size());
+		}
+
+		public int getSize() {
+			if(report_data == null){
+				return 0;
+			}else{
+				return report_data.size();
+			}
+		}
+
+		public Object getElementAt(int index) {
+			return report_data.get(index).member.getFullName();
+		}
+		
+	}
+
+	static private class MemberReportTableModel extends AbstractTableModel {
+
+		private List<ServiceRendered> report_data;
+
+		public void setData(List<ServiceRendered> report_data){
+			this.report_data = report_data;
+			fireTableDataChanged();
+		}
+
+		public int getRowCount() {
+			if(report_data == null){
+				return 0;
+			}else{
+				return report_data.size();
+			}
+		}
+
+		public int getColumnCount() {
+			return 4;
+		}
+		
+		@Override
+		public Class<?> getColumnClass(
+			int columnIndex) {
+			switch(columnIndex){
+				case 0:
+					return Date.class;
+				case 1:
+					return BigDecimal.class;
+				case 2:
+					return String.class;
+				case 3:
+					return String.class;
+				default:
+					return null;
+			}
+		}
+
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			ServiceRendered row = report_data.get(rowIndex);
+			switch(columnIndex){
+				case 0:
+					return row.getServiceProvided();
+				case 1:
+					return row.getFee();
+				case 2:
+					return row.getProvider().getProviderName();
+				case 3:
+					return row.getService().getServiceName();
+				default:
+					return null;
+			}
+		}
+		
+	}
+	
+	private MemberReport report;
+	private MemberReportListModel list_model;
+	private MemberReportTableModel table_model;
+	private DefaultTableColumnModel col_model;
+	final private List<ServiceRendered> empty_table_data = new LinkedList<ServiceRendered>();
+
 	/** Creates new form MemberList */
 	public MemberReportUI() {
+		initModels();
 		initComponents();
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.DATE, -(cal.get(Calendar.DAY_OF_WEEK) + 2)); // go to previous Saturday
+
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE,0);
+		cal.set(Calendar.SECOND,0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		Date from = cal.getTime();
+
+		cal.add(Calendar.DATE, 7); //now at beginning of next Friday
+		cal.add(Calendar.MILLISECOND, -1); //now at beginning of
+		Date to = cal.getTime();
+
+		fromField.setValue(from);
+		toField.setValue(to);
+
+		report = new MemberReport(from,to);
+
+		reloadData();
+	}
+
+	private void initModels(){
+		list_model = new MemberReportListModel();
+		table_model = new MemberReportTableModel();
+		col_model = new DefaultTableColumnModel();
+
+		TableColumn col1 = new TableColumn(0);
+		col1.setHeaderValue("Date Provided");
+		col1.setCellRenderer(new FormattedRenderer(DateFormat.getDateInstance()));
+		col_model.addColumn(col1);
+
+		TableColumn col2 = new TableColumn(1);
+		col2.setHeaderValue("Fee");
+		col2.setCellRenderer(new FormattedRenderer(NumberFormat.getCurrencyInstance()));
+		col_model.addColumn(col2);
+
+		TableColumn col3 = new TableColumn(2);
+		col3.setHeaderValue("Provider Name");
+		col_model.addColumn(col3);
+
+		TableColumn col4 = new TableColumn(3);
+		col4.setHeaderValue("Service");
+		col_model.addColumn(col4);
 	}
 
 	/**
@@ -33,113 +183,129 @@ public class MemberReportUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        toggleButton1 = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
-        toggleButton3 = new javax.swing.JToggleButton();
-        jLabel2 = new javax.swing.JLabel();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jPanel1 = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        table_scroll_pane = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        fromField = new javax.swing.JFormattedTextField();
+        toField = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(MemberReportUI.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
-        toggleButton1.setText(resourceMap.getString("toggleButton1.text")); // NOI18N
-        toggleButton1.setName("toggleButton1"); // NOI18N
-        toggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
-
-        toggleButton3.setSelected(true);
-        toggleButton3.setText(resourceMap.getString("toggleButton3.text")); // NOI18N
-        toggleButton3.setName("toggleButton3"); // NOI18N
-        toggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        jSplitPane1.setDividerLocation(200);
+        jSplitPane1.setName("jSplitPane1"); // NOI18N
+        jSplitPane1.setOneTouchExpandable(true);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"01/01/2010", "Massage", "Bob Cool"},
-                {"01/02/2010", "Group Therapy", "Bill Smooth"},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Date", "Type of Service", "Provider"
-            }
-        ) {
-            @SuppressWarnings("rawtypes")
-			Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            @SuppressWarnings("rawtypes")
-			public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jList1.setModel(list_model);
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.setName("jList1"); // NOI18N
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
             }
         });
+        jScrollPane1.setViewportView(jList1);
+
+        jSplitPane1.setLeftComponent(jScrollPane1);
+
+        jPanel1.setName("jPanel1"); // NOI18N
+
+        nameLabel.setText(resourceMap.getString("nameLabel.text")); // NOI18N
+        nameLabel.setName("nameLabel"); // NOI18N
+
+        totalLabel.setText(resourceMap.getString("totalLabel.text")); // NOI18N
+        totalLabel.setName("totalLabel"); // NOI18N
+
+        table_scroll_pane.setName("table_scroll_pane"); // NOI18N
+
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setColumnModel(col_model);
+        jTable1.setModel(table_model);
         jTable1.setName("jTable1"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        table_scroll_pane.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel)
+                    .addComponent(totalLabel)
+                    .addComponent(table_scroll_pane, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(table_scroll_pane, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+        );
+
+        jSplitPane1.setRightComponent(jPanel1);
+
+        fromField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        fromField.setText(resourceMap.getString("fromField.text")); // NOI18N
+        fromField.setName("fromField"); // NOI18N
+
+        toField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        toField.setText(resourceMap.getString("toField.text")); // NOI18N
+        toField.setName("toField"); // NOI18N
+
+        jLabel1.setText("From:"); // NOI18N
+        jLabel1.setToolTipText(resourceMap.getString("jLabel1.toolTipText")); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        jLabel2.setText("To:"); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        jButton1.setText("Refresh"); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(toggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(toggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fromField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(toField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,27 +313,64 @@ public class MemberReportUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(toggleButton1)
-                    .addComponent(jLabel1))
+                    .addComponent(toField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(fromField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(toggleButton3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jSplitPane1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void toggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jToggleButton2ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jToggleButton2ActionPerformed
+	private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+		int row = jList1.getSelectedIndex();
+		if(row == -1){
+			resetTable();
+			return;
+		}
 
-	private void toggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jToggleButton3ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jToggleButton3ActionPerformed
+		MemberReport.ReportItem item = report.getReportData().get(row);
+		
+		nameLabel.setText(item.member.getFullName());
+		totalLabel.setText(NumberFormat.getCurrencyInstance().format(item.total));
+		totalLabel.setVisible(true);
+
+		table_model.setData(item.services);
+
+		table_scroll_pane.setVisible(true);
+
+	}//GEN-LAST:event_jList1ValueChanged
+
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		reloadData();
+	}//GEN-LAST:event_jButton1ActionPerformed
+
+	private void resetTable(){
+		totalLabel.setVisible(false);
+		table_scroll_pane.setVisible(false);
+		jList1.clearSelection();
+		
+		nameLabel.setText("No Member Selected");
+		table_model.setData(empty_table_data);
+	}
+	
+	private void reloadData(){
+		if(report == null) return;
+		
+		try{
+			report.setFrom((Date)fromField.getValue());
+			report.setTo((Date)toField.getValue());
+			report.runReport();
+			list_model.setData(report.getReportData());
+		}catch(Exception ex){
+			JOptionPane.showMessageDialog(this, "Failed to load report data","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		resetTable();
+	}
 
 	/**
 	 * @param args
@@ -182,12 +385,19 @@ public class MemberReportUI extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField fromField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton toggleButton1;
-    private javax.swing.JToggleButton toggleButton3;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JScrollPane table_scroll_pane;
+    private javax.swing.JFormattedTextField toField;
+    private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -91,9 +91,9 @@ public class ServiceTest {
 		Assert.assertTrue(!service1.equals(service2));
 		
 		Map<Service,Integer> map = new HashMap<Service,Integer>();
-		map.put(service1, new Integer(1));
-		map.put(service2, new Integer(2));
-		map.put(service3, new Integer(3));
+		map.put(service1, Integer.valueOf(1));
+		map.put(service2, Integer.valueOf(2));
+		map.put(service3, Integer.valueOf(3));
 		
 		Assert.assertEquals(Integer
 			.valueOf(2), map.get(service2));
