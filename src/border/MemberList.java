@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.DefaultCellEditor;
@@ -32,6 +33,7 @@ public class MemberList extends javax.swing.JFrame {
 	private static final long serialVersionUID = -484134655678221995L;
 	private MemberListTableModel model;
 	private DefaultTableColumnModel columnModel;
+	static final private List <Member> empty_list = new LinkedList<Member>();
 
 	public class MemberListTableModel
 			extends AbstractTableModel{
@@ -347,7 +349,11 @@ public class MemberList extends javax.swing.JFrame {
 				status.add(MemberStatus.CANCELLED);
 			if(bannedCheckBox.isSelected())
 				status.add(MemberStatus.BANNED);
-
+			
+			if(status.isEmpty()){
+				model.setDataList(empty_list);
+				return;
+			}
 			status_arr = (MemberStatus[]) status.toArray(new MemberStatus[0]);
 		}
 

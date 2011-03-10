@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS providers (
 	provider_name VARCHAR(32) NOT NULL ,
 	email VARCHAR(128) NOT NULL
 
-	CHECK (provider_id <= 999999999)),
+	CHECK (provider_id <= 999999999),
 	CHECK (length(provider_name) <= 32),
 	CHECK (length(email) <= 128),
 	CHECK (valid_email(email))

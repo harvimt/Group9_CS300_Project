@@ -34,7 +34,7 @@ public class MemberTest {
 		member.setStreetAddress("123 barfoo st.");
 		member.setCity("Barfoo");
 		member.setState("WA");
-		member.setZipCode("123456");
+		member.setZipCode("97201");
 		member.setEmail("barfoo@example.org");
 		
 		member.save();
@@ -47,7 +47,7 @@ public class MemberTest {
 		Assert.assertTrue(member.getStreetAddress().equals("123 barfoo st."));
 		Assert.assertTrue(member.getCity().equals("Barfoo"));
 		Assert.assertTrue(member.getState().equals("WA"));
-		Assert.assertTrue(member.getZipCode().equals("123456"));
+		Assert.assertTrue(member.getZipCode().equals("97201"));
 		Assert.assertTrue(member.getEmail().equals("barfoo@example.org"));
 		
 		member = new Member("John Doe",MemberStatus.ACTIVE,

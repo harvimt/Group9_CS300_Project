@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS services_rendered (
 	fee VARCHAR(20) NOT NULL  DEFAULT 0
 
 	CHECK (length(comments) <= 100),
-	CHECK (fee REGEXP '[0-9]{1,10}(\.[0-9]{1,2}'))
+	CHECK (fee REGEXP '[0-9]{1,10}(\.[0-9]*)?')
 );

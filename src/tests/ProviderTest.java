@@ -12,6 +12,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import border.util.EmailValidator;
+
 import control.ChocAnApp;
 import entity.Provider;
 
@@ -98,7 +100,6 @@ public class ProviderTest {
 		provider2.delete();
 		provider3.delete();
 	}
-	
 	@Test
 	public void testInertConstraints() throws Exception{
 		Connection conn = ChocAnApp.getConnection();
@@ -111,6 +112,14 @@ public class ProviderTest {
 		
 		ins.setInt(1, 999999999);
 		ins.executeUpdate();
+		
+		Assert.assertTrue(EmailValidator.isValidEmailAddress("foobar@example.com"));
+		
+		Assert.assertFalse(EmailValidator.isValidEmailAddress("foobar@"));
+		Assert.assertFalse(EmailValidator.isValidEmailAddress("@example.com"));
+		Assert.assertFalse(EmailValidator.isValidEmailAddress(null));
+		Assert.assertFalse(EmailValidator.isValidEmailAddress("@"));
+		Assert.assertFalse(EmailValidator.isValidEmailAddress("barfoo"));
 		
 		try{
 			ins.setInt(1, (999999999+1));
