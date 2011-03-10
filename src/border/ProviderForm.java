@@ -10,13 +10,11 @@
  */
 package border;
 
-import border.util.EmailValidator;
-import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
 
 import org.jdesktop.application.Action;
 
+import border.util.EmailValidator;
 import border.util.JTextFieldLimit;
 import entity.Provider;
 
@@ -180,19 +178,18 @@ public class ProviderForm extends javax.swing.JFrame {
 			provider.setEmail(providerEmailField.getText());
 			try {
 				provider.save();
-			} catch (SQLException e) {
+				dispose();
+			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Edit Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			try {
 				new Provider(providerNameField.getText(), providerEmailField.getText()).save();
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
+				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		dispose();
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

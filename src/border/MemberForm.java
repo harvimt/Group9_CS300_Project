@@ -13,12 +13,13 @@ package border;
 
 
 
-import border.util.EmailValidator;
+import javax.swing.JOptionPane;
+
 import org.jdesktop.application.Action;
 
+import border.util.EmailValidator;
 import entity.Member;
 import entity.MemberStatus;
-import javax.swing.JOptionPane;
 
 /**
  * 
