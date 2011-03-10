@@ -89,6 +89,11 @@ public class HomeScreen extends FrameView {
 
         memberNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
         memberNumberField.setName("memberNumberField"); // NOI18N
+        memberNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                memberNumberFieldFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -99,6 +104,7 @@ public class HomeScreen extends FrameView {
                 .addComponent(authenticateButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(logServiceButton)
+
                 .addGap(51, 51, 51))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
@@ -120,7 +126,7 @@ public class HomeScreen extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authenticateButton)
                     .addComponent(logServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -204,12 +210,18 @@ public class HomeScreen extends FrameView {
         setMenuBar(menuBar);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void memberNumberFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_memberNumberFieldFocusGained
+		memberNumberField.setText("");
+	}//GEN-LAST:event_memberNumberFieldFocusGained
+
 	@Action
 	public void openLogServiceForm() {
-		logServiceForm = new LogServiceForm();
-		JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
-		logServiceForm.setLocale(mainFrame.getLocale());
-		logServiceForm.setVisible(true);
+		if(authMemberHelper()){
+			logServiceForm = new LogServiceForm(memberNumberField.getText());
+			JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
+			logServiceForm.setLocale(mainFrame.getLocale());
+			logServiceForm.setVisible(true);
+		}
 	}
 
 	public boolean authMemberHelper(){

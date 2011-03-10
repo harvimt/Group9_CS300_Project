@@ -8,7 +8,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
+import org.sqlite.Function;
+
+import border.util.EmailValidator;
 import entity.MemberStatus;
 
 /**
@@ -46,6 +50,26 @@ public class ChocAnApp {
 		Connection conn = ChocAnApp.getConnection();
 		conn.setAutoCommit(true);
 		java.sql.Statement stmt = conn.createStatement();
+		
+		//CREATE functions
+		Function.create(conn, "regexp", new Function() {
+		    protected void xFunc() throws SQLException {
+		        String needle = value_text(0);
+		        String haystack = value_text(1);
+		        int r = 0;
+		        Pattern pat = Pattern.compile(needle);
+		        r = (pat.matcher(haystack).matches())?1:0;
+		        
+		        result(r);
+		    }
+		});
+		
+		Function.create(conn, "valid_email", new Function() {
+		    protected void xFunc() throws SQLException {
+		        result(EmailValidator.isValidEmailAddress(value_text(0))?1:0);
+		    }
+		});
+
 		
 		//CREATE tables
 		final String [] entities = {"member_statuses","members","providers","services","services_rendered"};

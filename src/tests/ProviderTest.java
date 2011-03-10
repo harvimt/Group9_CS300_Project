@@ -1,5 +1,8 @@
 package tests;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import control.ChocAnApp;
 import entity.Provider;
 
 public class ProviderTest {
@@ -93,6 +97,55 @@ public class ProviderTest {
 		provider1.delete();
 		provider2.delete();
 		provider3.delete();
+	}
+	
+	@Test
+	public void testInertConstraints() throws Exception{
+		Connection conn = ChocAnApp.getConnection();
+		PreparedStatement ins = conn.prepareStatement(
+			"INSERT INTO providers (provider_id,provider_name,email) VALUES (?,?,?)");
+		
+		//test id insert
+		ins.setString(2, "FOOBAR");
+		ins.setString(3, "foobar@example.com");
+		
+		ins.setInt(1, 999999999);
+		ins.executeUpdate();
+		
+		try{
+			ins.setInt(1, (999999999+1));
+			ins.executeUpdate();
+			
+		}catch(SQLException ex){
+			System.out.println(ex.toString());			
+		}
+		
+		try{
+			ins.setString(3, "foobar@");
+			ins.executeUpdate();
+			
+		}catch(SQLException ex){
+			System.out.println(ex.toString());
+		}
+		
+		try{
+			ins.setString(3, "@barfoo");
+			ins.executeUpdate();
+			
+		}catch(SQLException ex){
+			System.out.println(ex.toString());
+		}
+		
+		try{
+			ins.setString(3, "barfoo");
+			ins.executeUpdate();
+		}catch(SQLException ex){
+			System.out.println(ex.toString());
+		}
+		
+		//--
+		
+		ins.close();
 	}
 	
 }

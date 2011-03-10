@@ -30,11 +30,12 @@ public class MemberForm extends javax.swing.JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 6822738359999263635L;
-	Member member;
+	private Member member;
 
 	/** Creates new form MemberForm */
 	public MemberForm() {
 		initComponents();
+		initX();
 		
 		activeRadioButton.setActionCommand(MemberStatus.ACTIVE.toString());
 		suspendedRadioButton.setActionCommand(MemberStatus.SUSPENDED.toString());
@@ -45,6 +46,7 @@ public class MemberForm extends javax.swing.JFrame {
 
 	public MemberForm(int val){
 		initComponents();
+		initX();
 		try {
 			member = new Member(val);
 			nameField.setValue(member.getFullName());
@@ -54,7 +56,7 @@ public class MemberForm extends javax.swing.JFrame {
 			stateField.setValue(member.getState());
 			zipField.setValue(member.getZipCode());
 			emailField.setText(member.getEmail());
-
+			
 			if(member.getMemberStatus() == MemberStatus.ACTIVE)
 				activeRadioButton.setSelected(true);
 			else if(member.getMemberStatus() == MemberStatus.SUSPENDED)
@@ -67,6 +69,10 @@ public class MemberForm extends javax.swing.JFrame {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Failed to Load Member info", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
+		
+	}
+
+	private void initX(){
 		
 	}
 	

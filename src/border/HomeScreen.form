@@ -15,12 +15,23 @@
                   <Component id="authenticateButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="69" max="32767" attributes="3"/>
                   <Component id="logServiceButton" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                  <EmptySpace pref="80" max="32767" attributes="0"/>
+=======
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+>>>>>>> branch 'refs/heads/master' of git@github.com:harvimt/Group9_CS300_Project.git
               </Group>
+<<<<<<< HEAD
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="137" max="32767" attributes="0"/>
+                  <Component id="invalidID" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+=======
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                   <Component id="invalidID" min="-2" pref="223" max="-2" attributes="0"/>
                   <EmptySpace pref="113" max="32767" attributes="0"/>
+>>>>>>> branch 'refs/heads/master' of git@github.com:harvimt/Group9_CS300_Project.git
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
@@ -41,7 +52,7 @@
                       <Component id="authenticateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="logServiceButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="107" max="32767" attributes="0"/>
+                  <EmptySpace pref="108" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -81,6 +92,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="memberNumberField" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="memberNumberFieldFocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

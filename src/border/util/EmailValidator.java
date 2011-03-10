@@ -35,7 +35,7 @@ public class EmailValidator extends InputVerifier {
 		}
 		boolean result = true;
 		try {
-			InternetAddress emailAddr = new InternetAddress(aEmailAddress);
+			new InternetAddress(aEmailAddress);
 			if (!hasNameAndDomain(aEmailAddress)) {
 				result = false;
 			}
