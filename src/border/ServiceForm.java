@@ -189,6 +189,7 @@ public class ServiceForm extends javax.swing.JFrame {
     		service.setFee( new BigDecimal(serviceFeeField.getText()) );
     		try {
 				service.save();
+				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Edit Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
@@ -196,11 +197,11 @@ public class ServiceForm extends javax.swing.JFrame {
     	else{
     		try {
 				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText())).save();
+				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Save New Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
     	}
-    	dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

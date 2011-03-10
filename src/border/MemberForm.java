@@ -346,6 +346,7 @@ public class MemberForm extends javax.swing.JFrame {
     		member.setEmail(emailField.getText());
     		try {
 				member.save();
+				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Edit Member Info","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
@@ -353,11 +354,11 @@ public class MemberForm extends javax.swing.JFrame {
     	else{
     		try {
 				new Member(nameField.getText().toString(), status, addressField.getText().toString(), cityField.getText().toString(), stateField.getText().toString(), zipField.getText().toString(), emailField.getText().toString()).save();
+				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Save New Member Info ", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
     	}
-    	dispose();	
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
