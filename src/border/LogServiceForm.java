@@ -11,10 +11,16 @@
 
 package border;
 
+import entity.Member;
 import entity.Provider;
 import entity.Service;
+import entity.ServiceRendered;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.math.BigDecimal;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,24 +32,25 @@ import org.jdesktop.application.Action;
  */
 public class LogServiceForm extends javax.swing.JFrame {
 
+	private Date now;
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -43572493282352303L;
 	/** Creates new form LogServiceForm */
     public LogServiceForm() {
+		now = new Date();
         initComponents();
         initX();
+		dateRecordEnteredField.setValue((new SimpleDateFormat("MM-dd-yyyy HH:mm:ss")).format(now));
     }
 
 	public LogServiceForm(String text) {
-		initComponents();
+		this();
 		memberNumberField.setText(text);
-		initX();
 	}
 
 	private void initX(){
-		xRecordEntered.setVisible(false);
 		xServiceRendered.setVisible(false);
 		xProvider.setVisible(false);
 		xMember.setVisible(false);
@@ -61,7 +68,6 @@ public class LogServiceForm extends javax.swing.JFrame {
         dateServiceRenderedField = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dateRecordEnteredField = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -76,9 +82,9 @@ public class LogServiceForm extends javax.swing.JFrame {
         xMember = new javax.swing.JLabel();
         xService = new javax.swing.JLabel();
         xServiceRendered = new javax.swing.JLabel();
-        xRecordEntered = new javax.swing.JLabel();
         providerNumberField = new javax.swing.JFormattedTextField();
         serviceCodeField = new javax.swing.JFormattedTextField();
+        dateRecordEnteredField = new javax.swing.JFormattedTextField();
 
         dateServiceRenderedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         dateServiceRenderedField.setName("dateServiceRenderedField"); // NOI18N
@@ -93,9 +99,6 @@ public class LogServiceForm extends javax.swing.JFrame {
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
-
-        dateRecordEnteredField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
-        dateRecordEnteredField.setName("dateRecordEnteredField"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
@@ -129,6 +132,7 @@ public class LogServiceForm extends javax.swing.JFrame {
 
         commentsField.setColumns(20);
         commentsField.setRows(5);
+        //commentsField.setMaximumSize(100)
         commentsField.setName("commentsField"); // NOI18N
         jScrollPane1.setViewportView(commentsField);
 
@@ -152,14 +156,9 @@ public class LogServiceForm extends javax.swing.JFrame {
         xService.setName("xService"); // NOI18N
 
         xServiceRendered.setFont(resourceMap.getFont("xServiceRendered.font")); // NOI18N
-        xServiceRendered.setForeground(resourceMap.getColor("xServiceRendered.foreground")); // NOI18N
+        xServiceRendered.setForeground(resourceMap.getColor("xService.foreground")); // NOI18N
         xServiceRendered.setText(resourceMap.getString("xServiceRendered.text")); // NOI18N
         xServiceRendered.setName("xServiceRendered"); // NOI18N
-
-        xRecordEntered.setFont(resourceMap.getFont("xRecordEntered.font")); // NOI18N
-        xRecordEntered.setForeground(resourceMap.getColor("xRecordEntered.foreground")); // NOI18N
-        xRecordEntered.setText(resourceMap.getString("xRecordEntered.text")); // NOI18N
-        xRecordEntered.setName("xRecordEntered"); // NOI18N
 
         providerNumberField.setFormatterFactory((new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000")))));
         providerNumberField.setText(resourceMap.getString("providerNumberField.text")); // NOI18N
@@ -168,6 +167,10 @@ public class LogServiceForm extends javax.swing.JFrame {
         serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
         serviceCodeField.setText(resourceMap.getString("serviceCodeField.text")); // NOI18N
         serviceCodeField.setName("serviceCodeField"); // NOI18N
+
+        dateRecordEnteredField.setEditable(false);
+        dateRecordEnteredField.setText(resourceMap.getString("dateRecordEnteredField.text")); // NOI18N
+        dateRecordEnteredField.setName("dateRecordEnteredField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,22 +195,17 @@ public class LogServiceForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addComponent(memberNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                             .addComponent(serviceRenderedDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                             .addComponent(providerNumberField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(serviceCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                            .addComponent(serviceCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(xProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(xMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(xService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(xServiceRendered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(xRecordEntered, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                                .addContainerGap())))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(xProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(xMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(xService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(xServiceRendered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
@@ -216,11 +214,10 @@ public class LogServiceForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(xRecordEntered))
+                    .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -275,13 +272,6 @@ public class LogServiceForm extends javax.swing.JFrame {
     public void nextButtonClicked() {
         boolean setReturn = false;
 		
-		if( dateRecordEnteredField.getText().equals("") ){
-			xRecordEntered.setVisible(true);
-			setReturn = true;
-		}
-		else
-			xRecordEntered.setVisible(false);
-		
 		if( serviceRenderedDateField.getText().equals("") ){
 			xServiceRendered.setVisible(true);
 			setReturn = true;
@@ -305,55 +295,59 @@ public class LogServiceForm extends javax.swing.JFrame {
 		}
 		if( setReturn == true)
 			return;
+		
 
+		
+		try {
+			ServiceRendered rendered = new ServiceRendered(
+						now,
+						(Date) (dateServiceRenderedField.getValue()),
+						new Service(((Number) serviceCodeField.getValue()).intValue()).getFee(),
+						new Provider(((Number) providerNumberField.getValue()).intValue()),
+						new Service(((Number) serviceCodeField.getValue()).intValue()),
+						new Member(((Number) memberNumberField.getValue()).intValue()),
+						commentsField.getText()
+						);
+			final LogServiceConfirm logServiceForm;
+			logServiceForm = new LogServiceConfirm(rendered);
+					
+			logServiceForm.setVisible(true);
+			//logServiceForm.setFields(now, serviceRenderedDateField, providerNumberField, memberNumberField, serviceCodeField, commentsField);
+			logServiceForm.addWindowListener(new WindowListener() {
 
-		final LogServiceConfirm logServiceForm = new LogServiceConfirm();
-		logServiceForm.setVisible(true);
-		logServiceForm.setFields(dateRecordEnteredField, serviceRenderedDateField, providerNumberField, memberNumberField, serviceCodeField, commentsField);
-		logServiceForm.addWindowListener(new WindowListener() {
+				@Override
+				public void windowClosed(WindowEvent e) {
+					if( logServiceForm.recordCommitted() )
+						dispose();
+				}
 
-			@Override
-			public void windowClosed(WindowEvent e) {
-				if( logServiceForm.recordCommitted() )
-					dispose();
-			}
+				@Override
+				public void windowOpened(WindowEvent e) {
+				}
 
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
+				@Override
+				public void windowIconified(WindowEvent e) {
+				}
 
-			}
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+				}
 
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+				}
 
-			}
+				@Override
+				public void windowClosing(WindowEvent e) {
+				}
 
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+				@Override
+				public void windowActivated(WindowEvent e) {
+				}
+			});
+		} catch (Exception ex) {
+			Logger.getLogger(LogServiceForm.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
 
     }
@@ -377,7 +371,6 @@ public class LogServiceForm extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField serviceRenderedDateField;
     private javax.swing.JLabel xMember;
     private javax.swing.JLabel xProvider;
-    private javax.swing.JLabel xRecordEntered;
     private javax.swing.JLabel xService;
     private javax.swing.JLabel xServiceRendered;
     // End of variables declaration//GEN-END:variables

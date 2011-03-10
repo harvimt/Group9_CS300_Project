@@ -525,7 +525,7 @@ public class MemberList extends javax.swing.JFrame {
 				member.delete();
 
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to delete Provider", "error", ERROR);
+				JOptionPane.showMessageDialog(this, "Failed to delete Member", "error", ERROR);
 			}
 			reloadData();
 		}
