@@ -35,9 +35,24 @@ public class ChocAnApp {
 
 	static public Connection getConnection() throws Exception {
 		if (db_connection == null) {
-			Class.forName("org.sqlite.JDBC");
-			db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
-			initializeDB();
+			try{
+				Class.forName("org.sqlite.JDBC");
+			}catch(Exception ex){
+				System.out.println("Failed to load sqlite driver");
+				throw ex;
+			}
+			try{
+				db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
+			}catch(Exception ex){
+				System.out.println("Failed to get/create db from file");
+				throw ex;
+			}
+			try{
+				initializeDB();
+			}catch(Exception ex){
+				System.out.println("Failed to create schema.");
+				throw ex;
+			}
 		}
 		return db_connection;
 	}

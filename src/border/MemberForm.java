@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.application.Action;
 
 import border.util.EmailValidator;
+import border.util.JTextFieldLimit;
 import entity.Member;
 import entity.MemberStatus;
 
@@ -50,10 +51,10 @@ public class MemberForm extends javax.swing.JFrame {
 		initX();
 		try {
 			member = new Member(val);
-			nameField.setValue(member.getFullName());
+			nameField.setText(member.getFullName());
 			numberField.setValue(member.getMemberId());
-			addressField.setValue(member.getStreetAddress());
-			cityField.setValue(member.getCity());
+			addressField.setText(member.getStreetAddress());
+			cityField.setText(member.getCity());
 			stateField.setValue(member.getState());
 			zipField.setValue(member.getZipCode());
 			emailField.setText(member.getEmail());
@@ -94,13 +95,10 @@ public class MemberForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        nameField = new javax.swing.JFormattedTextField();
         numberField = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
-        cityField = new javax.swing.JFormattedTextField();
         stateField = new javax.swing.JFormattedTextField();
         zipField = new javax.swing.JFormattedTextField();
-        addressField = new javax.swing.JFormattedTextField();
         activeRadioButton = new javax.swing.JRadioButton();
         suspendedRadioButton = new javax.swing.JRadioButton();
         cancelledRadioButton = new javax.swing.JRadioButton();
@@ -108,6 +106,9 @@ public class MemberForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        cityField = new javax.swing.JTextField();
+        addressField = new javax.swing.JTextField();
         emailField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -136,13 +137,6 @@ public class MemberForm extends javax.swing.JFrame {
         jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
         jLabel7.setName("jLabel7"); // NOI18N
 
-        try {
-            nameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        nameField.setName("nameField"); // NOI18N
-
         numberField.setEditable(false);
         try {
             numberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
@@ -153,13 +147,6 @@ public class MemberForm extends javax.swing.JFrame {
 
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
-
-        try {
-            cityField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        cityField.setName("cityField"); // NOI18N
 
         try {
             stateField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UU")));
@@ -174,14 +161,6 @@ public class MemberForm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         zipField.setName("zipField"); // NOI18N
-
-        try {
-            addressField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        addressField.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
-        addressField.setName("addressField"); // NOI18N
 
         buttonGroup1.add(activeRadioButton);
         activeRadioButton.setText(resourceMap.getString("activeRadioButton.text")); // NOI18N
@@ -211,6 +190,18 @@ public class MemberForm extends javax.swing.JFrame {
         jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
         jLabel9.setName("jLabel9"); // NOI18N
 
+        nameField.setText(resourceMap.getString("nameField.text")); // NOI18N
+        nameField.setName("nameField"); // NOI18N
+
+        cityField.setDocument(new JTextFieldLimit(14));
+        cityField.setText(resourceMap.getString("cityField.text")); // NOI18N
+        cityField.setName("cityField"); // NOI18N
+
+        addressField.setDocument(new JTextFieldLimit(25));
+        addressField.setText(resourceMap.getString("addressField.text")); // NOI18N
+        addressField.setName("addressField"); // NOI18N
+
+        emailField.setDocument(new JTextFieldLimit(25));
         emailField.setText(resourceMap.getString("emailField.text")); // NOI18N
         emailField.setInputVerifier(new EmailValidator());
         emailField.setName("emailField"); // NOI18N
@@ -220,7 +211,7 @@ public class MemberForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
+                .addContainerGap(232, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
@@ -235,7 +226,7 @@ public class MemberForm extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
@@ -243,13 +234,13 @@ public class MemberForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(zipField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(stateField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(addressField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(numberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                                .addComponent(zipField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(stateField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(numberField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(addressField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                             .addGap(94, 94, 94))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,13 +264,14 @@ public class MemberForm extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
+                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,7 +299,7 @@ public class MemberForm extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton1)))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                .addGap(55, 55, 55))
         );
 
         pack();
@@ -334,6 +326,7 @@ public class MemberForm extends javax.swing.JFrame {
     public void finishButtonClicked() {
 		if(buttonGroup1.getSelection() == null){
 			JOptionPane.showMessageDialog(this, "Must Select a Member Status","ERROR",JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		MemberStatus status = MemberStatus.valueOf(buttonGroup1.getSelection().getActionCommand());
 
@@ -363,11 +356,11 @@ public class MemberForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton activeRadioButton;
-    private javax.swing.JFormattedTextField addressField;
+    private javax.swing.JTextField addressField;
     private javax.swing.JRadioButton bannedRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton cancelledRadioButton;
-    private javax.swing.JFormattedTextField cityField;
+    private javax.swing.JTextField cityField;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -380,7 +373,7 @@ public class MemberForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JFormattedTextField nameField;
+    private javax.swing.JTextField nameField;
     private javax.swing.JFormattedTextField numberField;
     private javax.swing.JFormattedTextField stateField;
     private javax.swing.JRadioButton suspendedRadioButton;
