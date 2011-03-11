@@ -11,10 +11,7 @@ CREATE TABLE IF NOT EXISTS providers (
 	CHECK (provider_id <= 999999999),
 	CHECK (length(provider_name) <= 32),
 	CHECK (length(email) <= 128),
-	CHECK (email REGEXP 
-		'[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
-		)
-	
+	CHECK (valid_email(email))
 );
 
 CREATE INDEX IF NOT EXISTS providers_provider_name_index ON providers(provider_name);
