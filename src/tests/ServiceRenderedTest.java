@@ -189,8 +189,8 @@ public class ServiceRenderedTest {
 		Assert.assertEquals(sr2,sr2_dup);
 		
 		Map<ServiceRendered,Integer> map = new HashMap<ServiceRendered,Integer> ();
-		map.put(sr1, new Integer(1));
-		map.put(sr2, new Integer(2));
+		map.put(sr1, Integer.valueOf(1));
+		map.put(sr2, Integer.valueOf(2));
 		
 		Assert.assertEquals(Integer
 			.valueOf(1),map.get(sr1));

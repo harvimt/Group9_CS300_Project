@@ -102,8 +102,8 @@ public class MemberTest {
 		
 		Map<Member,Integer> map = new HashMap<Member,Integer>();
 		
-		map.put(member1, new Integer(1));
-		map.put(member2, new Integer(2));
+		map.put(member1, Integer.valueOf(1));
+		map.put(member2, Integer.valueOf(2));
 		map.put(member3, Integer
 			.valueOf(3));
 		

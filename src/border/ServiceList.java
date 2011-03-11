@@ -40,7 +40,7 @@ public class ServiceList extends javax.swing.JFrame {
 	private ServiceListTableModel model;
 	private DefaultTableColumnModel columnModel;
 
-	public class ServiceListTableModel
+	static public class ServiceListTableModel
 			extends AbstractTableModel{
 
 		private List<Service> dataList;

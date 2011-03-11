@@ -12,17 +12,10 @@
 package border;
 
 
-import java.awt.event.ActionEvent;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
 import javax.swing.JOptionPane;
 
 import org.jdesktop.application.Action;
 
-import entity.Member;
-import entity.Provider;
-import entity.Service;
 import entity.ServiceRendered;
 
 
