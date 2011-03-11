@@ -311,7 +311,7 @@ public class HomeScreen extends FrameView {
 	@Action
 	public void openLogServiceForm() {
 		if(authMemberHelper()){
-			logServiceForm = new LogServiceForm(memberNumberField.getText());
+			logServiceForm = new LogServiceForm(((Number)memberNumberField.getValue()).intValue());
 			JFrame mainFrame = DesktopApplication2.getApplication().getMainFrame();
 			logServiceForm.setLocale(mainFrame.getLocale());
 			logServiceForm.setVisible(true);

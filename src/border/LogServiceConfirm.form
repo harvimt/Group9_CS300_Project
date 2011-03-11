@@ -50,16 +50,14 @@
                           <Component id="backButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dateServiceRendered" min="-2" pref="213" max="-2" attributes="1"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="finishButton" min="-2" max="-2" attributes="0"/>
-                              <Component id="providerNumberField" alignment="0" max="32767" attributes="1"/>
-                              <Component id="memberNumberField" alignment="0" max="32767" attributes="1"/>
-                              <Component id="comments" alignment="0" max="32767" attributes="1"/>
-                              <Component id="serviceCode" alignment="0" pref="176" max="32767" attributes="1"/>
-                              <Component id="dateServiceEntered" alignment="0" min="-2" pref="213" max="-2" attributes="1"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="dateServiceRendered" max="32767" attributes="1"/>
+                          <Component id="finishButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="providerNumberField" alignment="0" max="32767" attributes="1"/>
+                          <Component id="memberNumberField" alignment="0" max="32767" attributes="1"/>
+                          <Component id="comments" alignment="0" max="32767" attributes="1"/>
+                          <Component id="serviceCode" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="dateServiceEntered" alignment="0" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -229,7 +227,7 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="yyyy-MM-dd HH:mm:ss" subtype="-1" type="1"/>
+          <Format subtype="1" type="1"/>
         </Property>
         <Property name="name" type="java.lang.String" value="dateServiceRendered" noResource="true"/>
       </Properties>

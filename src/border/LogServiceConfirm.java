@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import org.jdesktop.application.Action;
 
 import entity.ServiceRendered;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 
 /**
@@ -44,10 +46,12 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 
 	private void setFields(){
 		dateServiceEntered.setValue( serviceRendered.getServiceLogged() );
-		dateServiceRendered.setValue( serviceRendered.getServiceLogged() );
-		providerNumberField.setText( Integer.toString(serviceRendered.getProvider().getProviderId()) );
-		memberNumberField.setText( Integer.toString(serviceRendered.getMember().getMemberId()) );
-		this.serviceCode.setText( Integer.toString(serviceRendered.getService().getServiceId()) );
+		dateServiceRendered.setValue( serviceRendered.getServiceProvided() );
+		NumberFormat f6zs = new DecimalFormat("000000");
+		NumberFormat f9zs = new DecimalFormat("000000000");
+		providerNumberField.setText( f9zs.format(serviceRendered.getProvider().getProviderId()) );
+		memberNumberField.setText( f9zs.format(serviceRendered.getMember().getMemberId()) );
+		serviceCode.setText( f6zs.format(serviceRendered.getService().getServiceId()) );
 		commentsTextArea.setText( serviceRendered.getComments() );
 	}
 
@@ -141,7 +145,7 @@ public class LogServiceConfirm extends javax.swing.JFrame {
         finishButton.setName("finishButton"); // NOI18N
 
         dateServiceRendered.setEditable(false);
-        dateServiceRendered.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))));
+        dateServiceRendered.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         dateServiceRendered.setName("dateServiceRendered"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,15 +165,14 @@ public class LogServiceConfirm extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateServiceRendered, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(finishButton)
-                                .addComponent(providerNumberField)
-                                .addComponent(memberNumberField)
-                                .addComponent(comments)
-                                .addComponent(serviceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                .addComponent(dateServiceEntered, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateServiceRendered)
+                            .addComponent(finishButton)
+                            .addComponent(providerNumberField)
+                            .addComponent(memberNumberField)
+                            .addComponent(comments)
+                            .addComponent(serviceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(dateServiceEntered)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(titleLabel)))

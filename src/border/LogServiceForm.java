@@ -44,13 +44,12 @@ public class LogServiceForm extends javax.swing.JFrame {
 		dateRecordEnteredField.setValue((new SimpleDateFormat("MM-dd-yyyy HH:mm:ss")).format(now));
     }
 
-	public LogServiceForm(String text) {
+	public LogServiceForm(int member_number) {
 		this();
-		memberNumberField.setText(text);
+		memberNumberField.setValue(Integer.valueOf(member_number));
 	}
 
 	private void initX(){
-		xServiceRendered.setVisible(false);
 		xProvider.setVisible(false);
 		xMember.setVisible(false);
 		xService.setVisible(false);
@@ -64,7 +63,6 @@ public class LogServiceForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateServiceRenderedField = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -76,17 +74,13 @@ public class LogServiceForm extends javax.swing.JFrame {
         memberNumberField = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         commentsField = new javax.swing.JTextArea();
-        serviceRenderedDateField = new javax.swing.JFormattedTextField();
         xProvider = new javax.swing.JLabel();
         xMember = new javax.swing.JLabel();
         xService = new javax.swing.JLabel();
-        xServiceRendered = new javax.swing.JLabel();
         providerNumberField = new javax.swing.JFormattedTextField();
         serviceCodeField = new javax.swing.JFormattedTextField();
         dateRecordEnteredField = new javax.swing.JFormattedTextField();
-
-        dateServiceRenderedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        dateServiceRenderedField.setName("dateServiceRenderedField"); // NOI18N
+        renderedDate = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(LogServiceForm.class);
@@ -120,11 +114,7 @@ public class LogServiceForm extends javax.swing.JFrame {
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
 
-        try {
-            memberNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        memberNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
         memberNumberField.setName("memberNumberField"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -134,10 +124,6 @@ public class LogServiceForm extends javax.swing.JFrame {
         //commentsField.setMaximumSize(100)
         commentsField.setName("commentsField"); // NOI18N
         jScrollPane1.setViewportView(commentsField);
-
-        serviceRenderedDateField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
-        serviceRenderedDateField.setText(resourceMap.getString("serviceRenderedDateField.text")); // NOI18N
-        serviceRenderedDateField.setName("serviceRenderedDateField"); // NOI18N
 
         xProvider.setFont(resourceMap.getFont("xProvider.font")); // NOI18N
         xProvider.setForeground(resourceMap.getColor("xProvider.foreground")); // NOI18N
@@ -154,22 +140,23 @@ public class LogServiceForm extends javax.swing.JFrame {
         xService.setText(resourceMap.getString("xService.text")); // NOI18N
         xService.setName("xService"); // NOI18N
 
-        xServiceRendered.setFont(resourceMap.getFont("xServiceRendered.font")); // NOI18N
-        xServiceRendered.setForeground(resourceMap.getColor("xServiceRendered.foreground")); // NOI18N
-        xServiceRendered.setText(resourceMap.getString("xServiceRendered.text")); // NOI18N
-        xServiceRendered.setName("xServiceRendered"); // NOI18N
-
         providerNumberField.setFormatterFactory((new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000")))));
+        providerNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
         providerNumberField.setText(resourceMap.getString("providerNumberField.text")); // NOI18N
         providerNumberField.setName("providerNumberField"); // NOI18N
 
         serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000000"))));
+        serviceCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000000"))));
         serviceCodeField.setText(resourceMap.getString("serviceCodeField.text")); // NOI18N
         serviceCodeField.setName("serviceCodeField"); // NOI18N
 
         dateRecordEnteredField.setEditable(false);
         dateRecordEnteredField.setText(resourceMap.getString("dateRecordEnteredField.text")); // NOI18N
         dateRecordEnteredField.setName("dateRecordEnteredField"); // NOI18N
+
+        renderedDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        renderedDate.setText(resourceMap.getString("renderedDate.text")); // NOI18N
+        renderedDate.setName("renderedDate"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,33 +181,31 @@ public class LogServiceForm extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(serviceCodeField)
-                            .addComponent(memberNumberField)
-                            .addComponent(providerNumberField)
-                            .addComponent(serviceRenderedDateField)
-                            .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(memberNumberField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(providerNumberField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                            .addComponent(renderedDate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(xProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(xMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(xService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(xServiceRendered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(xService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(dateRecordEnteredField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(xServiceRendered)
-                    .addComponent(serviceRenderedDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(renderedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -270,13 +255,6 @@ public class LogServiceForm extends javax.swing.JFrame {
     public void nextButtonClicked() {
         boolean setReturn = false;
 		
-		if( serviceRenderedDateField.getText().equals("") ){
-			xServiceRendered.setVisible(true);
-			setReturn = true;
-		}
-		else
-			xServiceRendered.setVisible(false);
-		
 		try {
 			new Provider(((Number) this.providerNumberField.getValue()).intValue());
 			xProvider.setVisible(false);
@@ -294,12 +272,11 @@ public class LogServiceForm extends javax.swing.JFrame {
 		if( setReturn == true)
 			return;
 		
-
-		
 		try {
+			renderedDate.commitEdit();
 			ServiceRendered rendered = new ServiceRendered(
 						now,
-						(Date) (dateServiceRenderedField.getValue()),
+						(Date) (renderedDate.getValue()),
 						new Service(((Number) serviceCodeField.getValue()).intValue()).getFee(),
 						new Provider(((Number) providerNumberField.getValue()).intValue()),
 						new Service(((Number) serviceCodeField.getValue()).intValue()),
@@ -353,7 +330,6 @@ public class LogServiceForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea commentsField;
     private javax.swing.JFormattedTextField dateRecordEnteredField;
-    private javax.swing.JFormattedTextField dateServiceRenderedField;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -365,12 +341,11 @@ public class LogServiceForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFormattedTextField memberNumberField;
     private javax.swing.JFormattedTextField providerNumberField;
+    private javax.swing.JFormattedTextField renderedDate;
     private javax.swing.JFormattedTextField serviceCodeField;
-    private javax.swing.JFormattedTextField serviceRenderedDateField;
     private javax.swing.JLabel xMember;
     private javax.swing.JLabel xProvider;
     private javax.swing.JLabel xService;
-    private javax.swing.JLabel xServiceRendered;
     // End of variables declaration//GEN-END:variables
 
 }
