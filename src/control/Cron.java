@@ -37,7 +37,7 @@ public class Cron {
 	// Other methods
 	//
 
-	public Cron getInstance(){
+	static public Cron getInstance(){
 		if(instance == null){
 			instance = new Cron();
 		}

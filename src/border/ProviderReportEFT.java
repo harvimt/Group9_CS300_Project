@@ -77,26 +77,29 @@ public class ProviderReportEFT {
 			//not sure if this is the most efficient way, not sure that it isn't... either.
 			//if only they had sub-list iterators
 
-			for(ProviderReport.ReportItem item : report_data.subList(0, report_data.size() - 1)){
+			if(!report_data.isEmpty()){
+				if(report_data.size() > 1){
+					for(ProviderReport.ReportItem item : report_data.subList(0, report_data.size() - 1)){
+						writer.write(EFTFormat.format(new Object[]{
+							item.total,
+							item.provider.getProviderName()
+						}));
+
+						writer.write('\n');
+					}
+				}
+
+				ProviderReport.ReportItem item = report_data.get(report_data.size() - 1);
+
 				writer.write(EFTFormat.format(new Object[]{
 					item.total,
 					item.provider.getProviderName()
 				}));
-					
-				writer.write('\n');
 			}
-			
-			ProviderReport.ReportItem item = report_data.get(report_data.size() - 1);
-			
-			writer.write(EFTFormat.format(new Object[]{
-				item.total,
-				item.provider.getProviderName()
-			}));
 			
 			writer.close();
 		}catch(IOException ex){
 			System.out.println("Failed to write file");
 		}
 	}
-
 }
