@@ -149,7 +149,13 @@ public class Provider {
 		if (provider_id == -1) {
 			insert_stmt.setString(1, provider_name);
 			insert_stmt.setString(2, email);
-			insert_stmt.executeUpdate();
+			try{
+				insert_stmt.executeUpdate();
+			}catch(SQLException ex){
+				insert_stmt.close();
+				insert_stmt = null;
+				throw ex;
+			}
 			// "get last insert id" as explained here:
 			// http://www.freshblurbs.com/jdbc-get-last-inserts-id
 			ResultSet rs = insert_stmt.getGeneratedKeys();
@@ -159,7 +165,15 @@ public class Provider {
 			update_stmt.setString(1, provider_name);
 			update_stmt.setString(2, email);
 			update_stmt.setInt(3, provider_id);
-			update_stmt.executeUpdate();
+			try{
+				update_stmt.executeUpdate();
+			}catch(SQLException ex){
+				update_stmt.cancel();
+				update_stmt.close();
+				update_stmt = null;
+				throw ex;
+			}
+			
 		}
 	}
 

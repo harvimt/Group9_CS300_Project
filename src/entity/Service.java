@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -156,7 +157,14 @@ public class Service {
 		if(this.service_id == -1){
 			insert_stmt.setString(1, service_name);
 			insert_stmt.setString(2, fee.toString());
-			insert_stmt.executeUpdate();
+			try{
+				insert_stmt.executeUpdate();				
+			}catch(SQLException ex){
+				insert_stmt.close();
+				insert_stmt = null;
+				throw ex;
+			}
+
 			ResultSet rs = insert_stmt.getGeneratedKeys();
 			rs.next();
 			this.service_id = rs.getInt(1);
@@ -164,7 +172,13 @@ public class Service {
 			update_stmt.setString(1, service_name);
 			update_stmt.setString(2, fee.toString());
 			update_stmt.setInt(3,service_id);
-			update_stmt.executeUpdate();
+			try{
+				update_stmt.executeUpdate();
+			}catch(SQLException ex){
+				update_stmt.close();
+				update_stmt = null;
+				throw ex;
+			}
 		}
 	}
 	

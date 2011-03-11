@@ -69,7 +69,7 @@ public class MemberForm extends javax.swing.JFrame {
 				bannedRadioButton.setSelected(true);
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Member info", "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to Load Member info\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -341,7 +341,7 @@ public class MemberForm extends javax.swing.JFrame {
 				member.save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Edit Member Info","ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Edit Member Info\n"+e.toString(),"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	else{
@@ -349,7 +349,7 @@ public class MemberForm extends javax.swing.JFrame {
 				new Member(nameField.getText().toString(), status, addressField.getText().toString(), cityField.getText().toString(), stateField.getText().toString(), zipField.getText().toString(), emailField.getText().toString()).save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Save New Member Info ", "ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Save New Member Info\n"+e.toString(), "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
     	}
     }

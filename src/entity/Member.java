@@ -267,7 +267,13 @@ public class Member {
 			insert_stmt.setString(5, state);
 			insert_stmt.setString(6, zip_code);
 			insert_stmt.setString(7, email);
-			insert_stmt.executeUpdate();
+			try{
+				insert_stmt.executeUpdate();
+			}catch(SQLException ex){
+				insert_stmt.close();
+				insert_stmt = null;
+				throw ex;
+			}
 			// "get last insert id" as explained here:
 			// http://www.freshblurbs.com/jdbc-get-last-inserts-id
 			ResultSet rs = insert_stmt.getGeneratedKeys();
@@ -285,7 +291,9 @@ public class Member {
 			try{
 				update_stmt.executeUpdate();
 			}catch(SQLException ex){
-				update_stmt.cancel();
+				update_stmt.close();
+				update_stmt = null;
+				throw ex;
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import control.ChocAnApp;
@@ -312,8 +313,13 @@ public class ServiceRendered {
 			insert_stmt.setInt(5, service.getServiceId());
 			insert_stmt.setInt(6, member.getMemberId());
 			insert_stmt.setString(7, comments);
-			
-			insert_stmt.executeUpdate();
+			try{
+				insert_stmt.executeUpdate();
+			}catch(SQLException ex){
+				insert_stmt.close();
+				insert_stmt = null;
+				throw ex;
+			}
 			
 			ResultSet rs = insert_stmt.getGeneratedKeys();
 			rs.next();
@@ -328,7 +334,13 @@ public class ServiceRendered {
 			update_stmt.setInt(6, member.getMemberId());
 			update_stmt.setString(7, comments);
 			update_stmt.setInt(8, transaction_id);
-			update_stmt.executeUpdate();
+			try{
+				update_stmt.executeUpdate();
+			}catch(SQLException ex){
+				update_stmt.close();
+				update_stmt = null;
+				throw ex;
+			}
 		}
 	}
 	
