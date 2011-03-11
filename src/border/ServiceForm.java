@@ -11,12 +11,17 @@
 
 package border;
 
+import border.util.JTextFieldLimit;
 import java.math.BigDecimal;
 
 import org.jdesktop.application.Action;
 
 import entity.Service;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatter;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 
 /**
  * 
@@ -28,13 +33,19 @@ public class ServiceForm extends javax.swing.JFrame {
 	/** Creates new form LogService */
 	public ServiceForm() {
 		initComponents();
+		serviceFeeField.setValue(BigDecimal.valueOf(0));
+		DefaultFormatter fmt = new NumberFormatter(new DecimalFormat("#.00##############"));
+		fmt.setValueClass(serviceFeeField.getValue().getClass());
+		DefaultFormatterFactory fmtFactory = new DefaultFormatterFactory(fmt, fmt, fmt);
+		serviceFeeField.setFormatterFactory(fmtFactory);
+
 	}
 	
 	public ServiceForm(int val){
-		initComponents();
+		this();
 		try {
 			service = new Service(val);
-			serviceNameField.setValue(service.getServiceName());
+			serviceNameField.setText(service.getServiceName());
 			serviceCodeField.setValue(val);
 			serviceFeeField.setValue(service.getFee());
 		} catch (Exception e) {
@@ -58,10 +69,10 @@ public class ServiceForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        serviceNameField = new javax.swing.JFormattedTextField();
         serviceCodeField = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         serviceFeeField = new javax.swing.JFormattedTextField();
+        serviceNameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(pdx.edu.cs300_group9.DesktopApplication2.class).getContext().getResourceMap(ServiceForm.class);
@@ -88,22 +99,18 @@ public class ServiceForm extends javax.swing.JFrame {
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
 
-        try {
-            serviceNameField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*************************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        serviceNameField.setName("serviceNameField"); // NOI18N
-
         serviceCodeField.setEditable(false);
         serviceCodeField.setName("serviceCodeField"); // NOI18N
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
 
-        serviceFeeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         serviceFeeField.setText(resourceMap.getString("serviceFeeField.text")); // NOI18N
         serviceFeeField.setName("serviceFeeField"); // NOI18N
+
+        serviceNameField.setDocument(new JTextFieldLimit(32));
+        serviceNameField.setText(resourceMap.getString("serviceNameField.text")); // NOI18N
+        serviceNameField.setName("serviceNameField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,19 +126,18 @@ public class ServiceForm extends javax.swing.JFrame {
                         .addComponent(jLabel5)))
                 .addContainerGap(112, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(126, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6))
                 .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(serviceNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                        .addComponent(serviceCodeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                        .addComponent(serviceFeeField, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(serviceCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(serviceFeeField)
+                    .addComponent(jButton2)
+                    .addComponent(serviceNameField))
                 .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
@@ -140,10 +146,11 @@ public class ServiceForm extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel2))
                     .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,7 +166,7 @@ public class ServiceForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
                         .addComponent(jButton2)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,7 +193,9 @@ public class ServiceForm extends javax.swing.JFrame {
     public void finishButtonClicked() {
     	if( service != null){
     		service.setServiceName( serviceNameField.getText() );
-    		service.setFee( new BigDecimal(serviceFeeField.getText()) );
+			
+    		service.setFee( (BigDecimal)serviceFeeField.getValue() );
+			
     		try {
 				service.save();
 				dispose();
@@ -196,7 +205,10 @@ public class ServiceForm extends javax.swing.JFrame {
     	}
     	else{
     		try {
-				new Service(serviceNameField.getText(), new BigDecimal(serviceFeeField.getText())).save();
+				new Service(
+						serviceNameField.getText(),
+						(BigDecimal)serviceFeeField.getValue()
+					).save();
 				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(this, "Failed to Save New Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -214,7 +226,7 @@ public class ServiceForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JFormattedTextField serviceCodeField;
     private javax.swing.JFormattedTextField serviceFeeField;
-    private javax.swing.JFormattedTextField serviceNameField;
+    private javax.swing.JTextField serviceNameField;
     // End of variables declaration//GEN-END:variables
 
 	private Service service;

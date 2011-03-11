@@ -25,7 +25,9 @@ import entity.Service;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
@@ -134,7 +136,7 @@ public class ServiceList extends javax.swing.JFrame {
 					// can't set Code
 					break;
 				case 2:
-					row.setFee((BigDecimal)aValue);
+					row.setFee(new BigDecimal((String)aValue));
 			}
 			try {
 				row.save();
@@ -185,6 +187,8 @@ public class ServiceList extends javax.swing.JFrame {
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setColumnModel(columnModel);
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(model);
         jTable1.setName("jTable1"); // NOI18N
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -230,7 +234,7 @@ public class ServiceList extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,20 +283,20 @@ public class ServiceList extends javax.swing.JFrame {
 		columnModel = new DefaultTableColumnModel();
 
 		TableColumn col1 = new TableColumn(0);
-		col1.setIdentifier("Service Name");
+		col1.setHeaderValue("Service Name");
 		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
 		columnModel.addColumn(col1);
 
 		TableColumn col2 = new TableColumn(1);
-		col1.setIdentifier("Service Number");
-		FormattedRenderer serv_num_renderer = new FormattedRenderer();
-		serv_num_renderer.setFormatter(new DecimalFormat("000000"));
-		col1.setCellRenderer(serv_num_renderer);
+		col2.setHeaderValue("Service Number");
+		FormattedRenderer serv_num_renderer = new FormattedRenderer(new DecimalFormat("000000"));
+		col2.setCellRenderer(serv_num_renderer);
 		columnModel.addColumn(col2);
 
 		TableColumn col3 = new TableColumn(2);
-		col1.setIdentifier("Service Fee");
-		col1.setCellEditor(new DefaultCellEditor(new JTextField(new JTextFieldLimit(25), "", 0)));
+		col3.setHeaderValue("Service Fee");
+		col3.setCellEditor(new DefaultCellEditor(new JFormattedTextField(new DecimalFormat("0.00"))));
+		col3.setCellRenderer(new FormattedRenderer(NumberFormat.getCurrencyInstance()));
 		columnModel.addColumn(col3);
 
 		reloadData();

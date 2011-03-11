@@ -59,6 +59,7 @@ public class ChocAnApp {
 	
 	static public void closeConnection() throws Exception {
 		db_connection.close();
+		db_connection=null;
 	}
 	
 	static protected void initializeDB() throws Exception{

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import control.ChocAnApp;
+import java.sql.SQLException;
 
 /**
  * Class Member
@@ -281,7 +282,11 @@ public class Member {
 			update_stmt.setString(6, zip_code);
 			update_stmt.setString(7, email);
 			update_stmt.setInt(8, member_id);
-			update_stmt.executeUpdate();
+			try{
+				update_stmt.executeUpdate();
+			}catch(SQLException ex){
+				update_stmt.cancel();
+			}
 		}
 	}
 	/**

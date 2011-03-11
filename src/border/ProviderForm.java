@@ -180,14 +180,14 @@ public class ProviderForm extends javax.swing.JFrame {
 				provider.save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Edit Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Edit Provider Info\n"+e.toString(),"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			try {
 				new Provider(providerNameField.getText(), providerEmailField.getText()).save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info","ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Save New Provider Info\n"+e.toString(),"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

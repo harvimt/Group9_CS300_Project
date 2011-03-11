@@ -20,7 +20,9 @@ CREATE TABLE IF NOT EXISTS members (
 	CHECK (length(state) IN (0,2)),
 	CHECK (length(zip_code) <= 5),
 	CHECK (length(email) <= 128),
-	CHECK (valid_email(email))
+	CHECK (email REGEXP 
+		'[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
+		)
 );
 
 CREATE INDEX IF NOT EXISTS members_full_name_index ON members(full_name);
