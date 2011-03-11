@@ -27,6 +27,12 @@ import javax.swing.table.TableColumn;
 import border.util.FormattedRenderer;
 import control.ProviderReport;
 import entity.ServiceRendered;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -195,6 +201,7 @@ public class ProviderReportUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Provider Report"); // NOI18N
@@ -281,6 +288,14 @@ public class ProviderReportUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Export"); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -298,7 +313,9 @@ public class ProviderReportUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(toField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -310,7 +327,8 @@ public class ProviderReportUI extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(fromField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane1)
                 .addContainerGap())
@@ -341,6 +359,34 @@ public class ProviderReportUI extends javax.swing.JFrame {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		reloadData();
 	}//GEN-LAST:event_jButton1ActionPerformed
+
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+		JFileChooser chooser = new JFileChooser();
+
+		chooser.setFileFilter(new FileFilter() {
+
+			@Override
+			public boolean accept(File f) {
+				return
+					f.isFile() &&
+					f.getName().endsWith(".txt");
+			}
+
+			@Override
+			public String getDescription() {
+				return "Choose a text file with .txt extension";
+			}
+		});
+		if(chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+			ProviderReportAsciiDoc exporter = new ProviderReportAsciiDoc(report);
+			try {
+				exporter.writeReport(new BufferedWriter(new FileWriter(chooser.getSelectedFile())));
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(this, "Failed to save file",
+						"ERROR",JOptionPane.ERROR_MESSAGE);
+			}
+		}	
+	}//GEN-LAST:event_jButton2ActionPerformed
 
 	private void resetTable(){
 		totalLabel.setVisible(false);
@@ -380,6 +426,7 @@ public class ProviderReportUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField fromField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
