@@ -166,7 +166,7 @@ public class MemberList extends javax.swing.JFrame {
 				row.save();
 			}
 			catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Could not save Member",
+				JOptionPane.showMessageDialog(null, "Could not save Member\n"+ex.toString(),
 						"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -365,7 +365,7 @@ public class MemberList extends javax.swing.JFrame {
 			List<Member> members = Member.getMembers(search_string,status_arr);
 			model.setDataList(members);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Member List", "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to Load Member List\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -525,7 +525,7 @@ public class MemberList extends javax.swing.JFrame {
 				member.delete();
 
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to delete Member", "error", ERROR);
+				JOptionPane.showMessageDialog(this, "Failed to delete Member\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 			reloadData();
 		}

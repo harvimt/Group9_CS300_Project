@@ -235,10 +235,8 @@ public class LogServiceConfirm extends javax.swing.JFrame {
 		
 		try {
 			serviceRendered.save();
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Failed to save Service Record to database", "ERROR(0)", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to save Service Record to database", "ERROR(1)", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to save Service Record to database\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		recordCommitted = true;

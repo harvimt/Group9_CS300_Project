@@ -140,7 +140,8 @@ public class ProviderList extends javax.swing.JFrame {
 			try {
 				row.save();
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null, "Failed to Edit Provider Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Failed to Edit Provider Info\n"+e.toString(),
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -273,7 +274,8 @@ public class ProviderList extends javax.swing.JFrame {
 			List<Provider> providers = Provider.getProviders(search_string);
 			model.setDataList(providers);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Provider List", "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to Load Provider List\n"+e.toString(),
+				"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -378,7 +380,8 @@ public class ProviderList extends javax.swing.JFrame {
 				prov = new Provider(val);
 				prov.delete();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to delete provider", "ERROR", ERROR);
+				JOptionPane.showMessageDialog(this, "Failed to delete provider\n"+e.toString(),
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 			reloadData();
 		}

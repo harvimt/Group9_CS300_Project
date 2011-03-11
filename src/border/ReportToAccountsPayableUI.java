@@ -159,7 +159,8 @@ public class ReportToAccountsPayableUI extends javax.swing.JFrame {
 				table_model.setData(report.getReportData());
 				total = report.getGrandTotal();
 			}catch(Exception ex){
-				JOptionPane.showMessageDialog(this, "Failed to load report data","Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to load report data\n"+ex.toString(),
+					"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 

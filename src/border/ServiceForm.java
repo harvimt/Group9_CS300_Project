@@ -49,7 +49,8 @@ public class ServiceForm extends javax.swing.JFrame {
 			serviceCodeField.setValue(val);
 			serviceFeeField.setValue(service.getFee());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Failed to Load Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to Load Service Info\n"+e.toString(),
+				"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
@@ -200,7 +201,8 @@ public class ServiceForm extends javax.swing.JFrame {
 				service.save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Edit Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Edit Service Info\n"+e.toString(),
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
     	}
     	else{
@@ -211,7 +213,7 @@ public class ServiceForm extends javax.swing.JFrame {
 					).save();
 				dispose();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to Save New Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Failed to Save New Service Info\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
     	}
     }

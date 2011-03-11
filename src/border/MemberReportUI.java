@@ -389,7 +389,7 @@ public class MemberReportUI extends javax.swing.JFrame {
 			try {
 				exporter.writeReport(new BufferedWriter(new FileWriter(chooser.getSelectedFile())));
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(this, "Failed to save file",
+				JOptionPane.showMessageDialog(this, "Failed to save file\n"+ex.toString(),
 						"ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 		}	
@@ -413,7 +413,8 @@ public class MemberReportUI extends javax.swing.JFrame {
 			report.runReport();
 			list_model.setData(report.getReportData());
 		}catch(Exception ex){
-			JOptionPane.showMessageDialog(this, "Failed to load report data","Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to load report data"+ex.toString(),
+				"Error",JOptionPane.ERROR_MESSAGE);
 		}
 		resetTable();
 	}

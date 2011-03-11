@@ -141,7 +141,8 @@ public class ServiceList extends javax.swing.JFrame {
 			try {
 				row.save();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Failed to Edit Service Info", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Failed to Edit Service Info\n"+ex.toString(),
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 			fireTableCellUpdated(rowIndex, ColumnIndex);
 		}
@@ -273,7 +274,8 @@ public class ServiceList extends javax.swing.JFrame {
 			List<Service> services = Service.getServices(search_string);
 			model.setDataList(services);
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, "Failed to load Servce List", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Failed to load Servce List\n"+ex.toString(),
+				"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -406,7 +408,8 @@ public class ServiceList extends javax.swing.JFrame {
 				serv = new Service(val);
 				serv.delete();
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, "Failed to delete Service", "ERROR", ERROR);
+				JOptionPane.showMessageDialog(this, "Failed to delete Service\n"+e.toString(),
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 			reloadData();
 		}
