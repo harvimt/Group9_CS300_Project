@@ -45,6 +45,7 @@ public class ChocAnApp {
 				db_connection = DriverManager.getConnection("jdbc:sqlite:chocan.db");
 			}catch(Exception ex){
 				System.out.println("Failed to get/create db from file");
+				
 				throw ex;
 			}
 			try{
